@@ -15,7 +15,7 @@ class LodLiveServer(BaseHTTPRequestHandler):
         self.end_headers()
 
 
-        news = financial_web_scraper.retrive_news()
+        news = financial_web_scraper.retrieve_news()
         self.wfile.write(bytes("<html><head><title>Financial News</title></head>", "utf-8"))
         self.wfile.write(bytes("<html><head><title>List of Nesw taken from finviz.com</title></head>", "utf-8"))
         for n in news:

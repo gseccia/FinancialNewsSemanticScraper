@@ -9,6 +9,15 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
+        news = financial_web_scraper.retrieve_news()
+        self.wfile.write(bytes("<html><head><title>Financial News</title></head>", "utf-8"))
+        self.wfile.write(bytes("<html><head><title>List of Nesw taken from finviz.com</title></head>", "utf-8"))
+        for n in news:
+            self.wfile.write(bytes("<body><p>"+n+"</p>", "utf-8"))
+        #self.wfile.write(bytes("<body><p>This is a test.</p>", "utf-8"))
+        self.wfile.write(bytes("<p>You accessed path: %s</p>" % self.path, "utf-8"))
+        self.wfile.write(bytes("</body></html>", "utf-8"))
+    """
     def do_GET(self):
         logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         self._set_response()
@@ -52,3 +61,4 @@ if __name__ == '__main__':
         run(port=int(argv[1]))
     else:
         run()
+    """

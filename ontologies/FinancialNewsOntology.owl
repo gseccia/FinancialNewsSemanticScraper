@@ -53,6 +53,9 @@
         <Class IRI="#HealthCare"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Implications"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Industrials"/>
     </Declaration>
     <Declaration>
@@ -72,6 +75,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#NationalEconomy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NegativeImplications"/>
     </Declaration>
     <Declaration>
         <Class IRI="#News"/>
@@ -96,6 +102,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#Politics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PositiveImplications"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Rate"/>
@@ -129,6 +138,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasImplications"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasMarketRate"/>
@@ -457,6 +469,10 @@
         <Class IRI="#EconomicsTopics"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#NegativeImplications"/>
+        <Class IRI="#Implications"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#NewsPublisher"/>
         <Class IRI="#Organization"/>
     </SubClassOf>
@@ -475,6 +491,10 @@
     <SubClassOf>
         <Class IRI="#Politics"/>
         <Class IRI="#OtherNews"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PositiveImplications"/>
+        <Class IRI="#Implications"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Rate"/>
@@ -509,6 +529,16 @@
         <Class IRI="#Economics"/>
     </SubClassOf>
     <DisjointClasses>
+        <Class IRI="#Accounting"/>
+        <Class IRI="#Country"/>
+        <Class IRI="#Implications"/>
+        <Class IRI="#MarketIndex"/>
+        <Class IRI="#News"/>
+        <Class IRI="#Organization"/>
+        <Class IRI="#Person"/>
+        <Class IRI="#Topic"/>
+    </DisjointClasses>
+    <DisjointClasses>
         <Class IRI="#Announcement"/>
         <Class IRI="#Economics"/>
         <Class IRI="#Politics"/>
@@ -539,6 +569,10 @@
     <DisjointClasses>
         <Class IRI="#EconomicsTopics"/>
         <Class IRI="#OtherTopics"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#NegativeImplications"/>
+        <Class IRI="#PositiveImplications"/>
     </DisjointClasses>
     <ClassAssertion>
         <Class IRI="#Country"/>
@@ -920,6 +954,10 @@
         <Class IRI="#Economics"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasImplications"/>
+        <Class IRI="#News"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasMarketRate"/>
         <Class IRI="#MarketIndex"/>
     </ObjectPropertyDomain>
@@ -978,6 +1016,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <Class IRI="#EconomicsTopics"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasImplications"/>
+        <Class IRI="#Implications"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasMarketRate"/>

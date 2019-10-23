@@ -1,0 +1,492 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"
+     versionIRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology/1.0.1">
+    <Prefix name="" IRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#Accounting"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Announcement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CommunicationServices"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CompaniesEconomy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConsumerDiscretionary"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConsumerStaples"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Country"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Currency"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Economics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#EconomicsTopics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Energy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Financials"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#HealthCare"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Industrials"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InformationTechnology"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Investments"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MarketIndex"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Materials"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MonetaryAmount"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NationalEconomy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#News"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NewsPublisher"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Organization"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OtherEntity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OtherNews"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OtherTopics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Politics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rate"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RealEstate"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Socials"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#StockMarkets"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Topic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Utilities"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Markets&amp;Goods"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Mergers&amp;Aquisitions&amp;Agreements"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Products&amp;Services"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasAuthor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasEconomicsTopic"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMarketRate"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMarketValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasOtherTopic"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasSite"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasTopic"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isCitedIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isCitizenOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isQuotedOn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRelatedTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#publishedBy"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDateTime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasValue"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#Announcement"/>
+        <Class IRI="#OtherNews"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CommunicationServices"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CompaniesEconomy"/>
+        <Class IRI="#EconomicsTopics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConsumerDiscretionary"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConsumerStaples"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Currency"/>
+        <Class IRI="#Economics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Economics"/>
+        <Class IRI="#News"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#EconomicsTopics"/>
+        <Class IRI="#Topic"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Energy"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Financials"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#HealthCare"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Industrials"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InformationTechnology"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Investments"/>
+        <Class IRI="#Economics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Materials"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MonetaryAmount"/>
+        <Class IRI="#Accounting"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NationalEconomy"/>
+        <Class IRI="#EconomicsTopics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NewsPublisher"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OtherEntity"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OtherNews"/>
+        <Class IRI="#News"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OtherTopics"/>
+        <Class IRI="#Topic"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Politics"/>
+        <Class IRI="#OtherNews"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rate"/>
+        <Class IRI="#Accounting"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RealEstate"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Socials"/>
+        <Class IRI="#OtherNews"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#StockMarkets"/>
+        <Class IRI="#Economics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Utilities"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Markets&amp;Goods"/>
+        <Class IRI="#EconomicsTopics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Mergers&amp;Aquisitions&amp;Agreements"/>
+        <Class IRI="#Economics"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Products&amp;Services"/>
+        <Class IRI="#Economics"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#Announcement"/>
+        <Class IRI="#Economics"/>
+        <Class IRI="#Politics"/>
+        <Class IRI="#Socials"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#CommunicationServices"/>
+        <Class IRI="#ConsumerDiscretionary"/>
+        <Class IRI="#ConsumerStaples"/>
+        <Class IRI="#Energy"/>
+        <Class IRI="#Financials"/>
+        <Class IRI="#HealthCare"/>
+        <Class IRI="#Industrials"/>
+        <Class IRI="#InformationTechnology"/>
+        <Class IRI="#Materials"/>
+        <Class IRI="#NewsPublisher"/>
+        <Class IRI="#OtherEntity"/>
+        <Class IRI="#RealEstate"/>
+        <Class IRI="#Utilities"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Currency"/>
+        <Class IRI="#Investments"/>
+        <Class IRI="#StockMarkets"/>
+        <Class IRI="#Mergers&amp;Aquisitions&amp;Agreements"/>
+        <Class IRI="#Products&amp;Services"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#EconomicsTopics"/>
+        <Class IRI="#OtherTopics"/>
+    </DisjointClasses>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasEconomicsTopic"/>
+        <ObjectProperty IRI="#hasTopic"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasOtherTopic"/>
+        <ObjectProperty IRI="#hasTopic"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasAuthor"/>
+        <Class IRI="#News"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasEconomicsTopic"/>
+        <Class IRI="#Economics"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMarketRate"/>
+        <Class IRI="#MarketIndex"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMarketValue"/>
+        <Class IRI="#MarketIndex"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasOtherTopic"/>
+        <Class IRI="#OtherNews"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasSite"/>
+        <Class IRI="#Organization"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasTopic"/>
+        <Class IRI="#News"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isCitedIn"/>
+        <Class IRI="#Country"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isCitedIn"/>
+        <Class IRI="#MarketIndex"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isCitedIn"/>
+        <Class IRI="#Organization"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isCitedIn"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isCitizenOf"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <Class IRI="#MarketIndex"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#publishedBy"/>
+        <Class IRI="#News"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAuthor"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasEconomicsTopic"/>
+        <Class IRI="#EconomicsTopics"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMarketRate"/>
+        <Class IRI="#Rate"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMarketValue"/>
+        <Class IRI="#MonetaryAmount"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasOtherTopic"/>
+        <Class IRI="#OtherTopics"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSite"/>
+        <Class IRI="#Country"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasTopic"/>
+        <Class IRI="#Topic"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isCitedIn"/>
+        <Class IRI="#News"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isCitizenOf"/>
+        <Class IRI="#Country"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <Class IRI="#Country"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isQuotedOn"/>
+        <Class IRI="#MarketIndex"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isRelatedTo"/>
+        <Class IRI="#Organization"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#publishedBy"/>
+        <Class IRI="#NewsPublisher"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDateTime"/>
+        <Class IRI="#News"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#Country"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#MarketIndex"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#Organization"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#Person"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasValue"/>
+        <Class IRI="#MonetaryAmount"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasValue"/>
+        <Class IRI="#Rate"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDateTime"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasValue"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

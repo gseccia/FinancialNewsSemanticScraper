@@ -6,7 +6,8 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      ontologyIRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"
-     versionIRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology/1.0.0">
+     versionIRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology/1.0.1">
+    <Prefix name="" IRI="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
@@ -16,22 +17,19 @@
         <Class IRI="#Accounting"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Agreement"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Announcement"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#BusinessEntity"/>
+        <Class IRI="#CommunicationServices"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#CommercialEntity"/>
+        <Class IRI="#CompaniesEconomy"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#CompaniesFinancialResults"/>
+        <Class IRI="#ConsumerDiscretionary"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Conflicts"/>
+        <Class IRI="#ConsumerStaples"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Country"/>
@@ -40,31 +38,25 @@
         <Class IRI="#Currency"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Devaluation"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Economics"/>
     </Declaration>
     <Declaration>
         <Class IRI="#EconomicsTopics"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Education"/>
+        <Class IRI="#Energy"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Entertainment"/>
+        <Class IRI="#Financials"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Environment"/>
+        <Class IRI="#HealthCare"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#GovernativeEntity"/>
+        <Class IRI="#Industrials"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Health"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#InterestRate"/>
+        <Class IRI="#InformationTechnology"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Investments"/>
@@ -73,7 +65,13 @@
         <Class IRI="#MarketIndex"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Materials"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#MonetaryAmount"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NationalEconomy"/>
     </Declaration>
     <Declaration>
         <Class IRI="#News"/>
@@ -82,13 +80,10 @@
         <Class IRI="#NewsPublisher"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#NonGovernativeEntity"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#Organization"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#OtherEntities"/>
+        <Class IRI="#OtherEntity"/>
     </Declaration>
     <Declaration>
         <Class IRI="#OtherNews"/>
@@ -106,34 +101,31 @@
         <Class IRI="#Rate"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Removals"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ServiceProvider"/>
+        <Class IRI="#RealEstate"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Socials"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#StockExchange"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#StockMarkets"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Surevaluation"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Topic"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Utilities"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Markets&amp;Goods"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Mergers&amp;Aquisitions&amp;Agreements"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#NewProducts&amp;Services"/>
+        <Class IRI="#Products&amp;Services"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Products&amp;Services"/>
+        <ObjectProperty IRI="#hasAuthor"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
@@ -181,36 +173,28 @@
         <DataProperty IRI="#hasValue"/>
     </Declaration>
     <SubClassOf>
-        <Class IRI="#Agreement"/>
-        <Class IRI="#EconomicsTopics"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#Announcement"/>
         <Class IRI="#OtherNews"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#BusinessEntity"/>
-        <Class IRI="#NonGovernativeEntity"/>
+        <Class IRI="#CommunicationServices"/>
+        <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#CommercialEntity"/>
-        <Class IRI="#NonGovernativeEntity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#CompaniesFinancialResults"/>
+        <Class IRI="#CompaniesEconomy"/>
         <Class IRI="#EconomicsTopics"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Conflicts"/>
-        <Class IRI="#OtherTopics"/>
+        <Class IRI="#ConsumerDiscretionary"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConsumerStaples"/>
+        <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Currency"/>
         <Class IRI="#Economics"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Devaluation"/>
-        <Class IRI="#EconomicsTopics"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Economics"/>
@@ -221,48 +205,48 @@
         <Class IRI="#Topic"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Education"/>
-        <Class IRI="#OtherTopics"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Entertainment"/>
-        <Class IRI="#OtherTopics"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Environment"/>
-        <Class IRI="#OtherTopics"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#GovernativeEntity"/>
+        <Class IRI="#Energy"/>
         <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Health"/>
-        <Class IRI="#OtherTopics"/>
+        <Class IRI="#Financials"/>
+        <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#InterestRate"/>
-        <Class IRI="#EconomicsTopics"/>
+        <Class IRI="#HealthCare"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Industrials"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InformationTechnology"/>
+        <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Investments"/>
         <Class IRI="#Economics"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#Materials"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#MonetaryAmount"/>
         <Class IRI="#Accounting"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#NewsPublisher"/>
-        <Class IRI="#NonGovernativeEntity"/>
+        <Class IRI="#NationalEconomy"/>
+        <Class IRI="#EconomicsTopics"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#NonGovernativeEntity"/>
+        <Class IRI="#NewsPublisher"/>
         <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#OtherEntities"/>
-        <Class IRI="#NonGovernativeEntity"/>
+        <Class IRI="#OtherEntity"/>
+        <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#OtherNews"/>
@@ -281,27 +265,23 @@
         <Class IRI="#Accounting"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Removals"/>
-        <Class IRI="#EconomicsTopics"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ServiceProvider"/>
-        <Class IRI="#NonGovernativeEntity"/>
+        <Class IRI="#RealEstate"/>
+        <Class IRI="#Organization"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Socials"/>
         <Class IRI="#OtherNews"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#StockExchange"/>
-        <Class IRI="#EconomicsTopics"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#StockMarkets"/>
         <Class IRI="#Economics"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#Surevaluation"/>
+        <Class IRI="#Utilities"/>
+        <Class IRI="#Organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Markets&amp;Goods"/>
         <Class IRI="#EconomicsTopics"/>
     </SubClassOf>
     <SubClassOf>
@@ -309,23 +289,9 @@
         <Class IRI="#Economics"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#NewProducts&amp;Services"/>
-        <Class IRI="#EconomicsTopics"/>
-    </SubClassOf>
-    <SubClassOf>
         <Class IRI="#Products&amp;Services"/>
         <Class IRI="#Economics"/>
     </SubClassOf>
-    <DisjointClasses>
-        <Class IRI="#Agreement"/>
-        <Class IRI="#CompaniesFinancialResults"/>
-        <Class IRI="#Devaluation"/>
-        <Class IRI="#InterestRate"/>
-        <Class IRI="#Removals"/>
-        <Class IRI="#StockExchange"/>
-        <Class IRI="#Surevaluation"/>
-        <Class IRI="#NewProducts&amp;Services"/>
-    </DisjointClasses>
     <DisjointClasses>
         <Class IRI="#Announcement"/>
         <Class IRI="#Economics"/>
@@ -333,16 +299,19 @@
         <Class IRI="#Socials"/>
     </DisjointClasses>
     <DisjointClasses>
-        <Class IRI="#BusinessEntity"/>
-        <Class IRI="#CommercialEntity"/>
-        <Class IRI="#ServiceProvider"/>
-    </DisjointClasses>
-    <DisjointClasses>
-        <Class IRI="#Conflicts"/>
-        <Class IRI="#Education"/>
-        <Class IRI="#Entertainment"/>
-        <Class IRI="#Environment"/>
-        <Class IRI="#Health"/>
+        <Class IRI="#CommunicationServices"/>
+        <Class IRI="#ConsumerDiscretionary"/>
+        <Class IRI="#ConsumerStaples"/>
+        <Class IRI="#Energy"/>
+        <Class IRI="#Financials"/>
+        <Class IRI="#HealthCare"/>
+        <Class IRI="#Industrials"/>
+        <Class IRI="#InformationTechnology"/>
+        <Class IRI="#Materials"/>
+        <Class IRI="#NewsPublisher"/>
+        <Class IRI="#OtherEntity"/>
+        <Class IRI="#RealEstate"/>
+        <Class IRI="#Utilities"/>
     </DisjointClasses>
     <DisjointClasses>
         <Class IRI="#Currency"/>
@@ -355,10 +324,6 @@
         <Class IRI="#EconomicsTopics"/>
         <Class IRI="#OtherTopics"/>
     </DisjointClasses>
-    <DisjointClasses>
-        <Class IRI="#GovernativeEntity"/>
-        <Class IRI="#NonGovernativeEntity"/>
-    </DisjointClasses>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <ObjectProperty IRI="#hasTopic"/>
@@ -367,6 +332,10 @@
         <ObjectProperty IRI="#hasOtherTopic"/>
         <ObjectProperty IRI="#hasTopic"/>
     </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasAuthor"/>
+        <Class IRI="#News"/>
+    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <Class IRI="#Economics"/>
@@ -378,10 +347,6 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasMarketValue"/>
         <Class IRI="#MarketIndex"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasMarketValue"/>
-        <Class IRI="#NonGovernativeEntity"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasOtherTopic"/>
@@ -420,10 +385,6 @@
         <Class IRI="#MarketIndex"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isQuotedOn"/>
-        <Class IRI="#NonGovernativeEntity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="#isRelatedTo"/>
         <Class IRI="#Person"/>
     </ObjectPropertyDomain>
@@ -431,6 +392,10 @@
         <ObjectProperty IRI="#publishedBy"/>
         <Class IRI="#News"/>
     </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAuthor"/>
+        <Class IRI="#Person"/>
+    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <Class IRI="#EconomicsTopics"/>

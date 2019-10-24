@@ -1,0 +1,1181 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"
+     xml:base="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:FinancialNewsOntology="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#">
+    <owl:Ontology rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology">
+        <owl:versionIRI rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology/1.0.1"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasAuthor -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasAuthor">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasEconomicsTopic -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasEconomicsTopic">
+        <rdfs:subPropertyOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTopic"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasImplications -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasImplications">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Implications"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasMarketRate -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasMarketRate">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Rate"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasMarketValue -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasMarketValue">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MonetaryAmount"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasOtherTopic -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasOtherTopic">
+        <rdfs:subPropertyOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTopic"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherNews"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopics"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasSite -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasSite">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTopic -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTopic">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topic"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isCitedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isCitedIn">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isCitizenOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isCitizenOf">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isMarketIndexOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isMarketIndexOf">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn">
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isRelatedTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isRelatedTo">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+        <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasDateTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasDateTime">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasName">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasValue">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MonetaryAmount"/>
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Rate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Accounting -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Accounting"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Announcement -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Announcement">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherNews"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CommunicationServices -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CommunicationServices">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CompaniesEconomy -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CompaniesEconomy">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#ConsumerDiscretionary -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#ConsumerDiscretionary">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#ConsumerStaples -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#ConsumerStaples">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Currency -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Currency">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topic"/>
+        <owl:disjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Energy -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Energy">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Financials -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Financials">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#HealthCare -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#HealthCare">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Implications -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Implications"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Industrials -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Industrials">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#InformationTechnology -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#InformationTechnology">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Investments -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Investments">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Materials -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Materials">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MonetaryAmount -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MonetaryAmount">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Accounting"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NegativeImplications -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NegativeImplications">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Implications"/>
+        <owl:disjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#PositiveImplications"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherEntity -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherEntity">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherNews -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherNews">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopics -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopics">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topic"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Politics -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Politics">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherNews"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#PositiveImplications -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#PositiveImplications">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Implications"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Rate -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Rate">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Accounting"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#RealEstate -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#RealEstate">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Socials -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Socials">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherNews"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockMarkets -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockMarkets">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topic -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topic"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Utilities -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Utilities">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Mergers&amp;Aquisitions&amp;Agreements -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Mergers&amp;Aquisitions&amp;Agreements">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Products&amp;Services -->
+
+    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Products&amp;Services">
+        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Afghanistan -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Afghanistan">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Argentina -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Argentina">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Australia -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Australia">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Austria -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Austria">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Belgium -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Belgium">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bovespa -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bovespa">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Brasil"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Brasil -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Brasil">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CAC_40 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CAC_40">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#France"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CSI_300 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CSI_300">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#China"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Canada -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Canada">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#China -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#China">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Costa_RIca -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Costa_RIca">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Cuba -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Cuba">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#DAX -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#DAX">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Germany"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Denmark -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Denmark">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Dow_Jones -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Dow_Jones">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_States_of_America"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Egypt -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Egypt">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Euro_Stoxx_50 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Euro_Stoxx_50">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_100 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_100">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_Kingdom"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_MIB -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_MIB">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Italy"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#France -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#France">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Germany -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Germany">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Greece -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Greece">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hang_Seng -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hang_Seng">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hong_Kong"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hong_Kong -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hong_Kong">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#IBEX_35 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#IBEX_35">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Spain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#India -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#India">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Indonesia -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Indonesia">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Iran -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Iran">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Iraq -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Iraq">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Israel -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Israel">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Italy -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Italy">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Japan -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Japan">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Kuwait -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Kuwait">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Luxembourg -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Luxembourg">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Lybia -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Lybia">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Mexico -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Mexico">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Monaco -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Monaco">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nasdaq -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nasdaq">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_States_of_America"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Netherlands -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Netherlands">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#New_Zealand -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#New_Zealand">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nikkei_225 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nikkei_225">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Japan"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#North_Korea -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#North_Korea">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Norway -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Norway">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Oman -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Oman">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Pakistan -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Pakistan">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Palestine -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Palestine">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Panama -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Panama">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Portugal -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Portugal">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Qatar -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Qatar">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Russia -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Russia">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Saudi_Arabia -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Saudi_Arabia">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Singapore -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Singapore">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#South_Africa -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#South_Africa">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#South_Korea -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#South_Korea">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Spain -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Spain">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Sweden -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Sweden">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Switzerland -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Switzerland">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Syria -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Syria">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Thailand -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Thailand">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topix -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topix">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Japan"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Turkey -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Turkey">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Ukraine -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Ukraine">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_Arab_Emirates -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_Arab_Emirates">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_Kingdom -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_Kingdom">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_States_of_America -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_States_of_America">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Uruguay -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Uruguay">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Venezuela -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Venezuela">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Vietnam -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Vietnam">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P_500 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P_500">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#United_States_of_America"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/ASX_200 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/ASX_200">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Australia"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/TSX -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/TSX">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+        <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Canada"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Accounting"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Country"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Implications"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Person"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topic"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Announcement"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Economics"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Politics"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Socials"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CommunicationServices"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#ConsumerDiscretionary"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#ConsumerStaples"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Energy"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Financials"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#HealthCare"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Industrials"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#InformationTechnology"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Materials"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherEntity"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#RealEstate"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Utilities"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Currency"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Investments"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockMarkets"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Mergers&amp;Aquisitions&amp;Agreements"/>
+            <rdf:Description rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Products&amp;Services"/>
+        </owl:members>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

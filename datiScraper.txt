@@ -1,0 +1,65 @@
+REUTERS NEWS:
+In the main page of the news:
+- date and hour at top left -> triple: <*news title*> <hasDateTime> <xml:dateTime *news dateTime*> 
+- news title -> come si crea dinamicamente un individuo?
+- news authors -> 1 or more triples <*news title*> <hasAuthor> <*news author*>
+- publisher -> triple: <*news title*> <publishedBy> <Reuters>
+
+Find the link of a company in the body of the article. There is a stripe at the top of the page. From it retrieve the following triples
+- latest trade -> triple <*company name*> <hasMarketValue> <xsd:float *numerical value from the page*>
+- change -> triple <*company name*> <hasPercentageVariation> <xsd:float *numerical value from the page (ONLY PERCENTAGE VALUE)>
+
+Be careful, these two triples have to substitute the same triples if already present in the triple storage.
+Immediately below this stripe there is a small sentence of the type "As of 1:12 PM CEST Oct 25 on the Euronext Paris ∙ Minimum 15 minute delay". The content
+after "on the " is the market index name on which the company is traded. This string has to be looked up in a list of possible market indices of our ontology.
+If it is present generate the following triple:
+- market index -> triple: <*company name*> <isQuotedOn> <market index name>
+
+Below the body of the description of the company there are two columns of information.
+
+From the first column, get the "Industry" description and lookup the organization type of our ontology. If present add the individual
+- organization type -> come si crea dinamicamente un individuo?
+From the list "Executive Leadership" get the name of the chairman or of the CEO in this given order and the add the triple
+- organization ceo -> <*company name*> <hasChairman/CEO> <name of the chairman/CEO>
+These three infos are in a bar at the top of the page, latest trade and change are the first two, the market is named in a sentence below. Needs some
+processing to be extracted from it. 
+These two infos are below the "About" paragraph
+
+
+BLOOMBERG NEWS
+In the main page of the news, obtained following finviz link retrieve:
+- date and hour at top left -> triple: <*news title*> <hasDateTime> <xml:dateTime *news dateTime*> 
+- news title -> come si crea dinamicamente un individuo?
+- news authors -> 1 or more triples <*news title*> <hasAuthor> <*news author*>
+- publisher -> triple: <*news title*> <publishedBy> <Reuters>
+
+When following a company link from the news page there all the needed infos. There is a sort of rectangle with some important info. 
+its first two rows contain an abbreviation of the name of the company, followed by the market on which the company is quoted. Lookup this name and if found
+- market index -> triple: <*company name*> <isQuotedOn> <market index name>
+
+The big number is the current stock price:
+- current price -> triple <*company name*> <hasMarketValue> <xsd:float *numerical value from the page*>
+
+On the right there is the percentage variation
+- change -> triple <*company name*> <hasPercentageVariation> <xsd:float *numerical value from the page (ONLY PERCENTAGE VALUE)>
+
+Below there is the label sector, from which it is possible to create the triple
+- organization type -> come si crea dinamicamente un individuo?
+
+Parsing the address it could be possible to individuate the nationality of the company, and to build the triple
+- company site -> triple <*company name*> <hasSite> <Nation>
+
+Going a bit more down there is a small table with the most inluent persons in the company. From the list "Executives" get the name of the chairman
+or of the CEO in this given order and the add the triple
+- organization ceo -> <*company name*> <hasChairman/CEO> <name of the chairman/CEO>
+
+PAY ATTENTION: it may happen that Bloomberg company links lands to a page that does not contain market infos of the company. The two kinds of links are
+https://www.bloomberg.com/quote/F:US and https://www.bloomberg.com/profile/company/8291453Z:LN. In the second case there are no info about markets (price, 
+market membership, percentage variation) but all the others are available.
+
+
+After this, in both cases, it is possible to fill the triples citedIn because the news content has been "structured" in a certain way. 
+<company name> <citedIn> <news title>
+<market index> <citedIn> <news title>
+<Nation> <citedIn> <news title>
+ 

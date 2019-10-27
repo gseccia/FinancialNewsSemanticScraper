@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import logging
 import urllib.parse
 import re
+import financial_web_scraper
 
 class S(BaseHTTPRequestHandler):
     def _set_response(self):

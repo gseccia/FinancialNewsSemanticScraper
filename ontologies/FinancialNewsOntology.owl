@@ -53,6 +53,9 @@
         <Class IRI="#HealthCare"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#Implications"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Industrials"/>
     </Declaration>
     <Declaration>
@@ -72,6 +75,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#NationalEconomy"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NegativeImplications"/>
     </Declaration>
     <Declaration>
         <Class IRI="#News"/>
@@ -96,6 +102,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#Politics"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PositiveImplications"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Rate"/>
@@ -129,6 +138,9 @@
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasImplications"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasMarketRate"/>
@@ -171,6 +183,222 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#hasValue"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Afghanistan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Argentina"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Australia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Austria"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Belgium"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Bovespa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Brasil"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CAC_40"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CSI_300"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Canada"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#China"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Costa_RIca"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Cuba"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#DAX"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Denmark"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Dow_Jones"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Egypt"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Euro_Stoxx_50"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FTSE_100"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#FTSE_MIB"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#France"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Germany"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Greece"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Hang_Seng"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Hong_Kong"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#IBEX_35"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#India"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Indonesia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Iran"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Iraq"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Israel"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Italy"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Japan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Kuwait"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Luxembourg"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Lybia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mexico"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Monaco"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Nasdaq"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Netherlands"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#New_Zealand"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Nikkei_225"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#North_Korea"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Norway"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Oman"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Pakistan"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Palestine"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Panama"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Portugal"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Qatar"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Russia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Saudi_Arabia"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Singapore"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#South_Africa"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#South_Korea"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Spain"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Sweden"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Switzerland"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Syria"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Thailand"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Topix"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Turkey"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Ukraine"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#United_Arab_Emirates"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#United_Kingdom"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#United_States_of_America"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Uruguay"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Venezuela"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Vietnam"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#S&amp;P_500"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#S&amp;P/ASX_200"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#S&amp;P/TSX"/>
     </Declaration>
     <SubClassOf>
         <Class IRI="#Announcement"/>
@@ -241,6 +469,10 @@
         <Class IRI="#EconomicsTopics"/>
     </SubClassOf>
     <SubClassOf>
+        <Class IRI="#NegativeImplications"/>
+        <Class IRI="#Implications"/>
+    </SubClassOf>
+    <SubClassOf>
         <Class IRI="#NewsPublisher"/>
         <Class IRI="#Organization"/>
     </SubClassOf>
@@ -259,6 +491,10 @@
     <SubClassOf>
         <Class IRI="#Politics"/>
         <Class IRI="#OtherNews"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PositiveImplications"/>
+        <Class IRI="#Implications"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#Rate"/>
@@ -293,6 +529,16 @@
         <Class IRI="#Economics"/>
     </SubClassOf>
     <DisjointClasses>
+        <Class IRI="#Accounting"/>
+        <Class IRI="#Country"/>
+        <Class IRI="#Implications"/>
+        <Class IRI="#MarketIndex"/>
+        <Class IRI="#News"/>
+        <Class IRI="#Organization"/>
+        <Class IRI="#Person"/>
+        <Class IRI="#Topic"/>
+    </DisjointClasses>
+    <DisjointClasses>
         <Class IRI="#Announcement"/>
         <Class IRI="#Economics"/>
         <Class IRI="#Politics"/>
@@ -324,6 +570,373 @@
         <Class IRI="#EconomicsTopics"/>
         <Class IRI="#OtherTopics"/>
     </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#NegativeImplications"/>
+        <Class IRI="#PositiveImplications"/>
+    </DisjointClasses>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Afghanistan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Argentina"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Australia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Austria"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Belgium"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Bovespa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Brasil"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#CAC_40"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#CSI_300"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Canada"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#China"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Costa_RIca"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Cuba"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#DAX"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Denmark"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Dow_Jones"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Egypt"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Euro_Stoxx_50"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#FTSE_100"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#FTSE_MIB"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#France"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Germany"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Greece"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Hang_Seng"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Hong_Kong"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#IBEX_35"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#India"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Indonesia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Iran"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Iraq"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Israel"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Italy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Japan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Kuwait"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Luxembourg"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Lybia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Mexico"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Monaco"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Nasdaq"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Netherlands"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#New_Zealand"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Nikkei_225"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#North_Korea"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Norway"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Oman"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Pakistan"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Palestine"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Panama"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Portugal"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Qatar"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Russia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Saudi_Arabia"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Singapore"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#South_Africa"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#South_Korea"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Spain"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Sweden"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Switzerland"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Syria"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Thailand"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#Topix"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Turkey"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Ukraine"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#United_Arab_Emirates"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#United_Kingdom"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#United_States_of_America"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Uruguay"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Venezuela"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Country"/>
+        <NamedIndividual IRI="#Vietnam"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#S&amp;P_500"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#S&amp;P/ASX_200"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#MarketIndex"/>
+        <NamedIndividual IRI="#S&amp;P/TSX"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#Bovespa"/>
+        <NamedIndividual IRI="#Brasil"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#CAC_40"/>
+        <NamedIndividual IRI="#France"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#CSI_300"/>
+        <NamedIndividual IRI="#China"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#DAX"/>
+        <NamedIndividual IRI="#Germany"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#Dow_Jones"/>
+        <NamedIndividual IRI="#United_States_of_America"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#FTSE_100"/>
+        <NamedIndividual IRI="#United_Kingdom"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#FTSE_MIB"/>
+        <NamedIndividual IRI="#Italy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#Hang_Seng"/>
+        <NamedIndividual IRI="#Hong_Kong"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#IBEX_35"/>
+        <NamedIndividual IRI="#Spain"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#Nasdaq"/>
+        <NamedIndividual IRI="#United_States_of_America"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#Nikkei_225"/>
+        <NamedIndividual IRI="#Japan"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#Topix"/>
+        <NamedIndividual IRI="#Japan"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#S&amp;P_500"/>
+        <NamedIndividual IRI="#United_States_of_America"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#S&amp;P/ASX_200"/>
+        <NamedIndividual IRI="#Australia"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isMarketIndexOf"/>
+        <NamedIndividual IRI="#S&amp;P/TSX"/>
+        <NamedIndividual IRI="#Canada"/>
+    </ObjectPropertyAssertion>
     <SubObjectPropertyOf>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <ObjectProperty IRI="#hasTopic"/>
@@ -339,6 +952,10 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <Class IRI="#Economics"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasImplications"/>
+        <Class IRI="#News"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasMarketRate"/>
@@ -399,6 +1016,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasEconomicsTopic"/>
         <Class IRI="#EconomicsTopics"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasImplications"/>
+        <Class IRI="#Implications"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasMarketRate"/>

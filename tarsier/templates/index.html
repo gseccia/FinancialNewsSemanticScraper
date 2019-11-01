@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <title>Tarsier v0.1</title>
+
+    <link rel="stylesheet" href="static/fontawesome-free-5.0.6/web-fonts-with-css/css/fontawesome-all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="static/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="static/bootstrap-4.0.0-beta.2/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/babylon.custom.js"></script>
+    <script type="text/javascript" src="static/babylon.gui.min.js"></script>
+    <script type="text/javascript" src="static/tarsier.js"></script>
+    <script type="text/javascript" src="static/math.min.js"></script>
+    <script src="static/js-yaml.min.js"></script>
+    <!-- <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js" crossorigin="anonymous"></script> -->
+    <style>
+      #renderCanvas {
+      width   : 100%;
+      height  : 100%;
+      touch-action: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+      <a class="navbar-brand" href="#">Tarsier v0.1</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+      </button>
+      <a href="#" class="navbar-left"><img src="static/tarsier_small.png"></a>
+    </nav>
+
+
+    <div class="container-fluid">
+      <div class="row">
+
+	<!-- COLUMN 1 -->
+	<div class="col p-0 m-2">
+	  
+	  <!-- LOAD YAML -->
+	  <div class="card border border-dark rounded-3 m-1 mt-0">
+	    <div class="card-header text-white bg-dark rounded-0"><i class="fab fa-js-square"></i>&nbsp;Load YAML</div>
+	    <div class="card-body font-weight-light">
+	      <form>
+		<div class="form-group">
+		  <input type="file" class="form-control-file" id="formFile1">
+		</div>
+		<button type="button" class="btn btn-dark btn-sm" onClick="javascript:loadYAML();">Load</button>
+	      </form>
+	    </div>
+	    <div class="card-footer">
+	      <small><i class="fas fa-info-circle"></i>&nbsp;Load YAML file</small>
+	    </div>
+	  </div>
+
+	  <!-- SEPA PARAMS -->
+	  <div class="card border border-dark rounded-3 m-1 mt-2">
+	    <div class="card-header text-white bg-dark rounded-0"><i class="fas fa-sliders-h"></i>&nbsp;Endpoint Parameters</div>
+	    <div class="card-body font-weight-light">	     
+	      
+	      <form>
+		<div class="dropdown">
+		  <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	  	    Saved Configurations<span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="confDropdown">
+		  </ul>
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Query URL</span>
+		  <input type="text" class="form-control" value="http://localhost:8000/query" aria-describedby="basic-addon1" id="queryUriInput">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Query format</span>
+		  <input type="text" class="form-control" value="%s" aria-describedby="basic-addon1" id="queryPrefixInput">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">HTTP Verb</span>
+		  <input type="text" class="form-control" value="POST" aria-describedby="basic-addon1" id="queryVerbInput">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">HTTP Headers</span>
+		  <input type="text" class="form-control" value='{"Content-Type": "application/sparql-query"}' aria-describedby="basic-addon1" id="queryHeadersInput">
+		</div>		
+		
+	      </form>
+	    </div>
+	    <div class="card-footer">
+	      <small><i class="fas fa-info-circle"></i>&nbsp;Connection parameters</small>
+	    </div>
+	  </div>
+
+	  <!-- SETTINGS -->
+	  <div class="card border border-dark rounded-3 m-1 mt-2">
+	    <div class="card-header text-white bg-dark rounded-0"><i class="fas fa-sliders-h"></i>&nbsp;Settings</div>
+	    <div class="card-body font-weight-light">
+	      <form>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Classes</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="classesColor" value="#ff8000">		  
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Data Prop.</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="datapropColor" value="#00cc00">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Object Prop.</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="objpropColor" value="#3399ff">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">RDF Type</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="rdftypeColor" value="#ff0000">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Instances</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="instancesColor" value="#7f00ff">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Blank Nodes</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="bnodesColor" value="#ff00ff">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Planes</span>
+		  <input type="color" class="form-control" aria-describedby="basic-addon1" id="groundColor" value="#222222">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Level of detail</span>
+		  <input type="text" class="form-control" aria-describedby="basic-addon1" id="lod" value="8">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Mesh - Plane gap</span>
+		  <input type="text" class="form-control" aria-describedby="basic-addon1" id="meshPlaneGap" value="1">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Plane - Plane gap</span>
+		  <input type="text" class="form-control" aria-describedby="basic-addon1" id="planePlaneGap" value="20">
+		</div>
+		<br>
+		<div class="input-group input-group-sm">
+		  <span class="input-group-addon" id="basic-addon1">Bump</span>
+		  <input type="text" class="form-control" aria-describedby="basic-addon1" id="bump" value="5">
+		</div>
+	      </form>
+	    </div>
+	    <div class="card-footer">
+	      <small><i class="fas fa-info-circle"></i>&nbsp;Colors and other settings</small>
+	    </div>
+	  </div>
+	  
+	</div>
+
+	<!-- COLUMN 2-->
+	<div class="col-9 p-0 m-2">
+	  <button type="button" class="btn btn-light btn-sm" onClick="javascript:sendRequest('{{ requestUri }}', false);"><i class="fas fa-arrow-alt-circle-down"></i>&nbsp;Get Data</button>		
+	  <button type="button" class="btn btn-light btn-sm disabled" onClick="javascript:draw();" id="plotButton"><i class="fas fa-pencil-alt"></i>&nbsp;Plot</button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:resetPlanes();"><i class="fas fa-window-minimize"></i>&nbsp;Reset planes</button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:resetView();"><i class="fas fa-trash"></i>&nbsp;Reset view</button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:screenshot();"><i class="fas fa-image"></i>&nbsp;Save PNG</button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:showHelp();"><i class="fas fa-question-circle"></i>&nbsp;Help</button>
+
+	  <div class="card" id="renderCard">
+	    <canvas id="renderCanvas" style="height:100%; width:100%;"></canvas>
+	  </div>
+
+	  <b>Move Camera:</b>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('up', 5);"><i class="fas fa-angle-up"></i></button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('left', 5);"><i class="fas fa-angle-left"></i></button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('right', 5);"><i class="fas fa-angle-right"></i></button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('down', 5);"><i class="fas fa-angle-down"></i></button>
+	  
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('up', 20);"><i class="fas fa-angle-double-up"></i></button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('left', 20);"><i class="fas fa-angle-double-left"></i></button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('right', 20);"><i class="fas fa-angle-double-right"></i></button>
+	  <button type="button" class="btn btn-light btn-sm" onClick="jacascript:moveCamera('down', 20);"><i class="fas fa-angle-double-down"></i></button>
+
+	  <br>
+	  
+	  <div id="alertBox" role="alert">	  
+	  </div>
+	  
+	</div>
+      </div>
+
+      <div class="row">
+	<div class="col p-0 m-2">
+	  <!-- CLASSES -->
+          <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0">
+    	      <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Classes
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('classes', true);">Select All</button>
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('classes', false);">Deselect All</button>
+		<button type="button" class="btn btn-light btn-sm" data-toggle="collapse" data-target="#collapseClasses" aria-expanded="false" aria-controls="collapseClasses">Collapse/Expande</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-body font-weight-light" id="collapseClasses">
+    	      <div class="card-text font-weight-light" id="logWindow">
+		<small>
+		  <table id="classesTable">
+		  </table>
+		</small>
+    	      </div>
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseClasses(true,true);"><i class="far fa-hand-point-up"></i>&nbsp;Raise classes</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseClasses(true,false);"><i class="far fa-hand-point-down"></i>&nbsp;Lower classes</button>
+	      </div><br>
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseClasses(false,true);"><i class="far fa-hand-point-up"></i>&nbsp;Raise instances</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseClasses(false,false);"><i class="far fa-hand-point-down"></i>&nbsp;Lower instances</button>
+	      </div><br>
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-sm btn-link" onClick="javascript:showHideClasses(true);"><i class="fas fa-eye"></i>&nbsp;Show</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideClasses(false);"><i class="far fa-eye-slash"></i>&nbsp;Hide</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter classes</small>
+    	    </div>
+          </div>
+	</div>
+
+	<div class="col p-0 m-2">
+	  <!-- DATATYPE PROPERTIES -->
+          <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0">
+    	      <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Data Properties
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('dataProperties', true);">Select All</button>
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('dataProperties', false);">Deselect All</button>
+		<button type="button" class="btn btn-light btn-sm" data-toggle="collapse" data-target="#collapseDps" aria-expanded="false" aria-controls="collapseDps">Collapse/Expande</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-body font-weight-light" id="collapseDps">
+    	      <div class="card-text font-weight-light" id="logWindow">
+		<small>
+		  <table id="dataPropertiesTable">
+		  </table>
+		</small>
+    	      </div>
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseDP(true);"><i class="far fa-hand-point-up"></i>&nbsp;Raise Data prop</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseDP(false);"><i class="far fa-hand-point-down"></i>&nbsp;Lower Data prop</button>
+	      </div>
+	      <br>
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideDP(true);"><i class="fas fa-eye"></i>&nbsp;Show</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideDP(false);"><i class="far fa-eye-slash"></i>&nbsp;Hide</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter Datatype properties</small>
+    	    </div>
+          </div>
+
+	</div>
+	<div class="col p-0 m-2">
+          <!-- OBJECT PROPERTIES -->
+          <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0">
+    	      <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Object Properties
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('objectProperties', true);">Select All</button>
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('objectProperties', false);">Deselect All</button>		
+		<button type="button" class="btn btn-light btn-sm" data-toggle="collapse" data-target="#collapseOps" aria-expanded="false" aria-controls="collapseOps">Collapse/Expande List</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-body font-weight-light" id="collapseOps">
+    	      <div class="card-text font-weight-light" id="logWindow">
+		<small>
+		  <table id="objectPropertiesTable">
+		  </table>
+		</small>
+    	      </div>
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseOp('StoO');"><i class="far fa-hand-point-up"></i>&nbsp;Raise (s->o)</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseOp('OtoS');"><i class="far fa-hand-point-up"></i>&nbsp;Raise (o->s)</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseOp('SandO');"><i class="far fa-hand-point-up"></i>&nbsp;Raise (s and o)</button>
+	      </div>
+	      <br>
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideOP(true);"><i class="fas fa-eye"></i>&nbsp;Show</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideOP(false);"><i class="far fa-eye-slash"></i>&nbsp;Hide</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter Object properties</small>
+    	    </div>
+          </div>
+	</div>
+	<div class="col p-0 m-2">
+	  <!-- RESOURCES -->
+	  <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Resources</div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('resources', true);">Select All</button>
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('resources', false);">Deselect All</button>
+		<button type="button" class="btn btn-light btn-sm" data-toggle="collapse" data-target="#collapseResources" aria-expanded="false" aria-controls="collapseResources">Collapse/Expande</button>
+	      </div>	      
+	    </div>	    
+    	    <div class="card-body font-weight-light" id="collapseResources">
+	      <small>
+		<table id="resourcesTable">
+		</table>
+	      </small>
+    	    </div>	   
+	    <div class="card-body text-center">	      
+	      <div class="btn-group btn-group-sm" align="center">
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseResources(true);"><i class="far fa-hand-point-up"></i>&nbsp;Raise Resources</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseResources(false);"><i class="far fa-hand-point-down"></i>&nbsp;Lower Resources</button>
+	      </div>
+	      <br>
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideRes(true);"><i class="fas fa-eye"></i>&nbsp;Show</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideRes(false);"><i class="far fa-eye-slash"></i>&nbsp;Hide</button>
+	      </div>
+	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter Resources</small>
+    	    </div>
+          </div>
+
+	</div>
+      </div>
+      
+      <div class="row">
+
+	<!-- COLUMN 1 -->
+
+	<div class="col p-0 m-2">
+	  <!-- BNODES -->
+	  <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Blank Nodes</div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('bnodes', true);">Select All</button>
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('bnodes', false);">Deselect All</button>
+		<button type="button" class="btn btn-light btn-sm" data-toggle="collapse" data-target="#collapseBnodes" aria-expanded="false" aria-controls="collapseBnodes">Collapse/Expande</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-body font-weight-light" id="collapseBnodes">
+	      <small>
+		<table id="bnodesTable">
+		</table>
+	      </small>
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseBNodes(true);"><i class="far fa-hand-point-up"></i>&nbsp;Raise BNodes</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseBNodes(false);"><i class="far fa-hand-point-down"></i>&nbsp;Lower BNodes</button>
+	      </div>
+	      <br>
+	      <div class="btn-group btn-group-sm" align="center">
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideBNodes(true);"><i class="fas fa-eye"></i>&nbsp;Show BNodes</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideBNodes(false);"><i class="far fa-eye-slash"></i>&nbsp;Hide BNodes</button>
+	      </div>
+	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter Blank Nodes</small>
+    	    </div>
+          </div>
+	</div>
+
+
+	
+	<div class="col p-0 m-2">
+	  <!-- LITERALS -->
+	  <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;Literals</div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('literals', true);">Select All</button>
+		<button type="button" class="btn btn-light btn-sm" onClick="javascript:selectAll('literals', false);">Deselect All</button>
+		<button type="button" class="btn btn-light btn-sm" data-toggle="collapse" data-target="#collapseLiterals" aria-expanded="false" aria-controls="collapseLiterals">Collapse/Expande</button>
+	      </div>	      
+	    </div>
+    	    <div class="card-body font-weight-light" id="collapseLiterals">
+	      <small>
+		<table id="literalsTable">
+		</table>
+	      </small>
+    	    </div>
+	    <div class="card-body text-center">
+	      <div class="btn-group btn-group-sm" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseLiterals(true);"><i class="far fa-hand-point-up"></i>&nbsp;Raise Literals</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:raiseLiterals(false);"><i class="far fa-hand-point-down"></i>&nbsp;Lower Literals</button>
+	      </div>
+	      <br>
+	      <div class="btn-group btn-group-sm" align="center">
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideLiterals(true);"><i class="fas fa-eye"></i>&nbsp;Show Literals</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:showHideLiterals(false);"><i class="far fa-eye-slash"></i>&nbsp;Hide Literals</button>
+	      </div>
+	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter literal values</small>
+    	    </div>
+          </div>
+	</div>
+
+	
+	<div class="col p-0 m-2">
+	  <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0"><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;SPARQL</div>
+
+    	    <div class="card-body font-weight-light">
+	      <div class="dropdown">
+		<button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	  	  Saved queries<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="queryDropdown">
+		</ul>
+	      </div>
+	      <br>
+	      <textarea class="form-control" id="sparql" rows="10">CONSTRUCT { ?s ?p ?o }&#13;&#10;WHERE { ?s ?p ?o }&#13;&#10;LIMIT 100</textarea>
+	    </div>
+	    <div class="card-body text-center">	    
+	      <div class="btn-group btn-group-sm text-center" align="center">		  
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:sparqlFilter('{{ requestUri }}', false);"><i class="fas fa-filter"></i><i class="fas fa-window-minimize"></i>&nbsp;Filter</button>
+		<button type="button" class="btn btn-link btn-sm" onClick="javascript:sparqlFilter('{{ requestUri }}', true);"><i class="fas fa-filter"></i><i class="fas fa-bars"></i>&nbsp;Filter (multi-layer)</button>
+	      </div>	      	      
+    	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Filter through SPARQL queries</small>
+    	    </div>
+          </div>
+	</div>
+
+	<!-- COLUMN 2 -->
+	<div class="col p-0 m-2">	    
+	  <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0"><i class="fas fa-bars" aria-hidden="true"></i>&nbsp;Plane names</div>
+    	    <div class="card-body font-weight-light text-center">
+	      <small>
+		<form>
+		  <div class="form-group" id="planeNames">
+		  </div>
+		  <button type="button" class="btn btn-link btn-sm" onClick="javascript:editPlaneNames();">Update Names</button>
+		</form>		
+	      </small>
+    	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Edit plane names</small>
+    	    </div>
+          </div>	    
+	</div>
+      </div>
+      
+      <div class="row">
+	<!-- COLUMN 2 -->
+	<div class="col p-0 m-2">	    
+	  <div class="card border-dark rounded-3 m-1 mt-2">
+    	    <div class="card-header text-white bg-dark rounded-0"><i class="fas fa-book" aria-hidden="true"></i>&nbsp;Help</div>
+    	    <div class="card-body font-weight-light text-center">
+	      <img src="static/tarsier_medium.png">
+	      <small>
+		<br>
+    		<b>Tarsier</b> is an RDF graph viewer released under <b>GNU GPL v3
+    		  License</b> and maintained by Fabio Viola (fabio.viola
+    		at unibo dot it).
+	      </small>
+    	    </div>
+    	    <div class="card-footer">
+    	      <small><i class="fas fa-info-circle"></i>&nbsp;Info about SEPA LoadSimulator</small>
+    	    </div>
+          </div>	    
+	</div>
+
+      </div>		
+    </div>
+  </body>
+</html>

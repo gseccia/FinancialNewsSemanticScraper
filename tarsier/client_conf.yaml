@@ -1,0 +1,124 @@
+endpoints:
+
+  custom_sparql_server:
+    host: "http://localhost:3030/financial/sparql"
+    verb: "POST"
+    headers: '{"Content-Type": "application/sparql-query", "Accept": "application/sparql-results+json"}'
+    queryPrefix: "%s"
+  
+  dbpedia:
+    host: "http://dbpedia.org/sparql"
+    verb: "POST"
+    headers: ""
+    queryPrefix: '{"query":"%s", "format":"json"}'
+
+  blazegraph:
+    host: "http://localhost:9999/blazegraph/namespace/kb/sparql"
+    verb: "POST"
+    headers: '{"Content-Type": "application/sparql-query", "Accept": "application/json"}'
+    queryPrefix: "%s"
+    
+  wikidata:
+    host: "https://query.wikidata.org/sparql"
+    verb: "POST"
+    headers: '{"Content-Type": "application/sparql-query", "Accept": "application/json"}'
+    queryPrefix: '%s'
+
+  sepa:
+    host: "http://localhost:8000/query"
+    verb: "POST"
+    headers: '{"Content-Type": "application/sparql-query", "Accept": "application/json"}'
+    queryPrefix: '%s'
+
+colors:
+
+  dataProperties: "#00CC00"  
+  objectProperties: "#3399FF"
+  instances: "#7F00FF"
+  bnodes: "#FF00FF"
+  classes: "#FF8000"
+  ground: "#444444"
+  rdftype: "#FF0000"
+
+values:
+
+  planesGap: 20
+  meshPlaneGap: 1
+  LOD: 16
+  bump: 5
+
+queries:
+  CUSTOM_QUERY:
+    sparql: "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+              SELECT * WHERE {
+                ?s ?p ?o .
+              } 
+              LIMIT 71"
+
+
+  CONS_ALL:
+    sparql: "CONSTRUCT { ?s ?p ?o } 
+             WHERE { ?s ?p ?o } LIMIT 200"
+  
+  TEN_TRIPLES:
+    sparql: "CONSTRUCT { ?s ?p ?o }
+            WHERE { ?s ?p ?o }
+            LIMIT 10"
+
+  FOAF_PROJECTS_AND_ORGANIZATIONS:
+    sparql: "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+             PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+             CONSTRUCT {
+               ?project rdf:type foaf:Project .
+               ?project foaf:name ?name .
+               ?organization rdf:type foaf:Organization .
+               ?organization foaf:name ?name .
+               ?organization foaf:homepage ?homepage .
+               ?organization foaf:topic ?topic .
+             }
+             WHERE {
+               ?project rdf:type foaf:Project .
+               ?project foaf:name ?name .
+               ?organization rdf:type foaf:Organization .
+               ?organization foaf:name ?name .
+               ?organization foaf:homepage ?homepage .
+               ?organization foaf:topic ?topic .
+             }"
+            
+  DBPEDIA_LONDON_AIRPORTS:
+    sparql: "PREFIX owl: <http://www.w3.org/2002/07/owl#>
+             PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+             PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+             PREFIX dc: <http://purl.org/dc/elements/1.1/>
+             PREFIX : <http://dbpedia.org/resource/>
+             PREFIX dbpedia2: <http://dbpedia.org/property/>
+             PREFIX dbpedia: <http://dbpedia.org/>
+             PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+             CONSTRUCT {
+               ?airport rdf:type dbo:Airport .
+               ?airport dbo:city dbr:London .
+               dbr:London rdf:type dbo:Place .
+               ?airport dbo:elevation ?elevation .
+               ?airport foaf:homepage ?homepage .
+               ?airport <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
+               ?airport <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?lon .
+               ?airport dbo:iataLocationIdentifier ?iata .
+               ?airport dbpedia2:hub ?hub .
+               ?hub rdf:type dbo:Airline .
+               ?hub dbpedia2:companySlogan ?slogan
+            }
+            WHERE {
+              ?airport rdf:type dbo:Airport .
+              ?airport dbo:city dbr:London .
+              dbr:London rdf:type dbo:Place .
+              ?airport dbo:elevation ?elevation .
+              ?airport foaf:homepage ?homepage .
+              ?airport <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ?lat .
+              ?airport <http://www.w3.org/2003/01/geo/wgs84_pos#long> ?lon .
+              ?airport dbo:iataLocationIdentifier ?iata .
+              ?airport dbpedia2:hub ?hub .
+              ?hub rdf:type dbo:Airline .
+              ?hub dbpedia2:companySlogan ?slogan
+            }"

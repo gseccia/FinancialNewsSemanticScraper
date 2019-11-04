@@ -3,7 +3,7 @@ nltk==3.4.5
 numpy==1.16.5
 pandas==0.25.2
 pyodbc==4.0.27
-PyYAML==3.13
+PyYAML==5.1
 query-string==2019.4.13
 rdflib==4.2.2
 request==2019.4.13

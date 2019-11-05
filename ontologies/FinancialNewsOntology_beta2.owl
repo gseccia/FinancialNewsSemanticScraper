@@ -239,6 +239,15 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTitle">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //

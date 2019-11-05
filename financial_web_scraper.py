@@ -14,7 +14,7 @@ def retrieve_news(news_URL = "https://finviz.com/news.ashx"):
         news_table = parser.select(".news > table:nth-child(2) > tr:nth-child(2) > td > table")[0]
         news = []
         for rows in news_table.find_all("tr",class_="nn"):
-            news.append({"date":None,"text":None,"link":None})
+            news.append({"date":None,"text":None,"link":None,"authors":""})
             news[-1]["link"] = re.findall("http.*',",rows.attrs["onclick"])[0][:-2]
             for col in rows.find_all("td"):
                 if col.has_attr("title"):
@@ -66,7 +66,7 @@ def autoretrieve_news():
     
     # Update the news
     with open('news.csv', mode='a+') as csv_file:
-        fieldnames = ['date', 'text', 'link']
+        fieldnames = ['date', 'text', 'link','authors']
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         if newfile:
             writer.writeheader()

@@ -17,22 +17,23 @@ def make_request(url,delay=5):
     triples = None
     auth = None
     try:
-        session.get(url)
+        if "reuters" in url or "bloomberg" in url:
+            session.get(url)
 
-        # Wait for the page
-        
-        response = session.page_source
-        if "reuters" in url:
-            myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
-            triples,auth = scrape_reuters_request(session,response)
-        elif "bloomberg" in url:
-            myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__container')))
-            triples,auth = scrape_bloomberg_request(session,response)
+            # Wait for the page
+            response = session.page_source
+            if "reuters" in url:
+                myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
+                triples,auth = scrape_reuters_request(session,response)
+            elif "bloomberg" in url:
+                myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__container')))
+                triples,auth = scrape_bloomberg_request(session,response)
 
-        # Save info
-        save_triples(triples)
+            # Save info
+            save_triples(triples)
 
-        session.close()
+            session.close()
+            session.quit()
 
     except TimeoutException:
         print("Loading took too much time!")
@@ -46,11 +47,9 @@ def save_triples(triples,filename="triples.json"):
             saved_triples = json.load(f)
             f.close()
 
-        saved_triples["triples"].append(triples)
+        saved_triples.update(triples)
     else:
-        saved_triples = {}
-        saved_triples["triples"] = []
-        saved_triples["triples"].append(triples)
+        saved_triples = triples
     
     with open(filename,mode="w") as f:
         f.write(json.dumps(saved_triples))
@@ -82,6 +81,9 @@ def scrape_reuters_request(session,text):
         
         try:
             session.get(link)
+
+            # name
+            companies[company]["name"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[1]/div[1]/h1').text
             
             # last_trade 
             companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
@@ -143,6 +145,9 @@ def scrape_bloomberg_request(session,text):
             parser = BeautifulSoup(session.page_source, "html.parser")
 
             if "quote" in link:
+                # Name
+                companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
+                
                 # Last_trade
                 companies[company]["last_trade"] = ""
                 last_trade_container = parser.find_all("div",class_="overviewRow__0956421f")[0]
@@ -187,6 +192,8 @@ def scrape_bloomberg_request(session,text):
     return companies,author
     
 if __name__ == "__main__":
+    new_file = []
+    
     if os.path.exists("news.csv"):
         # Get the news
         with open("news.csv","r") as f:
@@ -197,16 +204,19 @@ if __name__ == "__main__":
                     if auth is None or auth == []:
                         row["authors"] = "None"
                     else:
-                        row["authors"] = "("+"".join(auth)+")"
+                        row["authors"] = "("+",".join(auth)+")"
+                    new_file.append(row)
             f.close()
-
+            
+        newfile = not os.path.exists("news_defintive.csv")
+        
         # Save the news with author
         with open("news_defintive.csv","a+")  as csv_file:
             fieldnames = ['date', 'text', 'link','authors']
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             if newfile:
                 writer.writeheader()
-            for row in csv_reader:
+            for row in new_file:
                 writer.writerow(row)
             csv_file.close()
     else:

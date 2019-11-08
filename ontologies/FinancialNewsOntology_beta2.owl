@@ -188,19 +188,8 @@
     <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasDateTime">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment xml:lang="en">Indicates date and time of news.</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasMarketRate -->
-
-    <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasMarketRate">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-        <rdfs:comment xml:lang="en">Indicates the current market rate of a market index.</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -220,7 +209,6 @@
 
     <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasPercentageVariation">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
         <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment xml:lang="en">Indicates the percentage variation on the stock value of an organization/market index.</rdfs:comment>
@@ -302,15 +290,6 @@
     <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CommunicationServices">
         <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
         <rdfs:comment xml:lang="en">Organization specialized in offering communication services such as web, telephony etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CompaniesEconomy -->
-
-    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CompaniesEconomy">
-        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
-        <rdfs:comment xml:lang="en">Contents about companies and their economics results and activities.</rdfs:comment>
     </owl:Class>
     
 
@@ -405,15 +384,6 @@
     
 
 
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy -->
-
-    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy">
-        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
-        <rdfs:comment xml:lang="en">Contents about nations&apos; economy and financials.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News -->
 
     <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News">
@@ -479,15 +449,6 @@
     <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Utilities">
         <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
         <rdfs:comment xml:lang="en">Organization providing utilities services, such as electricity, water etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods -->
-
-    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods">
-        <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
-        <rdfs:comment xml:lang="en">Contents about national stock markets and primary goods economy.</rdfs:comment>
     </owl:Class>
     
 
@@ -5140,6 +5101,15 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CompaniesEconomy -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CompaniesEconomy">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+        <rdfs:comment xml:lang="en">News about private companies financials.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#DAX -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#DAX">
@@ -5212,11 +5182,37 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+        <rdfs:comment xml:lang="en">News about financials of a Nation.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nikkei_225 -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nikkei_225">
         <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
         <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherPublisher -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherPublisher">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopic -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopic">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#OtherTopics"/>
+        <rdfs:comment xml:lang="en">News about non financial and non economic topic.</rdfs:comment>
     </owl:NamedIndividual>
     
 
@@ -5234,6 +5230,15 @@
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Topix">
         <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#MarketIndex"/>
         <FinancialNewsOntology:isMarketIndexOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
+        <rdfs:comment xml:lang="en">News about markets info and primary goods economy.</rdfs:comment>
     </owl:NamedIndividual>
     
 

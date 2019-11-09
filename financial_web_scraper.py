@@ -52,9 +52,9 @@ def autoretrieve_news():
     if os.path.exists("news.csv"):
         # Check the last news saved
         with open("news.csv","r") as f:
-            csv_reader = csv.DictReader(f)
+            csv_reader = csv.DictReader(f,dialect="excel")
             for row in csv_reader:
-                last_date = datetime.datetime.strptime(row["date"],"%Y-%m-%d %H:%M:%S")
+                last_date = datetime.datetime.strptime(row["date"],"%Y-%m-%dT%H:%M:%S+02:00")
             for row in today_news:
                 if row["date"] > last_date:
                     fresh_news.append(row)
@@ -67,10 +67,11 @@ def autoretrieve_news():
     # Update the news
     with open('news.csv', mode='a+') as csv_file:
         fieldnames = ['date', 'text', 'link','authors']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames,dialect="excel")
         if newfile:
             writer.writeheader()
         for row in fresh_news:
+            row["date"] = row["date"].strftime("%Y-%m-%dT%H:%M:%S+02:00")
             writer.writerow(row)
         csv_file.close()
 

@@ -11,8 +11,9 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 
 import re
+import datetime
 
-def make_request(url,delay=5):
+def make_request(url,date,delay=5):
     session = webdriver.Chrome()
     triples = None
     auth = None
@@ -30,7 +31,7 @@ def make_request(url,delay=5):
                 triples,auth = scrape_bloomberg_request(session,response)
 
             # Save info
-            save_triples(triples)
+            save_triples(url,auth,triples,filename = "news_"+str(date.year)+str(date.month)+str(date.day)+".json")
 
             session.close()
             session.quit()
@@ -38,18 +39,20 @@ def make_request(url,delay=5):
     except TimeoutException:
         print("Loading took too much time!")
 
-    return auth
 
-
-def save_triples(triples,filename="triples.json"):
+def save_triples(url,auth,triples,filename="triples.json"):
+    
     if os.path.exists(filename):
         with open(filename,mode="r") as f:
             saved_triples = json.load(f)
             f.close()
 
-        saved_triples.update(triples)
+        saved_triples[url] = {"authors":auth,"companies":triples}
+        saved_triples["last"] = url
     else:
-        saved_triples = triples
+        saved_triples = {}
+        saved_triples[url] = {"authors":auth,"companies":triples}
+        saved_triples["last"] = url
     
     with open(filename,mode="w") as f:
         f.write(json.dumps(saved_triples))
@@ -60,7 +63,7 @@ def scrape_reuters_request(session,text):
 
     # Getting authors
     authors_text = session.find_element_by_class_name("Attribution_content").text
-    author = ''.join(authors_text.split()[2:4])
+    author = ' '.join(authors_text.split()[2:4])
     print("author ",author)
     
     # Retrieve companies in the article
@@ -190,34 +193,43 @@ def scrape_bloomberg_request(session,text):
                 
     # print(author,repr(companies))
     return companies,author
-    
+
+def save_file(new_file):
+    # Save the news with author
+    newfile = not os.path.exists("news_defintive.csv")
+    with open("news_defintive.csv","a+")  as csv_file:
+                fieldnames = ['date', 'text', 'link','authors']
+                writer = csv.DictWriter(csv_file, fieldnames=fieldnames,dialect="excel")
+                if newfile:
+                    writer.writeheader()
+                for row in new_file:
+                    writer.writerow(row)
+                csv_file.close()
+
+
 if __name__ == "__main__":
     new_file = []
+    filename = "news_2019119.json"
+    select_news = False
+    with open(filename,mode="r") as f:
+        saved_triples = json.load(f)
+        last_url = saved_triples["last"]
+        f.close()
+    selected_date = datetime.datetime.strptime("2019-11-08 00:00:00","%Y-%m-%d %H:%M:%S")
     
     if os.path.exists("news.csv"):
         # Get the news
         with open("news.csv","r") as f:
-            csv_reader = csv.DictReader(f)
+            csv_reader = csv.DictReader(f,dialect="excel")
             for row in csv_reader:
-                if row["authors"] == "":
-                    auth = make_request(row["link"])
-                    if auth is None or auth == []:
-                        row["authors"] = "None"
-                    else:
-                        row["authors"] = "("+",".join(auth)+")"
-                    new_file.append(row)
+                date_row = datetime.datetime.strptime(row["date"],"%Y-%m-%dT%H:%M:%S+02:00")
+
+                # date_row > selected_date
+                if row["link"]==last_url and not select_news:
+                    select_news = True
+
+                if "authors" in row and select_news:
+                    make_request(row["link"],date_row)
             f.close()
-            
-        newfile = not os.path.exists("news_defintive.csv")
-        
-        # Save the news with author
-        with open("news_defintive.csv","a+")  as csv_file:
-            fieldnames = ['date', 'text', 'link','authors']
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-            if newfile:
-                writer.writeheader()
-            for row in new_file:
-                writer.writerow(row)
-            csv_file.close()
     else:
         print("No news")

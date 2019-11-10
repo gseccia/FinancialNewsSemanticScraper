@@ -5,6 +5,7 @@ from topic_classifier import TopicClassifier
 from brmapping import *
 from fsanalysis import *
 import json
+import requests
 
 
 class Tripleizer():
@@ -75,13 +76,13 @@ class Tripleizer():
 
                     if news_source == "B":
                         # news retrieved from Bloomberg
-                        partial_query = partial_query + "\n<" + news_link + "> ont:publishedBy ont:Bloomberg ."
+                        partial_query = partial_query + "\n<" + news_link + "> ont:publishedBy <http://dbpedia.org/page/Bloomberg_News> ."
                     elif news_source == "R":
                         # news retrieved from Reuters
-                        partial_query = partial_query + "\n<" + news_link + "> ont:publishedBy ont:Reuters ."
+                        partial_query = partial_query + "\n<" + news_link + "> ont:publishedBy <http://dbpedia.org/page/Reuters> ."
                     else:
                         # news retrieved from other publishers
-                        partial_query = partial_query + "\n<" + news_link + "> ont:publishedBy ont:OtherPublisher ."
+                        partial_query = partial_query + "\n<" + news_link + "> ont:publishedBy http://dbpedia.org/page/News_agency ."
         partial_query = partial_query + "\n}"
         self.__db_manager.doUpdate(partial_query)
         print(partial_query)
@@ -91,13 +92,11 @@ class Tripleizer():
         partial_query = self.__query_prefix
         partial_query = partial_query + self.__insert_prefix
         for news in self.__news_data:
-            for author in self.__news_data[news]["author"]:
-                partial_query = partial_query + '\nont:' + author + ' rdf:type ont:Person, owl:NamedIndividual .'
-                partial_query = partial_query + '\n<' + news + '> ont:hasAuthor ont:' + author + ' .'
-
             companies = self.__news_data[news]['companies']
             for company in companies:
                 company_type = self.company_type_lookup(company['type'])
+                # look for the company in dbpedia, otherwise create a new customized individual in the ontology
+                if
                 partial_query = partial_query + '\nont:"' + company[
                     'name'] + '" rdf:type ont:"' + company_type + '", owl:NamedIndividual .'
                 partial_query = partial_query + '\nont:"' + company[
@@ -151,6 +150,11 @@ class Tripleizer():
         print(partial_query_insert)
         print()
 
+    """ 
+    Identifies uniquely the type of a company by checking a predefined lookup table 
+    @:param cat indicates the company category
+    @:return The exact type of the company
+    """
     def company_type_lookup(self, cat: str) -> str:
         return remove_whitespaces(br_classes[cat])
 
@@ -168,6 +172,21 @@ class Tripleizer():
             partial_query = partial_query+"\n<"+persons[person]["uri"]+"> rdf:type ont:Person, owl:NamedIndividual ."
         partial_query = partial_query + "\n}"
         self.__db_manager.doUpdate(partial_query)
+
+    """
+    Looks for some concept on DBPedia semantic database.
+    @:param concept concept to look for
+    @:return true if the concept is found, false otherwise
+    
+    The assumption is that dbpedia exposes concepts using the format dbpedia.org/page/concept
+    """
+    def ask_concept(concept: str) -> bool:
+        # ATTENZIONE VANNO GESTITI ERRORI ED ECCEZIONI
+        req = requests.get("http://dbpedia.org/page/" + concept)
+        if req.status_code == 200:
+            return True
+        else:
+            return False
 
 
 

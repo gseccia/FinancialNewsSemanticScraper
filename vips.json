@@ -1,0 +1,532 @@
+{
+	"Jeff Bezos": {
+		"uri": "http://dbpedia.org/page/Jeff_Bezos",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Bill Gates": {
+		"uri": "http://dbpedia.org/page/Bill_Gates",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Warren Buffet": {
+		"uri": "http://dbpedia.org/page/Warren_Buffett",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Bernard Arnault": {
+		"uri": "http://dbpedia.org/page/Bernard_Arnault",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Carlos Slim Helu": {
+		"uri": "http://dbpedia.org/page/Carlos_Slim",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Amancio Ortega": {
+		"uri": "http://dbpedia.org/page/Amancio_Ortega",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Larry Ellison": {
+		"uri": "http://dbpedia.org/page/Larry_Ellison",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Mark ZuckerBerg": {
+		"uri": "http://dbpedia.org/page/Mark_Zuckerberg",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Michael Bloomberg": {
+		"uri": "http://dbpedia.org/page/Michael_Bloomberg",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Larry Page": {
+		"uri": "http://dbpedia.org/page/Larry_Page",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Charles Koch": {
+		"uri": "http://dbpedia.org/page/Charles_Koch",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Mukesh Ambani": {
+		"uri": "http://dbpedia.org/page/Mukesh_Ambani",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Sergey Brin": {
+		"uri": "http://dbpedia.org/page/Sergey_Brin",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Francoise Bettencourt Meyers": {
+		"uri": "http://dbpedia.org/page/Françoise_Bettencourt_Meyers",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Rob Walton": {
+		"uri": "http://dbpedia.org/page/Rob_Walton",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Alice Walton": {
+		"uri": "http://dbpedia.org/page/Alice_Walton",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Jim Walton": {
+		"uri": "http://dbpedia.org/page/Jim_Walton",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Steve Ballmer": {
+		"uri": "http://dbpedia.org/page/Steve_Ballmer",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Ma_Huateng": {
+		"uri": "http://dbpedia.org/page/Ma_Huateng",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Jack_Ma": {
+		"uri": "http://dbpedia.org/page/Jack_Ma",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Hui_Ka_Yan": {
+		"uri": "http://dbpedia.org/page/Xu_Jiayin",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Sheldon Adelson": {
+		"uri": "http://dbpedia.org/page/Sheldon_Adelson",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Michael Dell": {
+		"uri": "http://dbpedia.org/page/Michael_Dell",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Phil Knight": {
+		"uri": "http://dbpedia.org/page/Phil_Knight",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"David Thomson": {
+		"uri": "http://dbpedia.org/page/David_Thomson,_3rd_Baron_Thomson_of_Fleet",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Li Ka-Shing": {
+		"uri": "http://dbpedia.org/page/Li_Ka-shing",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Lee Shau Kee": {
+		"uri": "http://dbpedia.org/page/Lee_Shau-kee",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Francois Pinault": {
+		"uri": "http://dbpedia.org/page/François_Pinault",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Joseph Safra": {
+		"uri": "http://dbpedia.org/page/Joseph_Safra",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Leonid Mikhelson": {
+		"uri": "http://dbpedia.org/page/Leonid_Mikhelson",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Jacqueline Mars": {
+		"uri": "http://dbpedia.org/page/Jacqueline_Mars",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Jorge Paulo Lemann": {
+		"uri": "http://dbpedia.org/page/Jorge_Paulo_Lemann",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Azim Premji": {
+		"uri": "http://dbpedia.org/page/Azim_Premji",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Dieter Schwarz": {
+		"uri": "http://dbpedia.org/page/Dieter_Schwarz",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Wang Jianlin": {
+		"uri": "http://dbpedia.org/page/Wang_Jianlin",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Giovanni Ferrero": {
+		"uri": "http://dbpedia.org/page/Giovanni_Ferrero",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Elon Musk": {
+		"uri": "http://dbpedia.org/page/Elon_Musk",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Tadashi Yanai": {
+		"uri": "http://dbpedia.org/page/Tadashi_Yanai",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Yang Huiyan": {
+		"uri": "http://dbpedia.org/page/Yang_Huiyan",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Masayoshi Son": {
+		"uri": "http://dbpedia.org/page/Masayoshi_Son",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Vladimir Lisin": {
+		"uri": "http://dbpedia.org/page/Vladimir_Lisin",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Susanne Klatten": {
+		"uri": "http://dbpedia.org/page/Susanne_Klatten",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Vagit_Alekperov": {
+		"uri": "http://dbpedia.org/page/Vagit_Alekperov",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Alexey Mordashov": {
+		"uri": "http://dbpedia.org/page/Alexei_Mordashov",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Gennady Timchenko": {
+		"uri": "http://dbpedia.org/page/Gennady_Timchenko",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Leonardo Del Vecchio": {
+		"uri": "http://dbpedia.org/page/Leonardo_Del_Vecchio",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"He Xiangjain": {
+		"uri": "http://dbpedia.org/page/He_Xiangjian",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Rupert Murdoch": {
+		"uri": "http://dbpedia.org/page/Rupert_Murdoch",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Dietrich Mateschitz": {
+		"uri": "http://dbpedia.org/page/Dietrich_Mateschitz",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Vladimir Potanin": {
+		"uri": "http://dbpedia.org/page/Vladimir_Potanin",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Len Blavatnik": {
+		"uri": "http://dbpedia.org/page/Leonard_Blavatnik",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Stefan Quandt": {
+		"uri": "http://dbpedia.org/page/Stefan_Quandt",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Carl Icahn": {
+		"uri": "http://dbpedia.org/page/Carl_Icahn",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Thomas Peterffy": {
+		"uri": "http://dbpedia.org/page/Thomas_Peterffy",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Lee Kun-Hee": {
+		"uri": "http://dbpedia.org/page/Lee_Kun-hee",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Donald Bren": {
+		"uri": "http://dbpedia.org/page/Donald_Bren",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Takemitsu Takizaki": {
+		"uri": "http://dbpedia.org/page/Takemitsu_Takizaki",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Abigail Johnson": {
+		"uri": "http://dbpedia.org/page/Abigail_Johnson",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Stefan Persson": {
+		"uri": "http://dbpedia.org/page/Stefan_Persson_(magnate)",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Iris_Fontbona": {
+		"uri": "http://dbpedia.org/page/Iris_Fontbona",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Dhanin Chearavanont": {
+		"uri": "http://dbpedia.org/page/Dhanin_Chearavanont",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Gina Rinehart": {
+		"uri": "http://dbpedia.org/page/Gina_Rinehart",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Mikhail Fridman": {
+		"uri": "http://dbpedia.org/page/Mikhail_Fridman",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Pallonji Mistry": {
+		"uri": "http://dbpedia.org/page/Pallonji_Mistry",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Mauricio Macri": {
+		"uri": "http://dbpedia.org/page/Mauricio_Macri",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Scott Morrison": {
+		"uri": "http://dbpedia.org/page/Scott_Morrison",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Jair Bolsonaro": {
+		"uri": "http://dbpedia.org/page/Jair_Bolsonaro",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Justin Trudeau": {
+		"uri": "http://dbpedia.org/page/Justin_Trudeau",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Xi Jinping": {
+		"uri": "http://dbpedia.org/page/Xi_Jinping",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Emmanuel Macron": {
+		"uri": "http://dbpedia.org/page/Emmanuel_Macron",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Angela Merkel": {
+		"uri": "http://dbpedia.org/page/Angela_Merkel",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Narendra Modi": {
+		"uri": "http://dbpedia.org/page/Narendra_Modi",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Joko Widodo": {
+		"uri": "http://dbpedia.org/page/Joko_Widodo",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Shinzo Abe": {
+		"uri": "http://dbpedia.org/page/Shinzō_Abe",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Vladimir Putin": {
+		"uri": "http://dbpedia.org/page/Vladimir_Putin",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Andres Manuel Lopez Obrador": {
+		"uri": "http://dbpedia.org/page/Andrés_Manuel_López_Obrador",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"King Salman": {
+		"uri": "http://dbpedia.org/page/Salman_of_Saudi_Arabia",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Cyril Ramaphosa": {
+		"uri": "http://dbpedia.org/page/Cyril_Ramaphosa",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Moon Jae-in": {
+		"uri": "http://dbpedia.org/page/Moon_Jae-in",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Recep Tayyip Erdogan": {
+		"uri": "http://dbpedia.org/page/Recep_Tayyip_Erdoğan",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Boris Johnson": {
+		"uri": "http://dbpedia.org/page/Boris_Johnson",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Donald Trump": {
+		"uri": "http://dbpedia.org/page/Donald_Trump",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Donald Tusk": {
+		"uri": "http://dbpedia.org/page/Donald_Tusk",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Jean-Claude Juncker": {
+		"uri": "http://dbpedia.org/page/Jean-Claude_Juncker",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Jerome Powell": {
+		"uri": "http://dbpedia.org/page/Jerome_H._Powell",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Li-Keqiang": {
+		"uri": "http://dbpedia.org/page/Li_Keqiang",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Mario Draghi": {
+		"uri": "http://dbpedia.org/page/Mario_Draghi",
+		"isCeo/Chairman": false,
+		"hasNationalRole": false
+	},
+	"Jamie Dimon": {
+		"uri": "http://dbpedia.org/page/Jamie_Dimon",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Christine Lagarde": {
+		"uri": "http://dbpedia.org/page/Christine_Lagarde",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Doug McMillon": {
+		"uri": "http://dbpedia.org/page/Doug_McMillon",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Tim Cook": {
+		"uri": "http://dbpedia.org/page/Tim_Cook",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Benjamin Netanyahu": {
+		"uri": "http://dbpedia.org/page/Benjamin_Netanyahu",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Akio Toyoda": {
+		"uri": "http://dbpedia.org/page/Akio_Toyoda",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Antonio Guterres": {
+		"uri": "http://dbpedia.org/page/António_Guterres",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Kim Jong-Un": {
+		"uri": "http://dbpedia.org/page/Kim_Jong-un",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Satya Nadella": {
+		"uri": "http://dbpedia.org/page/Satya_Nadella",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Jim Yong Kim": {
+		"uri": "http://dbpedia.org/page/Jim_Yong_Kim",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Stephen Schwarzman": {
+		"uri": "http://dbpedia.org/page/Stephen_A._Schwarzman",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Haruhiko Kuroda": {
+		"uri": "http://dbpedia.org/page/Haruhiko_Kuroda",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Lloyd Blankfein": {
+		"uri": "http://dbpedia.org/page/Lloyd_Blankfein",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Michel Temer": {
+		"uri": "http://dbpedia.org/page/Michel_Temer",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Mary Barra": {
+		"uri": "http://dbpedia.org/page/Mary_Barra",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Robin Li": {
+		"uri": "http://dbpedia.org/page/Robin_Li",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Bashar Al-Assad": {
+		"uri": "http://dbpedia.org/page/Bashar_al-Assad",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	},
+	"Aliko Dangote": {
+		"uri": "http://dbpedia.org/page/Aliko_Dangote",
+		"isCeo/Chairman": true,
+		"hasNationalRole": false
+	},
+	"Mike Pence": {
+		"uri": "http://dbpedia.org/page/Mike_Pence",
+		"isCeo/Chairman": false,
+		"hasNationalRole": true
+	}
+}

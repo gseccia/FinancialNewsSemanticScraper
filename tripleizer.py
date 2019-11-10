@@ -4,6 +4,7 @@ from fuseki_wrapper import FusekiSparqlWrapper
 from topic_classifier import TopicClassifier
 from brmapping import *
 from fsanalysis import *
+import json
 
 
 class Tripleizer():
@@ -152,6 +153,22 @@ class Tripleizer():
 
     def company_type_lookup(self, cat: str) -> str:
         return remove_whitespaces(br_classes[cat])
+
+    """ 
+    Loads the individuals representing some of the most influential persons in the economics field 
+    @:param person_filename indicates the file in which data is stored
+    @:return None
+    """
+    def load_persons(self, persons_filename: str = "vips.json"):
+        with open(persons_filename, encoding="UTF-8") as json_file:
+            persons = json.load(json_file)
+        partial_query = self.__query_prefix
+        partial_query = partial_query + self.__insert_prefix
+        for person in persons:
+            partial_query = partial_query+"\n<"+persons[person]["uri"]+"> rdf:type ont:Person, owl:NamedIndividual ."
+        partial_query = partial_query + "\n}"
+        self.__db_manager.doUpdate(partial_query)
+
 
 
 if __name__ == "__main__":

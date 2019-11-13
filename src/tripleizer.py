@@ -22,6 +22,7 @@ class Tripleizer():
         self.__insert_prefix = "INSERT DATA {"
         self.__delete_prefix = "DELETE DATA {"
         self.__analyser = FinancialSentimentAnalysis()
+        self.__lookuper = InfoLookup()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -65,7 +66,7 @@ class Tripleizer():
             # get info about persons cited in the news title
             # get info about market indices cited in the news title
             # get info about nations cited in the news title
-            person_uri, market_uri, nation_uri = lookup(news_title)
+            person_uri, market_uri, nation_uri = self.__lookuper.lookup(news_title)
 
             if person_uri is not None:
                 partial_query = partial_query + "\n<" + person_uri + "> ont:isCitedIn <" + news + "> ."
@@ -90,14 +91,18 @@ class Tripleizer():
             for company in companies:
 
                 # add triple about company type
-                company_type = company_type_lookup(company['type'])
+                company_type = self.__lookuper.company_type_lookup(company['type'])
                 # look for the company in dbpedia (?), otherwise create a new customized individual in the ontology
                 partial_query = partial_query + '\n<' + self.get_dbpedia_uri(company['name']) + '> rdf:type ont:' \
                                 + company_type + ', owl:NamedIndividual .'
 
+                # add company stock name
+                partial_query = partial_query + '\n<' + self.get_dbpedia_uri(company['name']) + '> ont:hasStockName:' \
+                                + company + ' .'
+
                 # add triples about market index
                 # check if the market index of the company is already into the knowledge base, otherwise add it
-                if market_index_lookup(company["market_index"]) is None:
+                if self.__lookuper.market_index_lookup(company["market_index"]) is None:
                     partial_query = partial_query + '\n<' + self.get_dbpedia_uri(company['market_index']) + '>' \
                                     ' rdf:type ont:MarketIndex, owl:NamedIndividual .'
                     # IN PIU AGGIUNGI NELLA TABELLA DI LOOKUP
@@ -107,7 +112,7 @@ class Tripleizer():
                 # add triples about company's ceo
                 for ceo in company['ceo']:
                     # verify if the system already knows this person, otherwise update it with a new individual
-                    if person_lookup(None, ceo) is None:
+                    if self.__lookuper.person_lookup(None, ceo) is None:
                         partial_query = partial_query + '\n<' + self.get_dbpedia_uri(ceo) + '> rdf:type ont:Person, ' \
                                         'owl:NamedIndividual .'
                         # IN PIU AGGIUNGI NELLA TABELLA DI LOOKUP

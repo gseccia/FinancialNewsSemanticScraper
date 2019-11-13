@@ -26,6 +26,23 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasCEO -->
+
+    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasCEO">
+        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#Person"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasTopic"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isCitedIn"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isImportantPersonOf"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isLocatedIn"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isStockExchangeOf"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
+        <rdfs:comment xml:lang="en">Indicates the chairman or chief executive officer of an organization, if available.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasEconomicsTopic -->
 
     <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasEconomicsTopic">
@@ -60,7 +77,6 @@
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isStockExchangeOf"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
         <rdfs:comment xml:lang="en">Indicates the typology of topic of a given news.</rdfs:comment>
     </owl:ObjectProperty>
     
@@ -79,7 +95,6 @@
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isStockExchangeOf"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
         <rdfs:comment xml:lang="en">Indicates the citation of an entity in a news.</rdfs:comment>
     </owl:ObjectProperty>
     
@@ -95,7 +110,6 @@
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isStockExchangeOf"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
     </owl:ObjectProperty>
     
 
@@ -109,7 +123,6 @@
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isQuotedOn"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isStockExchangeOf"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
         <rdfs:comment xml:lang="en">Indicates the legal site of an organization.</rdfs:comment>
     </owl:ObjectProperty>
     
@@ -122,7 +135,6 @@
         <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isStockExchangeOf"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
         <rdfs:comment xml:lang="en">Indicates on which national market index a given organization is quoted.</rdfs:comment>
     </owl:ObjectProperty>
     
@@ -135,7 +147,6 @@
         <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
         <rdfs:range rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry"/>
         <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#publishedBy"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
         <rdfs:comment xml:lang="en">Indicates the relation between a national market index and the corresponding national entity.</rdfs:comment>
     </owl:ObjectProperty>
     
@@ -147,18 +158,7 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News"/>
         <rdfs:range rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
-        <owl:propertyDisjointWith rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO"/>
         <rdfs:comment xml:lang="en">Indicates the news publisher of a given news.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO -->
-
-    <owl:ObjectProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#hasChairman/CEO">
-        <rdfs:domain rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#Person"/>
-        <rdfs:comment xml:lang="en">Indicates the chairman or chief executive officer of an organization, if available.</rdfs:comment>
     </owl:ObjectProperty>
     
 

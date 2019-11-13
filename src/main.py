@@ -43,7 +43,7 @@ def main_loop():
                 f.close()
             news_retr.update(news)
             with open("../resources/news.tmp",mode="w") as f:
-                f.write(json.dump(news_retr))
+                f.write(json.dumps(news_retr))
                 f.close()
             ##########################################
 

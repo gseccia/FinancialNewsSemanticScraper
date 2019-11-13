@@ -12,9 +12,12 @@ class Finviz_scraper:
     def scraper_factory(last_date = None):
         if last_date == None and os.path.exists("../resources/scraper.dat"):
             with open("../resources/scraper.dat","r") as f:
-                last_date = datetime.datetime.strptime(f.readline(),"%Y-%m-%dT%H:%M:%S+02:00")
+                retr_date = datetime.datetime.strptime(f.readline(),"%Y-%m-%dT%H:%M:%S+02:00")
                 f.close()
-        scraper = Finviz_scraper(datetime.datetime(1970,1,1) if last_date is None else last_date)
+            print(retr_date,type(retr_date))
+            scraper = Finviz_scraper(retr_date)
+        else:
+            scraper = Finviz_scraper(datetime.datetime(1970,1,1))
         return scraper
     
     def __init__(self,last_date = None):

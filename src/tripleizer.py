@@ -1,10 +1,10 @@
 import os.path
-from src.fuseki_wrapper import FusekiSparqlWrapper
-from src.topic_classifier import TopicClassifier
-from src.fsanalysis import *
+from fuseki_wrapper import FusekiSparqlWrapper
+from topic_classifier import TopicClassifier
+from fsanalysis import *
 import json
 import requests
-from src.info_lookup import *
+from info_lookup import *
 
 
 class Tripleizer():

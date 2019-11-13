@@ -1,4 +1,4 @@
-from src.brmapping import *
+from brmapping import *
 import json
 
 

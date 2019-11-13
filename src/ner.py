@@ -1,37 +1,54 @@
 import paralleldots
-import datetime
-import csv
-import json
 
 TOKEN = "zmxvDWsLaMuo6cxA1ZuIhjaqw6vtNVc9OVB5RgHQWFw"
 
+'''
+Result by paralleldots ner request example:
+{'entities': 
+    [{
+    'name': 'french', 
+    'category': 'place', 
+    'confidence_score': 0.6469822526
+    },
+    {
+    'name': 'europe', 
+    'category': 'place', 
+    'confidence_score': 0.9100195765
+    }]
+}
+'''
 
-def news_ner(filename,date, count = 10):
-    results = {}
-    i = 0
-    with open(filename,"r") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            date_row = datetime.datetime.strptime(row["date"],"%Y-%m-%dT%H:%M:%S+02:00")
-            if date_row > date and i < count:
-                text = row["text"].lower()
-                results[row["link"]]=paralleldots.ner(text)
-                results[row["link"]]["text"] = text
-                i += 1
-        f.close()
-    return results
+
+def text_ner(text: str, confidence_threshold_pers: int=0.35, confidence_threshold_plac: int=0.65) -> list:
+    """
+    Asks paralleldots.ner to find persons and nations in the news title
+    @:param news title as a string
+    @:param confidence_threshold
+    @:return list composed of dictionary of persons and places if found any
+    Example
+    [   {'name': 'france', 'category': 'place'},
+        {'name': 'moon jae-in', 'category': 'name'},
+        {'name': 'kazakhstan', 'category': 'place'}
+    ]
+    """
+    text = text.lower()
+    result_dict = paralleldots.ner(text)
+
+    l = list()
+    for el in result_dict['entities']:
+        print(el)
+        current_element = dict()
+        if el['category'] == 'place' and el['confidence_score'] >= confidence_threshold_plac \
+                or el['category'] == 'name' and el['confidence_score'] >= confidence_threshold_pers:
+            current_element['name'] = el['name']
+            current_element['category'] = el['category']
+            l.append(current_element)
+    return l
 
 
 if __name__ == "__main__":
+    # ATTENZIONE QUESTO VA INSERITO NELL'INIT DEL PROGRAMMA
     paralleldots.set_api_key(TOKEN)
-    date_limit = datetime.datetime.strptime("1970-01-01T00:00:00+02:00","%Y-%m-%dT%H:%M:%S+02:00")
-    results = news_ner("news.csv",date_limit)
-    with open("test.json","r") as f:
-        news_elab = json.load(f)
-        f.close()
-        
-    news_elab.update(results)
-        
-    with open("test.json","w") as f:
-        f.write(json.dumps(news_elab))
-        f.close()
+    #
+    r = text_ner("Moon Jae-in Opens Up for Foreign Investment, Spurring Rivalry With Kazakhstan")
+    print(r)

@@ -13,7 +13,7 @@ class Tripleizer():
 
     def __init__(self):
         self.__db_manager = FusekiSparqlWrapper()
-        # self.__topic_classifier = TopicClassifier()
+        self.__topic_classifier = TopicClassifier()
         self.__query_prefix = """
         PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

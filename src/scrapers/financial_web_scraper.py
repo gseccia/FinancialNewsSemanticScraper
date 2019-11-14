@@ -97,9 +97,14 @@ class Finviz_scraper:
         for row in today_news:
             if type(row["date"]) == str:
                 row["date"] = datetime.datetime.strptime(row["date"],"%Y-%m-%dT%H:%M:%S+02:00")
-            print(type(row["date"]),type(self.last_date))
             if row["date"] > self.last_date:
                 fresh_news[row["link"]] = dict(row)
+                if "bloomberg" in row["link"]:
+                    fresh_news[row["link"]]["source"] = "bloomberg"
+                elif "reuters" in row["link"]:
+                    fresh_news[row["link"]]["source"] = "reuters"
+                else:
+                    fresh_news[row["link"]]["source"] = "other"
                 fresh_news[row["link"]]["date"] = fresh_news[row["link"]]["date"].strftime("%Y-%m-%dT%H:%M:%S+02:00")
                 del fresh_news[row["link"]]["link"]
                 self.last_date = row["date"]

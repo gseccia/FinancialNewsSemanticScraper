@@ -69,6 +69,11 @@ def main_loop():
             traceback.print_tb(exc_tb)
         time.sleep(5*60)
 
+def tarsier_execution():
+    DEBUG("Starting Tarsier..")
+    os.system("python ./tarsier/tarsier.py")
+    DEBUG("Tarsier closed!")
+    
 if __name__ == "__main__":
     current_dir = os.getcwd()
     DEBUG("Starting Fuseki..")
@@ -76,11 +81,10 @@ if __name__ == "__main__":
     os.system("java -jar fuseki-server.jar")
     os.chdir(current_dir)
     DEBUG("Fuseki is running!")
-    th = Thread(target=main_loop)
+    th = Thread(target=tarsier_execution)
     th.start()
-    DEBUG("Starting Tarsier..")
-    os.system("python ./tarsier/tarsier.py")
-    DEBUG("Tarsier is running!")
+    main_loop()
+    
     
     
     

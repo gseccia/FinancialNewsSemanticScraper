@@ -1,5 +1,8 @@
 from src.brmapping import *
+from src.ner import text_ner
+from src.utils import get_dbpedia_uri
 import json
+import re
 
 
 class InfoLookup():
@@ -17,7 +20,9 @@ class InfoLookup():
     """
     def set_person_table(self, person_table):
         with open(person_table, mode='r') as file:
-            self.__person_table = json.load(file)
+            t = json.load(file)
+            self.__person_table = {k.lower(): v for k, v in t.items()}
+            self.__person_table = {re.sub('[^a-z]', '', k): v for k, v in self.__person_table.items()}
 
     """
     Load a lookup table for stock exchanges in the knowledge base
@@ -26,7 +31,9 @@ class InfoLookup():
     """
     def set_market_table(self, market_table):
         with open(market_table, mode='r') as file:
-            self.__market_table = json.load(file)
+            t = json.load(file)
+            self.__person_table = {k.lower(): v for k, v in t.items()}
+            self.__person_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__person_table.items()}
 
     """
     Identifies uniquely the type of a company by checking a predefined lookup table 
@@ -42,9 +49,10 @@ class InfoLookup():
     @:param person_name indicates the name of a specific person to lookup
     @:return The URI of the person if found, None otherwise
     """
-    def person_lookup(self, title: str=None, person_name: str=None) -> str:
-        # formattare le stringhe dei nomi nello stesso modo (lowercase eliminare spazi e altri caratteri)
-        if person_name in self.__person_table:
+    def person_lookup(self, person_name: str):
+        key_to_find = person_name.lower()
+        key_to_find = re.sub('[^a-z]', '', key_to_find)
+        if key_to_find in self.__person_table.keys():
             return self.__person_table[person_name]["uri"]
         else:
             return None
@@ -54,13 +62,20 @@ class InfoLookup():
     @:param index_name indicates the name of the stock market
     @:return The URI of the market index if found, None otherwise
     """
-    def market_index_lookup(self, stock_name: str) -> str:
-        # formattare le stringhe dei nomi nello stesso modo (lowercase eliminare spazi e altri caratteri)
-        if stock_name in self.__market_table:
-            return self.__market_table[stock_name]["uri"]
+    def market_index_lookup(self, stock_name: str, default=True):
+        key_to_find = stock_name.lower()
+        key_to_find = re.sub('[^a-z|&]', '', key_to_find)
+        if default:
+            if key_to_find in self.__market_table.keys():
+                return self.__market_table[stock_name]
+            else:
+                return None
         else:
-            return None
-
+            stocks_found = list()
+            for key in self.__market_table:
+                if key in key_to_find:
+                    stocks_found.append(self.__market_table[key])
+            return stocks_found
 
     """
     Looks for a nation cited in the title of a news into the lookup knowledge of the system 
@@ -70,6 +85,26 @@ class InfoLookup():
     def nation_lookup(self, nation_name: str) -> str:
         pass
 
+    """
+    Looks for persons, stock exchanges and places cited in a news title
+    @:param title news title in which to look for information
+    @:return tuple of lists containing persons, markets, places in the news title
+    """
+    def lookup(self, title: str) -> (list, list, list):
+        # Call ner to obtain persons and places in a list of dict
+        data = text_ner(title)
+        persons, markets, places = list(), list(), list()
+        for el in data:
+            if el['category'] == 'name':
+                persons.append(get_dbpedia_uri(el['name']))
+            elif el['category'] == 'place':
+                places.append(get_dbpedia_uri(el['name']))
+        markets.append(self.market_index_lookup(title))
+        return persons, markets, places
 
-    def lookup(self, title: str) -> str:
-        return None, None, None
+    """
+    Updates the knowledge base of the system
+    @:param
+    """
+    def update_table(self, ):
+        pass

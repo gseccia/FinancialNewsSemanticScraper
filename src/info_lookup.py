@@ -19,7 +19,7 @@ class InfoLookup():
     @:return None
     """
     def set_person_table(self, person_table):
-        with open(person_table, mode='r') as file:
+        with open(person_table, mode='r', encoding="utf-8") as file:
             t = json.load(file)
             self.__person_table = {k.lower(): v for k, v in t.items()}
             self.__person_table = {re.sub('[^a-z]', '', k): v for k, v in self.__person_table.items()}
@@ -30,10 +30,23 @@ class InfoLookup():
     @:return None
     """
     def set_market_table(self, market_table):
-        with open(market_table, mode='r') as file:
+        with open(market_table, mode='r', encoding="utf-8") as file:
             t = json.load(file)
-            self.__person_table = {k.lower(): v for k, v in t.items()}
-            self.__person_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__person_table.items()}
+            self.__market_table = {k.lower(): v for k, v in t.items()}
+            self.__market_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__market_table.items()}
+
+
+    def set_countries_table(self, market_table):
+        with open(market_table, mode='r', encoding="utf-8") as file:
+            data = json.load(file)
+            for e in data:
+                t = {e["country"]: e["uri"]}
+                print(t)
+            print(t)
+            self.__market_table = {k.lower(): v for k, v in t.items()}
+            self.__market_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__market_table.items()}
+            print(self.__market_table)
+
 
     """
     Identifies uniquely the type of a company by checking a predefined lookup table 
@@ -74,7 +87,8 @@ class InfoLookup():
             stocks_found = list()
             for key in self.__market_table:
                 if key in key_to_find:
-                    stocks_found.append(self.__market_table[key])
+                    if self.__market_table[key] is not None:
+                        stocks_found.append(self.__market_table[key])
             return stocks_found
 
     """
@@ -99,7 +113,7 @@ class InfoLookup():
                 persons.append(get_dbpedia_uri(el['name']))
             elif el['category'] == 'place':
                 places.append(get_dbpedia_uri(el['name']))
-        markets.append(self.market_index_lookup(title))
+        markets = self.market_index_lookup(title, default=False)
         return persons, markets, places
 
     """
@@ -108,3 +122,11 @@ class InfoLookup():
     """
     def update_table(self, ):
         pass
+
+
+if __name__ == "__main__":
+    i = InfoLookup()
+    i.set_person_table('../resources/Data/vips.json')
+    i.set_market_table('../resources/Data/stock_exchange.json')
+    i.set_countries_table('../resources/Data/countries.json')
+    print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board"))

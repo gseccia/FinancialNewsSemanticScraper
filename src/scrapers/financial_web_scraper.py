@@ -98,6 +98,7 @@ class Finviz_scraper:
             if row["date"] > self.last_date:
                 fresh_news[row["link"]] = row
                 del fresh_news[row["link"]]["link"]
+                fresh_news[row["link"]]["date"] = fresh_news[row["link"]]["date"].strftime("%Y-%m-%dT%H:%M:%S+02:00")
                 self.last_date = row["date"]
         # Update last_date of scraper
         with open("../resources/scraper.dat","w") as f:

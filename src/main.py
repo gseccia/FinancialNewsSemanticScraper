@@ -1,12 +1,14 @@
 from scrapers.financial_web_scraper import Finviz_scraper
 from scrapers.deep_scraping import make_request
-# from tripleizer import Tripleizer
+from tripleizer import Tripleizer
 import datetime
 import time
+import os
 import json
 
 debug_mode = True
 max_blocked_loops = 10
+FUSEKI_JAR = "C:/Users/anton/Desktop/apache-jena-fuseki-3.13.1/fuseki-server.jar"
 
 def DEBUG(x):
     if debug_mode:
@@ -38,6 +40,7 @@ def main_loop():
 
             ##########################################
             # Da cancellare quando sarà in funzione
+            news_retr = {}
             with open("../resources/news.tmp",mode="r") as f:
                 news_retr = json.load(f)
                 f.close()
@@ -57,4 +60,8 @@ def main_loop():
         time.sleep(5*60)
 
 if __name__ == "__main__":
+    DEBUG("Starting Fuseki..")
+    os.system("java -jar "+FUSEKI_JAR)
+    DEBUG("Fuseki is running!")
+    
     main_loop()

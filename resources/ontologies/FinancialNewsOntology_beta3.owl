@@ -592,6 +592,15 @@
     
 
 
+    <!-- http://dbpedia.org/page/Australian_Securities_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Australian_Securities_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Australia"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://dbpedia.org/page/Bloomberg_News -->
 
     <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Bloomberg_News">
@@ -765,6 +774,24 @@
     <owl:NamedIndividual rdf:about="http://dbpedia.org/page/TOPIX">
         <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
         <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dbpedia.org/page/Toronto_Stock_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Toronto_Stock_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Canada"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dbpedia.org/page/S%26P_500_Index -->
+
+    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/S%26P_500_Index">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
     </owl:NamedIndividual>
     
 
@@ -5201,33 +5228,6 @@
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods">
         <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
         <rdfs:comment xml:lang="en">News about markets info and primary goods economy.</rdfs:comment>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P_500 -->
-
-    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P_500">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/ASX_200 -->
-
-    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/ASX_200">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Australia"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/TSX -->
-
-    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P/TSX">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Canada"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 

@@ -2,6 +2,8 @@
 
 # global reqs
 import os
+import re
+import asyncio
 import pdb
 import sys
 import json
@@ -281,17 +283,18 @@ class HTTPHandler(tornado.web.RequestHandler):
 class HTTPThread(threading.Thread):
 
     # constructor
-    def __init__(self, port, n):
+    def __init__(self, port, n,relpath):
         self.port = port
         self.n = n
+        self.relpath = relpath
         threading.Thread.__init__(self)
 
     # the main loop
     def run(self):
 
         # define routes
-        settings = {"static_path": os.path.join(os.getcwd(), "static"),
-                    "template_path": os.path.join(os.getcwd(), "templates")}
+        settings = {"static_path": os.path.join(self.relpath, "static"),
+                    "template_path": os.path.join(self.relpath, "templates")}
         application = tornado.web.Application([
             (r"/", HTTPHandler),
             (r"/commands", HTTPHandler),            
@@ -299,9 +302,11 @@ class HTTPThread(threading.Thread):
         ], **settings)
 
         # start the main loop
+        asyncio.set_event_loop(asyncio.new_event_loop())
         application.listen(8080)
         ioloop = tornado.ioloop.IOLoop()
-        ioloop.current().start()    
+        ioloop.current().start()  
+        # tornado.ioloop.IOLoop.instance().start() 
         
 ########################################################################
 #
@@ -310,6 +315,7 @@ class HTTPThread(threading.Thread):
 ########################################################################
 
 if __name__ == '__main__':
+    relpath  = re.sub("tarsier.py","",os.path.realpath(__file__))
 
     # init
     httpServerUri = None
@@ -328,7 +334,7 @@ if __name__ == '__main__':
     # create a YAMLCONF object
     logging.debug("Parsing Configuration file")
     try:
-        yamlConf = yaml.load(open("server_conf.yaml", "r"))
+        yamlConf = yaml.load(open(relpath+"server_conf.yaml", "r"))
     except FileNotFoundError:
         logging.critical("Configuration file 'server_conf.yaml' not found")
         sys.exit(255)
@@ -341,7 +347,7 @@ if __name__ == '__main__':
         sys.exit(255)
 
     # http interface
-    threadHTTP = HTTPThread(myConf["httpPort"], "HTTP Interface")
+    threadHTTP = HTTPThread(myConf["httpPort"], "HTTP Interface",relpath)
 
     # Start new Threads
     logging.debug("Ready! Tarsier is now running on http://localhost:%s" % myConf["httpPort"])

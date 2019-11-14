@@ -1,11 +1,11 @@
 import os.path
-from src.fuseki_wrapper import FusekiSparqlWrapper
-from src.topic_classifier import TopicClassifier
-from src.fsanalysis import *
+from fuseki_wrapper import FusekiSparqlWrapper
+from topic_classifier import TopicClassifier
+from fsanalysis import *
 import json
 import requests
-from src.info_lookup import *
-from src.utils import get_dbpedia_uri
+from info_lookup import *
+from utils import get_dbpedia_uri
 
 
 class Tripleizer():
@@ -13,7 +13,7 @@ class Tripleizer():
 
     def __init__(self):
         self.__db_manager = FusekiSparqlWrapper()
-        self.__topic_classifier = TopicClassifier()
+        # self.__topic_classifier = TopicClassifier()
         self.__query_prefix = """
         PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

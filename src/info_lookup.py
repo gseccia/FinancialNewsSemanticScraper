@@ -1,6 +1,6 @@
-from src.brmapping import *
-from src.ner import text_ner
-from src.utils import get_dbpedia_uri
+from brmapping import *
+from ner import text_ner
+from utils import get_dbpedia_uri
 import json
 import re
 

@@ -1,14 +1,18 @@
 from scrapers.financial_web_scraper import Finviz_scraper
 from scrapers.deep_scraping import make_request
 from tripleizer import Tripleizer
+from threading import Thread
 import datetime
 import time
 import os
 import json
 
+import sys, traceback
+
+
 debug_mode = True
 max_blocked_loops = 10
-FUSEKI_JAR = "C:/Users/anton/Desktop/apache-jena-fuseki-3.13.1/fuseki-server.jar"
+FUSEKI_JAR = "C:/Users/anton/Desktop/apache-jena-fuseki-3.13.1/"
 
 def DEBUG(x):
     if debug_mode:
@@ -16,7 +20,7 @@ def DEBUG(x):
 
 def main_loop():
     scraper = Finviz_scraper.scraper_factory()
-    # tripleizer = Tripleizer()
+    tripleizer = Tripleizer()
     while True:
         try:
             # Retrieving fresh news
@@ -51,17 +55,37 @@ def main_loop():
             ##########################################
 
             # Generate and insert triples
-            # tripleizer.generate_insert(news_pool=news)
+            if len(news) != 0:
+                DEBUG("Try to insert triples..")
+                tripleizer.generate_insert(news_pool=news)
+            else:
+                DEBUG("No fresh news")
             DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")
             
         except Exception as e:
             DEBUG("Acquisition at "+str(datetime.datetime.now())+" FAILED")
-            DEBUG("Exception "+str(e))
+            DEBUG("Exception "+repr(e))
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            traceback.print_tb(exc_tb)
         time.sleep(5*60)
 
-if __name__ == "__main__":
-    DEBUG("Starting Fuseki..")
-    os.system("java -jar "+FUSEKI_JAR)
-    DEBUG("Fuseki is running!")
+def tarsier_execution():
+    DEBUG("Starting Tarsier..")
+    os.system("python ./tarsier/tarsier.py")
+    DEBUG("Tarsier closed!")
     
+if __name__ == "__main__":
+    current_dir = os.getcwd()
+    DEBUG("Starting Fuseki..")
+    os.chdir(FUSEKI_JAR)
+    os.system("java -jar fuseki-server.jar")
+    os.chdir(current_dir)
+    DEBUG("Fuseki is running!")
+    th = Thread(target=tarsier_execution)
+    th.start()
     main_loop()
+    
+    
+    
+    
+    

@@ -1,11 +1,11 @@
 import os.path
-from src.fuseki_wrapper import FusekiSparqlWrapper
-from src.topic_classifier import TopicClassifier
-from src.fsanalysis import *
+from fuseki_wrapper import FusekiSparqlWrapper
+from topic_classifier import TopicClassifier
+from fsanalysis import *
 import json
 import requests
-from src.info_lookup import *
-from src.utils import get_dbpedia_uri
+from info_lookup import *
+from utils import get_dbpedia_uri
 
 
 class Tripleizer():

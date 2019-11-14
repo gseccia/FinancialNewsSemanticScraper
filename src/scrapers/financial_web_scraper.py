@@ -14,7 +14,7 @@ class Finviz_scraper:
             with open("../resources/scraper.dat","r") as f:
                 retr_date = datetime.datetime.strptime(f.readline(),"%Y-%m-%dT%H:%M:%S+02:00")
                 f.close()
-            print(retr_date,type(retr_date))
+            # print(retr_date,type(retr_date))
             scraper = Finviz_scraper(retr_date)
         else:
             scraper = Finviz_scraper(datetime.datetime(1970,1,1))
@@ -95,10 +95,18 @@ class Finviz_scraper:
         # Build news dictionary
         fresh_news = {}
         for row in today_news:
+            if type(row["date"]) == str:
+                row["date"] = datetime.datetime.strptime(row["date"],"%Y-%m-%dT%H:%M:%S+02:00")
             if row["date"] > self.last_date:
-                fresh_news[row["link"]] = row
-                del fresh_news[row["link"]]["link"]
+                fresh_news[row["link"]] = dict(row)
+                if "bloomberg" in row["link"]:
+                    fresh_news[row["link"]]["source"] = "bloomberg"
+                elif "reuters" in row["link"]:
+                    fresh_news[row["link"]]["source"] = "reuters"
+                else:
+                    fresh_news[row["link"]]["source"] = "other"
                 fresh_news[row["link"]]["date"] = fresh_news[row["link"]]["date"].strftime("%Y-%m-%dT%H:%M:%S+02:00")
+                del fresh_news[row["link"]]["link"]
                 self.last_date = row["date"]
         # Update last_date of scraper
         with open("../resources/scraper.dat","w") as f:

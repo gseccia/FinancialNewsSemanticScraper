@@ -1,6 +1,6 @@
-from src.brmapping import *
-from src.ner import text_ner
-from src.utils import get_dbpedia_uri
+from brmapping import *
+from ner import text_ner
+from utils import get_dbpedia_uri
 import json
 import re
 import string
@@ -163,6 +163,7 @@ if __name__ == "__main__":
     i.set_person_table('../resources/Data/vips.json')
     i.set_market_table('../resources/Data/stock_exchange.json')
     i.set_countries_table('../resources/Data/countries.json')
+<<<<<<< HEAD
     i.update_table(True, "Ilaria Gigi")
     i.update_table(False, "Ilaria Stock")
     print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
@@ -173,3 +174,6 @@ if __name__ == "__main__":
     print(i.person_lookup('Antonio Vicinanza'))
     print(i.market_index_lookup("Nasdaq"))
     print(i.market_index_lookup("PeppeSeccia_200"))
+=======
+    print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board"))
+>>>>>>> ace10ea0f96ad44c8c93b0197a42581e90d9b466

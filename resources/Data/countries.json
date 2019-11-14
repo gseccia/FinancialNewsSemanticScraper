@@ -1,0 +1,966 @@
+[
+  {
+    "country": "TAJIKISTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Tajikistan"
+  },
+  {
+    "country": "SIERRA LEONE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SierraLeone"
+  },
+  {
+    "country": "MOROCCO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Morocco"
+  },
+  {
+    "country": "WALLIS AND FUTUNA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.WallisAndFutuna"
+  },
+  {
+    "country": "LAO PEOPLE'S DEMOCRATIC REPUBLIC",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Laos"
+  },
+  {
+    "country": "TOGO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Togo"
+  },
+  {
+    "country": "UNITED ARAB EMIRATES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedArabEmirates"
+  },
+  {
+    "country": "MAURITANIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mauritania"
+  },
+  {
+    "country": "UNITED KINGDOM",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedKingdom"
+  },
+  {
+    "country": "LIBERIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Liberia"
+  },
+  {
+    "country": "NAURU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Nauru"
+  },
+  {
+    "country": "DOMINICA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Dominica"
+  },
+  {
+    "country": "PHILIPPINES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Philippines"
+  },
+  {
+    "country": "BHUTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bhutan"
+  },
+  {
+    "country": "MACAU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Macau"
+  },
+  {
+    "country": "UNITED STATES MINOR OUTLYING ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStatesMinorOutlyingIslands"
+  },
+  {
+    "country": "BAHRAIN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bahrain"
+  },
+  {
+    "country": "PAPUA NEW GUINEA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.PapuaNewGuinea"
+  },
+  {
+    "country": "THAILAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Thailand"
+  },
+  {
+    "country": "INDIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.India"
+  },
+  {
+    "country": "TONGA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Tonga"
+  },
+  {
+    "country": "KOREA, REPUBLIC OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.KoreaSouth"
+  },
+  {
+    "country": "SPAIN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Spain"
+  },
+  {
+    "country": "RWANDA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Rwanda"
+  },
+  {
+    "country": "GUATEMALA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Guatemala"
+  },
+  {
+    "country": "HONG KONG",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HongKong"
+  },
+  {
+    "country": "TUNISIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Tunisia"
+  },
+  {
+    "country": "TURKMENISTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Turkmenistan"
+  },
+  {
+    "country": "SAINT VINCENT AND THE GRENADINES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaintVincentAndTheGrenadines"
+  },
+  {
+    "country": "CAYMAN ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CaymanIslands"
+  },
+  {
+    "country": "UNITED STATES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"
+  },
+  {
+    "country": "DOMINICAN REPUBLIC",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.DominicanRepublic"
+  },
+  {
+    "country": "SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SouthGeorgiaAndTheSouthSandwichIslands"
+  },
+  {
+    "country": "SERBIA AND MONTENEGRO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SerbiaAndMontenegro"
+  },
+  {
+    "country": "EGYPT",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Egypt"
+  },
+  {
+    "country": "BRAZIL",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Brazil"
+  },
+  {
+    "country": "DJIBOUTI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Djibouti"
+  },
+  {
+    "country": "SAMOA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Samoa"
+  },
+  {
+    "country": "MAYOTTE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mayotte"
+  },
+  {
+    "country": "SAN MARINO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SanMarino"
+  },
+  {
+    "country": "NETHERLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Netherlands"
+  },
+  {
+    "country": "MONGOLIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mongolia"
+  },
+  {
+    "country": "VIET NAM",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Vietnam"
+  },
+  {
+    "country": "MOLDOVA, REPUBLIC OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Moldova"
+  },
+  {
+    "country": "GUAM",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Guam"
+  },
+  {
+    "country": "ANGOLA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Angola"
+  },
+  {
+    "country": "CAMBODIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Cambodia"
+  },
+  {
+    "country": "TUVALU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Tuvalu"
+  },
+  {
+    "country": "TOKELAU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Tokelau"
+  },
+  {
+    "country": "HUNGARY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Hungary"
+  },
+  {
+    "country": "NAMIBIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Namibia"
+  },
+  {
+    "country": "FALKLAND ISLANDS (MALVINAS)",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.FalklandIslands"
+  },
+  {
+    "country": "GUINEA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Guinea"
+  },
+  {
+    "country": "BELGIUM",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Belgium"
+  },
+  {
+    "country": "SENEGAL",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Senegal"
+  },
+  {
+    "country": "IRELAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Ireland"
+  },
+  {
+    "country": "FINLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Finland"
+  },
+  {
+    "country": "ÅLAND ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.AlandIslands"
+  },
+  {
+    "country": "PALESTINIAN TERRITORY, OCCUPIED",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.PalestinianTerritoryOccupied"
+  },
+  {
+    "country": "COMOROS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Comoros"
+  },
+  {
+    "country": "UKRAINE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Ukraine"
+  },
+  {
+    "country": "JAMAICA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Jamaica"
+  },
+  {
+    "country": "MARSHALL ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.MarshallIslands"
+  },
+  {
+    "country": "SOLOMON ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SolomonIslands"
+  },
+  {
+    "country": "ANGUILLA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Anguilla"
+  },
+  {
+    "country": "MARTINIQUE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Martinique"
+  },
+  {
+    "country": "LESOTHO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Lesotho"
+  },
+  {
+    "country": "BURKINA FASO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.BurkinaFaso"
+  },
+  {
+    "country": "COOK ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CookIslands"
+  },
+  {
+    "country": "SINGAPORE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Singapore"
+  },
+  {
+    "country": "MONTSERRAT",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Montserrat"
+  },
+  {
+    "country": "BRUNEI DARUSSALAM",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.BruneiDarussalam"
+  },
+  {
+    "country": "NETHERLANDS ANTILLES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.NetherlandsAntilles"
+  },
+  {
+    "country": "MOZAMBIQUE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mozambique"
+  },
+  {
+    "country": "COLOMBIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Colombia"
+  },
+  {
+    "country": "MONACO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Monaco"
+  },
+  {
+    "country": "KIRIBATI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Kiribati"
+  },
+  {
+    "country": "EL SALVADOR",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.ElSalvador"
+  },
+  {
+    "country": "NEW ZEALAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.NewZealand"
+  },
+  {
+    "country": "NIUE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Niue"
+  },
+  {
+    "country": "ANDORRA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Andorra"
+  },
+  {
+    "country": "ICELAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Iceland"
+  },
+  {
+    "country": "CAMEROON",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Cameroon"
+  },
+  {
+    "country": "MYANMAR",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Myanmar"
+  },
+  {
+    "country": "KENYA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Kenya"
+  },
+  {
+    "country": "GREENLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Greenland"
+  },
+  {
+    "country": "ESTONIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Estonia"
+  },
+  {
+    "country": "RUSSIAN FEDERATION",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.RussianFederation"
+  },
+  {
+    "country": "DENMARK",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Denmark"
+  },
+  {
+    "country": "CUBA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Cuba"
+  },
+  {
+    "country": "POLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Poland"
+  },
+  {
+    "country": "SEYCHELLES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Seychelles"
+  },
+  {
+    "country": "CHINA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.China"
+  },
+  {
+    "country": "SAINT KITTS AND NEVIS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaintKittsAndNevis"
+  },
+  {
+    "country": "UZBEKISTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Uzbekistan"
+  },
+  {
+    "country": "MALDIVES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Maldives"
+  },
+  {
+    "country": "SWITZERLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Switzerland"
+  },
+  {
+    "country": "BRITISH INDIAN OCEAN TERRITORY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.BritishIndianOceanTerritory"
+  },
+  {
+    "country": "PORTUGAL",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Portugal"
+  },
+  {
+    "country": "CYPRUS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Cyprus"
+  },
+  {
+    "country": "HAITI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Haiti"
+  },
+  {
+    "country": "ISRAEL",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Israel"
+  },
+  {
+    "country": "BOLIVIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bolivia"
+  },
+  {
+    "country": "MALAWI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Malawi"
+  },
+  {
+    "country": "SLOVENIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Slovenia"
+  },
+  {
+    "country": "SUDAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Sudan"
+  },
+  {
+    "country": "SAINT LUCIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaintLucia"
+  },
+  {
+    "country": "RÉUNION",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Reunion"
+  },
+  {
+    "country": "JAPAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"
+  },
+  {
+    "country": "CZECH REPUBLIC",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CzechRepublic"
+  },
+  {
+    "country": "SVALBARD AND JAN MAYEN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SvalbardAndJanMayen"
+  },
+  {
+    "country": "LUXEMBOURG",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Luxembourg"
+  },
+  {
+    "country": "FIJI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Fiji"
+  },
+  {
+    "country": "GERMANY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Germany"
+  },
+  {
+    "country": "MAURITIUS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mauritius"
+  },
+  {
+    "country": "PUERTO RICO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.PuertoRico"
+  },
+  {
+    "country": "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.KoreaNorth"
+  },
+  {
+    "country": "CENTRAL AFRICAN REPUBLIC",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CentralAfricanRepublic"
+  },
+  {
+    "country": "NEPAL",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Nepal"
+  },
+  {
+    "country": "PITCAIRN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Pitcairn"
+  },
+  {
+    "country": "GUYANA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Guyana"
+  },
+  {
+    "country": "NORTHERN MARIANA ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.NorthernMarianaIslands"
+  },
+  {
+    "country": "ANTIGUA AND BARBUDA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.AntiguaAndBarbuda"
+  },
+  {
+    "country": "SAINT HELENA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaintHelena"
+  },
+  {
+    "country": "LEBANON",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Lebanon"
+  },
+  {
+    "country": "HEARD ISLAND AND MCDONALD ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HeardIslandsAndMcDonaldIslands"
+  },
+  {
+    "country": "BOUVET ISLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.BouvetIsland"
+  },
+  {
+    "country": "PALAU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Palau"
+  },
+  {
+    "country": "FAROE ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.FaroeIslands"
+  },
+  {
+    "country": "QATAR",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Qatar"
+  },
+  {
+    "country": "CHRISTMAS ISLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.ChristmasIsland"
+  },
+  {
+    "country": "TRINIDAD AND TOBAGO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.TrinidadAndTobago"
+  },
+  {
+    "country": "NORWAY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Norway"
+  },
+  {
+    "country": "BELIZE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Belize"
+  },
+  {
+    "country": "ZAMBIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Zambia"
+  },
+  {
+    "country": "TAIWAN, PROVINCE OF CHINA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Taiwan"
+  },
+  {
+    "country": "FRANCE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.France"
+  },
+  {
+    "country": "MALTA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Malta"
+  },
+  {
+    "country": "INDONESIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Indonesia"
+  },
+  {
+    "country": "MEXICO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mexico"
+  },
+  {
+    "country": "ETHIOPIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Ethiopia"
+  },
+  {
+    "country": "CANADA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Canada"
+  },
+  {
+    "country": "LITHUANIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Lithuania"
+  },
+  {
+    "country": "LATVIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Latvia"
+  },
+  {
+    "country": "SWEDEN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Sweden"
+  },
+  {
+    "country": "OMAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Oman"
+  },
+  {
+    "country": "TANZANIA, UNITED REPUBLIC OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Tanzania"
+  },
+  {
+    "country": "ANTARCTICA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Antarctica"
+  },
+  {
+    "country": "BARBADOS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Barbados"
+  },
+  {
+    "country": "ZIMBABWE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Zimbabwe"
+  },
+  {
+    "country": "NORFOLK ISLAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.NorfolkIsland"
+  },
+  {
+    "country": "AFGHANISTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Afghanistan"
+  },
+  {
+    "country": "GIBRALTAR",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Gibraltar"
+  },
+  {
+    "country": "BENIN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Benin"
+  },
+  {
+    "country": "NICARAGUA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Nicaragua"
+  },
+  {
+    "country": "ARMENIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Armenia"
+  },
+  {
+    "country": "MADAGASCAR",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Madagascar"
+  },
+  {
+    "country": "SYRIAN ARAB REPUBLIC",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Syria"
+  },
+  {
+    "country": "MALAYSIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Malaysia"
+  },
+  {
+    "country": "TURKEY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Turkey"
+  },
+  {
+    "country": "KAZAKHSTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Kazakhstan"
+  },
+  {
+    "country": "FRANCE, METROPOLITAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.FranceMetropolitan"
+  },
+  {
+    "country": "EQUATORIAL GUINEA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.EquatorialGuinea"
+  },
+  {
+    "country": "URUGUAY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Uruguay"
+  },
+  {
+    "country": "BOTSWANA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Botswana"
+  },
+  {
+    "country": "CROATIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Croatia"
+  },
+  {
+    "country": "SAINT PIERRE AND MIQUELON",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaintPierreAndMiquelon"
+  },
+  {
+    "country": "HONDURAS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Honduras"
+  },
+  {
+    "country": "COSTA RICA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CostaRica"
+  },
+  {
+    "country": "ARGENTINA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Argentina"
+  },
+  {
+    "country": "CONGO, THE DEMOCRATIC REPUBLIC OF THE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CongoDemocraticRepublic"
+  },
+  {
+    "country": "SAUDI ARABIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaudiArabia"
+  },
+  {
+    "country": "YEMEN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Yemen"
+  },
+  {
+    "country": "SOUTH AFRICA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SouthAfrica"
+  },
+  {
+    "country": "SURINAME",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Suriname"
+  },
+  {
+    "country": "SAO TOME AND PRINCIPE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SaoTomeAndPrincipe"
+  },
+  {
+    "country": "SRI LANKA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.SriLanka"
+  },
+  {
+    "country": "UGANDA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Uganda"
+  },
+  {
+    "country": "TURKS AND CAICOS ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.TurksAndCaicosIslands"
+  },
+  {
+    "country": "SWAZILAND",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Swaziland"
+  },
+  {
+    "country": "NIGERIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Nigeria"
+  },
+  {
+    "country": "BELARUS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Belarus"
+  },
+  {
+    "country": "ERITREA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Eritrea"
+  },
+  {
+    "country": "CÔTE D'IVOIRE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CoteDIvoire"
+  },
+  {
+    "country": "SLOVAKIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Slovakia"
+  },
+  {
+    "country": "CAPE VERDE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CapeVerde"
+  },
+  {
+    "country": "AUSTRALIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Australia"
+  },
+  {
+    "country": "ITALY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Italy"
+  },
+  {
+    "country": "KUWAIT",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Kuwait"
+  },
+  {
+    "country": "MICRONESIA, FEDERATED STATES OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Micronesia"
+  },
+  {
+    "country": "CONGO",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Congo"
+  },
+  {
+    "country": "NIGER",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Niger"
+  },
+  {
+    "country": "PAKISTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Pakistan"
+  },
+  {
+    "country": "PARAGUAY",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Paraguay"
+  },
+  {
+    "country": "HOLY SEE (VATICAN CITY STATE)",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HolySee"
+  },
+  {
+    "country": "BULGARIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bulgaria"
+  },
+  {
+    "country": "BURUNDI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Burundi"
+  },
+  {
+    "country": "MALI",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Mali"
+  },
+  {
+    "country": "KYRGYZSTAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Kyrgyzstan"
+  },
+  {
+    "country": "FRENCH POLYNESIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.FrenchPolynesia"
+  },
+  {
+    "country": "BAHAMAS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bahamas"
+  },
+  {
+    "country": "VENEZUELA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Venezuela"
+  },
+  {
+    "country": "GHANA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Ghana"
+  },
+  {
+    "country": "COCOS (KEELING) ISLANDS",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.CocosIslands"
+  },
+  {
+    "country": "TIMOR-LESTE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.EastTimor"
+  },
+  {
+    "country": "ALBANIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Albania"
+  },
+  {
+    "country": "AZERBAIJAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Azerbaijan"
+  },
+  {
+    "country": "GABON",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Gabon"
+  },
+  {
+    "country": "GAMBIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Gambia"
+  },
+  {
+    "country": "GREECE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Greece"
+  },
+  {
+    "country": "VIRGIN ISLANDS, U.S.",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.VirginIslandsUS"
+  },
+  {
+    "country": "SOMALIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Somalia"
+  },
+  {
+    "country": "VANUATU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Vanuatu"
+  },
+  {
+    "country": "GEORGIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Georgia"
+  },
+  {
+    "country": "ECUADOR",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Ecuador"
+  },
+  {
+    "country": "GUADELOUPE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Guadeloupe"
+  },
+  {
+    "country": "LIBYAN ARAB JAMAHIRIYA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Libya"
+  },
+  {
+    "country": "CHAD",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Chad"
+  },
+  {
+    "country": "BOSNIA AND HERZEGOVINA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.BosniaAndHerzegovina"
+  },
+  {
+    "country": "AMERICAN SAMOA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.AmericanSamoa"
+  },
+  {
+    "country": "IRAQ",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Iraq"
+  },
+  {
+    "country": "VIRGIN ISLANDS, BRITISH",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.VirginIslandsBritish"
+  },
+  {
+    "country": "FRENCH SOUTHERN TERRITORIES",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.FrenchSouthernTerritories"
+  },
+  {
+    "country": "GRENADA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Grenada"
+  },
+  {
+    "country": "FRENCH GUIANA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.FrenchGuiana"
+  },
+  {
+    "country": "WESTERN SAHARA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.WesternSahara"
+  },
+  {
+    "country": "ROMANIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Romania"
+  },
+  {
+    "country": "PANAMA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Panama"
+  },
+  {
+    "country": "BANGLADESH",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bangladesh"
+  },
+  {
+    "country": "LIECHTENSTEIN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Liechtenstein"
+  },
+  {
+    "country": "ALGERIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Algeria"
+  },
+  {
+    "country": "ARUBA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Aruba"
+  },
+  {
+    "country": "PERU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Peru"
+  },
+  {
+    "country": "GUINEA-BISSAU",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.GuineaBissau"
+  },
+  {
+    "country": "AUSTRIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Austria"
+  },
+  {
+    "country": "NEW CALEDONIA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.NewCaledonia"
+  },
+  {
+    "country": "JORDAN",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Jordan"
+  },
+  {
+    "country": "MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Macedonia"
+  },
+  {
+    "country": "CHILE",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Chile"
+  },
+  {
+    "country": "IRAN, ISLAMIC REPUBLIC OF",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Iran"
+  },
+  {
+    "country": "BERMUDA",
+    "uri": "http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Bermuda"
+  }
+]

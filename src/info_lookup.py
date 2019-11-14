@@ -3,6 +3,7 @@ from src.ner import text_ner
 from src.utils import get_dbpedia_uri
 import json
 import re
+import string
 
 
 class InfoLookup():
@@ -12,13 +13,18 @@ class InfoLookup():
     def __init__(self):
         self.__person_table = None
         self.__market_table = None
+        self.__country_table = None
+        self.__person_table_filename = None
+        self.__market_table_filename = None
+        self.__country_table_filename = None
 
     """
     Load a lookup table for persons in the knowledge base
     @:param person_table filename of the json file containing the table of information about persons
     @:return None
     """
-    def set_person_table(self, person_table):
+    def set_person_table(self, person_table: str):
+        self.__person_table_filename = person_table
         with open(person_table, mode='r', encoding="utf-8") as file:
             t = json.load(file)
             self.__person_table = {k.lower(): v for k, v in t.items()}
@@ -29,24 +35,27 @@ class InfoLookup():
     @:param person_table filename of the json file containing the table of information about stock exchanges
     @:return None
     """
-    def set_market_table(self, market_table):
+    def set_market_table(self, market_table: str):
+        self.__market_table_filename = market_table
         with open(market_table, mode='r', encoding="utf-8") as file:
             t = json.load(file)
             self.__market_table = {k.lower(): v for k, v in t.items()}
             self.__market_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__market_table.items()}
 
-
-    def set_countries_table(self, market_table):
-        with open(market_table, mode='r', encoding="utf-8") as file:
+    """
+    Load a lookup table for countries in the knowledge base
+    @:param countries_table filename of the json file containing the table of information about countries
+    @:return None
+    """
+    def set_countries_table(self, country_table: str):
+        self.__country_table_filename = country_table
+        with open(country_table, mode='r', encoding="utf-8") as file:
             data = json.load(file)
+            t = dict()
             for e in data:
-                t = {e["country"]: e["uri"]}
-                print(t)
-            print(t)
-            self.__market_table = {k.lower(): v for k, v in t.items()}
-            self.__market_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__market_table.items()}
-            print(self.__market_table)
-
+                t[e["country"]] = e["uri"]
+            self.__country_table = {k.lower(): v for k, v in t.items()}
+            self.__country_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__country_table.items()}
 
     """
     Identifies uniquely the type of a company by checking a predefined lookup table 
@@ -66,7 +75,7 @@ class InfoLookup():
         key_to_find = person_name.lower()
         key_to_find = re.sub('[^a-z]', '', key_to_find)
         if key_to_find in self.__person_table.keys():
-            return self.__person_table[person_name]["uri"]
+            return self.__person_table[key_to_find]["uri"]
         else:
             return None
 
@@ -80,7 +89,7 @@ class InfoLookup():
         key_to_find = re.sub('[^a-z|&]', '', key_to_find)
         if default:
             if key_to_find in self.__market_table.keys():
-                return self.__market_table[stock_name]
+                return self.__market_table[key_to_find]
             else:
                 return None
         else:
@@ -96,8 +105,13 @@ class InfoLookup():
     @:param nation_name indicates the name of the nation
     @:return The URI of the nation if found, None otherwise
     """
-    def nation_lookup(self, nation_name: str) -> str:
-        pass
+    def country_lookup(self, country_name: str):
+        key_to_find = country_name.lower()
+        key_to_find = re.sub('[^a-z]', '', key_to_find)
+        if key_to_find in self.__country_table.keys():
+            return self.__country_table[key_to_find]
+        else:
+            return None
 
     """
     Looks for persons, stock exchanges and places cited in a news title
@@ -118,10 +132,30 @@ class InfoLookup():
 
     """
     Updates the knowledge base of the system
-    @:param
+    @:param update_type if true updates persons table, otherwise updates markets table
+    @:param new_individual is the unknown concept found by the system 
+    @:param title_or_scrape in case of unknown persons found indicates whether this info comes from a news title (True)
+            or from web scraping (False)
+    @:return None
     """
-    def update_table(self, ):
-        pass
+    def update_table(self, update_type: bool, new_individual: str, title_or_scrape: bool=False):
+        key = new_individual.lower()
+        if update_type:
+            # update persons table, the system found an unknown person
+            if not title_or_scrape:
+                # the person found must be a CEO of a company
+                key = re.sub('[^a-z]', '', key)
+                self.__person_table[key] = {"uri": get_dbpedia_uri(string.capwords(new_individual)),
+                                                                        "isCeo/Chairman": "true",
+                                                                        "hasNationalRole": "false"}
+                with open('../resources/Data/'+self.__person_table_filename, 'w', encoding='utf-8') as file:
+                    json.dump(self.__person_table, file)
+        else:
+            # update stocks table, the system found an unknown stock
+            key = re.sub('[^a-z|&]', '', key)
+            self.__market_table[key] = get_dbpedia_uri(new_individual)
+            with open('../resources/Data/'+self.__market_table_filename, 'w', encoding='utf-8') as file:
+                json.dump(self.__person_table, file)
 
 
 if __name__ == "__main__":
@@ -129,4 +163,13 @@ if __name__ == "__main__":
     i.set_person_table('../resources/Data/vips.json')
     i.set_market_table('../resources/Data/stock_exchange.json')
     i.set_countries_table('../resources/Data/countries.json')
-    print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board"))
+    i.update_table(True, "Ilaria Gigi")
+    i.update_table(False, "Ilaria Stock")
+    print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
+                   "Italy, America. NASDAQ, CSI 300 and S&P 500 falling quickly"))
+    print(i.country_lookup("Italy"))
+    print(i.country_lookup("Ogliara"))
+    print(i.person_lookup('Amancio Ortega'))
+    print(i.person_lookup('Antonio Vicinanza'))
+    print(i.market_index_lookup("Nasdaq"))
+    print(i.market_index_lookup("PeppeSeccia_200"))

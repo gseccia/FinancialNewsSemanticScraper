@@ -1,13 +1,13 @@
 {
 	"Brussels Stock Exchange": "http://dbpedia.org/page/Brussels_Stock_Exchange",
 	"CAC 40": "http://dbpedia.org/page/CAC_40",
-	"CSI 300 Index": "http://dbpedia.org/page/CSI_300_Index",
+	"CSI 300": "http://dbpedia.org/page/CSI_300_Index",
 	"DAX": "http://dbpedia.org/page/DAX",
 	"Dow Jones Industrial Average": "http://dbpedia.org/page/Dow_Jones_Industrial_Average",
 	"Euronext Paris": "http://dbpedia.org/page/Euronext_Paris",
-	"FTSE 100 Index": "http://dbpedia.org/page/FTSE_100_Index",
+	"FTSE 100": "http://dbpedia.org/page/FTSE_100_Index",
 	"FTSE MIB": "http://dbpedia.org/page/FTSE_MIB",
-	"Hang Seng Index": "http://dbpedia.org/page/Hang_Seng_Index",
+	"Hang Seng": "http://dbpedia.org/page/Hang_Seng_Index",
 	"Hong Kong Stock Exchange": "http://dbpedia.org/page/Hong_Kong_Stock_Exchange",
 	"IBEX 35": "http://dbpedia.org/page/IBEX_35",
 	"London Stock Exchange": "http://dbpedia.org/page/London_Stock_Exchange",
@@ -17,6 +17,6 @@
 	"Nikkei 225": "http://dbpedia.org/page/Nikkei_225",
 	"Topix": "http://dbpedia.org/page/TOPIX",
 	"Toronto Stock Exchange": "http://dbpedia.org/page/Toronto_Stock_Exchange",
-	"S&P 500 Index": "http://dbpedia.org/page/S%26P_500_Index",
+	"S&P 500": "http://dbpedia.org/page/S%26P_500_Index",
 	"Australian Securities Exchange": "http://dbpedia.org/page/Australian_Securities_Exchange"
 }

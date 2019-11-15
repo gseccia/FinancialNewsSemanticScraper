@@ -124,9 +124,20 @@ class InfoLookup():
         persons, markets, places = list(), list(), list()
         for el in data:
             if el['category'] == 'name':
-                persons.append(get_dbpedia_uri(el['name']))
+                val = self.person_lookup(el["name"])
+                print(type(el["name"]))
+                print(val)
+                if val is None:
+                    # If the person found by the ner is not in the knowledge base update table and return uri
+                    self.update_table(True, el["name"], True)
+                    persons.append(self.person_lookup(el["name"]))
+                else:
+                    # If the person is already in the knowledge base
+                    persons.append(val)
             elif el['category'] == 'place':
-                places.append(get_dbpedia_uri(el['name']))
+                val = self.country_lookup(el['name'])
+                if val:
+                    places.append(val)
         markets = self.market_index_lookup(title, default=False)
         return persons, markets, places
 
@@ -146,16 +157,20 @@ class InfoLookup():
                 # the person found must be a CEO of a company
                 key = re.sub('[^a-z]', '', key)
                 self.__person_table[key] = {"uri": get_dbpedia_uri(string.capwords(new_individual)),
-                                                                        "isCeo/Chairman": "true",
-                                                                        "hasNationalRole": "false"}
-                with open('../resources/Data/'+self.__person_table_filename, 'w', encoding='utf-8') as file:
-                    json.dump(self.__person_table, file)
+                                                                        "isCeo/Chairman": True,
+                                                                        "hasNationalRole": False}
+            else:
+                self.__person_table[key] = {"uri": get_dbpedia_uri(string.capwords(new_individual)),
+                                            "isCeo/Chairman": False,
+                                            "hasNationalRole": False}
+            with open(self.__person_table_filename, 'w', encoding='utf-8') as file:
+                json.dump(self.__person_table, file)
         else:
             # update stocks table, the system found an unknown stock
             key = re.sub('[^a-z|&]', '', key)
             self.__market_table[key] = get_dbpedia_uri(new_individual)
-            with open('../resources/Data/'+self.__market_table_filename, 'w', encoding='utf-8') as file:
-                json.dump(self.__person_table, file)
+            with open(self.__market_table_filename, 'w', encoding='utf-8') as file:
+                json.dump(self.__market_table, file)
 
 
 if __name__ == "__main__":
@@ -163,13 +178,13 @@ if __name__ == "__main__":
     i.set_person_table('../resources/Data/vips.json')
     i.set_market_table('../resources/Data/stock_exchange.json')
     i.set_countries_table('../resources/Data/countries.json')
-    i.update_table(True, "Ilaria Gigi")
-    i.update_table(False, "Ilaria Stock")
+    i.update_table(True, "n Gigi")
+    #i.update_table(False, "Ilaria Stock")
     print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
                    "Italy, America. NASDAQ, CSI 300 and S&P 500 falling quickly"))
-    print(i.country_lookup("Italy"))
-    print(i.country_lookup("Ogliara"))
-    print(i.person_lookup('Amancio Ortega'))
-    print(i.person_lookup('Antonio Vicinanza'))
-    print(i.market_index_lookup("Nasdaq"))
-    print(i.market_index_lookup("PeppeSeccia_200"))
+    #print(i.country_lookup("Italy"))
+    #print(i.country_lookup("Ogliara"))
+    #print(i.person_lookup('Amancio Ortega'))
+    #print(i.person_lookup('Antonio Vicinanza'))
+    #print(i.market_index_lookup("Nasdaq"))
+    #print(i.market_index_lookup("PeppeSeccia_200"))

@@ -1,4 +1,5 @@
 import paralleldots
+import pprint
 
 TOKEN = "zmxvDWsLaMuo6cxA1ZuIhjaqw6vtNVc9OVB5RgHQWFw"
 
@@ -19,7 +20,7 @@ Result by paralleldots ner request example:
 '''
 
 
-def text_ner(text: str, confidence_threshold_pers: int=0.35, confidence_threshold_plac: int=0.65) -> list:
+def text_ner(text: str, confidence_threshold_pers: int = 0.35, confidence_threshold_plac: int = 0.35) -> list:
     """
     Asks paralleldots.ner to find persons and nations in the news title
     @:param news title as a string
@@ -36,7 +37,6 @@ def text_ner(text: str, confidence_threshold_pers: int=0.35, confidence_threshol
 
     l = list()
     for el in result_dict['entities']:
-        print(el)
         current_element = dict()
         if el['category'] == 'place' and el['confidence_score'] >= confidence_threshold_plac \
                 or el['category'] == 'name' and el['confidence_score'] >= confidence_threshold_pers:
@@ -51,4 +51,4 @@ if __name__ == "__main__":
     paralleldots.set_api_key(TOKEN)
     #
     r = text_ner("Moon Jae-in Opens Up for Foreign Investment, Spurring Rivalry With Kazakhstan")
-    print(r)
+    pprint.pprint(r)

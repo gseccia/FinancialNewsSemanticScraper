@@ -1,6 +1,6 @@
 from src.brmapping import *
 from src.ner import text_ner
-from src.utils import get_dbpedia_uri
+from src.utils import get_ontology_uri
 import json
 import re
 import string
@@ -125,8 +125,6 @@ class InfoLookup():
         for el in data:
             if el['category'] == 'name':
                 val = self.person_lookup(el["name"])
-                print(type(el["name"]))
-                print(val)
                 if val is None:
                     # If the person found by the ner is not in the knowledge base update table and return uri
                     self.update_table(True, el["name"], True)
@@ -153,14 +151,14 @@ class InfoLookup():
         key = new_individual.lower()
         if update_type:
             # update persons table, the system found an unknown person
+            key = re.sub('[^a-z]', '', key)
             if not title_or_scrape:
                 # the person found must be a CEO of a company
-                key = re.sub('[^a-z]', '', key)
-                self.__person_table[key] = {"uri": get_dbpedia_uri(string.capwords(new_individual)),
+                self.__person_table[key] = {"uri": get_ontology_uri(string.capwords(new_individual)),
                                                                         "isCeo/Chairman": True,
                                                                         "hasNationalRole": False}
             else:
-                self.__person_table[key] = {"uri": get_dbpedia_uri(string.capwords(new_individual)),
+                self.__person_table[key] = {"uri": get_ontology_uri(string.capwords(new_individual)),
                                             "isCeo/Chairman": False,
                                             "hasNationalRole": False}
             with open(self.__person_table_filename, 'w', encoding='utf-8') as file:
@@ -168,7 +166,7 @@ class InfoLookup():
         else:
             # update stocks table, the system found an unknown stock
             key = re.sub('[^a-z|&]', '', key)
-            self.__market_table[key] = get_dbpedia_uri(new_individual)
+            self.__market_table[key] = get_ontology_uri(new_individual)
             with open(self.__market_table_filename, 'w', encoding='utf-8') as file:
                 json.dump(self.__market_table, file)
 
@@ -178,7 +176,6 @@ if __name__ == "__main__":
     i.set_person_table('../resources/Data/vips.json')
     i.set_market_table('../resources/Data/stock_exchange.json')
     i.set_countries_table('../resources/Data/countries.json')
-    i.update_table(True, "n Gigi")
     #i.update_table(False, "Ilaria Stock")
     print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
                    "Italy, America. NASDAQ, CSI 300 and S&P 500 falling quickly"))

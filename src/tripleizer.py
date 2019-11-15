@@ -3,7 +3,7 @@ from src.fuseki_wrapper import FusekiSparqlWrapper
 from src.fsanalysis import *
 import requests
 from src.info_lookup import *
-from src.utils import get_dbpedia_uri
+from src.utils import get_dbpedia_uri, find_news_source, format_name
 
 
 class Tripleizer():
@@ -17,6 +17,7 @@ class Tripleizer():
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         PREFIX owl: <http://www.w3.org/2002/07/owl#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         """
         self.__insert_prefix = "INSERT DATA {"
         self.__delete_prefix = "DELETE DATA {"
@@ -41,7 +42,7 @@ class Tripleizer():
         for news in news_pool:  # news is the link
             datetime = news_pool[news]["date"]
             news_title = news_pool[news]["text"]
-            news_source = news_pool[news]["source"]
+            news_source = find_news_source(news)
             partial_query = partial_query + "\n<" + news + "> rdf:type ont:News, owl:NamedIndividual ."
             partial_query = partial_query + '\n<' + news + '> ont:hasTitle "' + news_title + '"^^xsd:string .'
             partial_query = partial_query + '\n<' + news + '> ont:hasDateTime "' + datetime + '"^^xsd:dateTime .'
@@ -88,51 +89,55 @@ class Tripleizer():
             ##### DEEEP SCRAPING #####
             companies = news_pool[news]['companies']
             for company in companies:
-
+                company_name = format_name(companies[company]['name'])
+                market_name = format_name(companies[company]['market_index'][1:-1])
                 # add triple about company type
                 company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
-                partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> rdf:type ont:' \
+                partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
                                 + company_type + ', owl:NamedIndividual .'
-                partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> rdfs:seeAlso <' \
-                                + get_dbpedia_uri(companies[company]['name']) + '> .'
+                partial_query = partial_query + '\n<ont:' + company_name + '> rdfs:seeAlso <' \
+                                + get_dbpedia_uri(company_name) + '> .'
 
                 # add company stock name
-                partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:hasStockName: "' \
+                partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasStockName: "' \
                                 + company + '"^^xsd:string .'
 
                 # add triples about market index
                 # check if the market index of the company is already into the knowledge base, otherwise add it
                 if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
-                    partial_query = partial_query + '\n<ont:' + companies[company]['market_index'] + '>' \
+                    partial_query = partial_query + '\n<ont:' + market_name + '>' \
                                     ' rdf:type ont:StockExchange, owl:NamedIndividual .'
                     self.__lookuper.update_table(False, companies[company]["market_index"])
-                    partial_query = partial_query + '\n<ont:' + companies[company]['market_index'] + '> rdfs:seeAlso <' \
-                                    + get_dbpedia_uri(companies[company]['market_index']) + '> .'
-                partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:isQuotedOn <ont:' \
-                                + companies[company]['market_index'] + '> .'
+                    partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
+                                    + get_dbpedia_uri(market_name) + '> .'
+                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <ont:' \
+                                + market_name + '> .'
 
                 # add triples about company's ceo
                 for ceo in companies[company]['ceo']:
+                    ceo = format_name(ceo)
                     # verify if the system already knows this person, otherwise update it with a new individual
                     if self.__lookuper.person_lookup(ceo) is None:
                         partial_query = partial_query + '\n<ont:' + ceo + '> rdf:type ont:Person, ' \
                                         'owl:NamedIndividual .'
                         self.__lookuper.update_table(True, ceo, False)
                         partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
-                    partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:hasCEO <ont:'\
+                    partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasCEO <ont:'\
                                     + ceo + '> .'
 
                 # add triples about company location
-                if companies[company]['site'] is not None:
-                    partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:isLocatedIn ' \
-                           '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + companies[company]['site'] + '> .'
+                try:
+                    place = companies[company]['site']
+                    partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
+                           '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + place + '> .'
+                except KeyError:
+                    print("No site took over for the company " + companies[company]['name'])
 
                 # add triple about company citation in a news
-                partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:isCitedIn <' + news + '> .'
+                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
         partial_query = partial_query + "\n}"
         self.__db_manager.doUpdate(partial_query)
-        print('Ok query done')
-        # print(partial_query)
+        print(partial_query)
         print()
 
     """ 

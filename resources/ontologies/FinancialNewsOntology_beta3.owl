@@ -592,210 +592,6 @@
     
 
 
-    <!-- http://dbpedia.org/page/Australian_Securities_Exchange -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Australian_Securities_Exchange">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Australia"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Bloomberg_News -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Bloomberg_News">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Brussels_Stock_Exchange -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Brussels_Stock_Exchange">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Belgium"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/CAC_40 -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/CAC_40">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.France"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/CSI_300_Index -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/CSI_300_Index">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.China"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/DAX -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/DAX">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Germany"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Dow_Jones_Industrial_Average -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Dow_Jones_Industrial_Average">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Euronext_Paris -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Euronext_Paris">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.France"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/FTSE_100_Index -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/FTSE_100_Index">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedKingdom"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/FTSE_MIB -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/FTSE_MIB">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Italy"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Hang_Seng_Index -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Hang_Seng_Index">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HongKong"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Hong_Kong_Stock_Exchange -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Hong_Kong_Stock_Exchange">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HongKong"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/IBEX_35 -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/IBEX_35">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Spain"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/London_Stock_Exchange -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/London_Stock_Exchange">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedKingdom"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/NASDAQ -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/NASDAQ">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/National_Stock_Exchange_of_India -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/National_Stock_Exchange_of_India">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.India"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/New_York_Stock_Exchange -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/New_York_Stock_Exchange">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/News_agency -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/News_agency">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Nikkei_225 -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Nikkei_225">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Reuters -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Reuters">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/TOPIX -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/TOPIX">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/Toronto_Stock_Exchange -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/Toronto_Stock_Exchange">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Canada"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- http://dbpedia.org/page/S%26P_500_Index -->
-
-    <owl:NamedIndividual rdf:about="http://dbpedia.org/page/S%26P_500_Index">
-        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
-        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#Afghanistan -->
 
     <owl:NamedIndividual rdf:about="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#Afghanistan"/>
@@ -5148,6 +4944,15 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Australian_Securities_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Australian_Securities_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Australia"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bayerische_Motoren_Werke_AG -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bayerische_Motoren_Werke_AG"/>
@@ -5157,6 +4962,41 @@
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bloomberg -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bloomberg"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bloomberg_News -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Bloomberg_News">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Brussels_Stock_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Brussels_Stock_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Belgium"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CAC_40 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CAC_40">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.France"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CSI_300 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CSI_300">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.China"/>
+    </owl:NamedIndividual>
     
 
 
@@ -5175,9 +5015,27 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#DAX -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#DAX">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Germany"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Donald_Tusk -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Donald_Tusk"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Dow_Jones -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Dow_Jones">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
+    </owl:NamedIndividual>
     
 
 
@@ -5193,11 +5051,118 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Euronext_Paris -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Euronext_Paris">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.France"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_100 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_100">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedKingdom"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_MIB -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#FTSE_MIB">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Italy"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hang_Seng -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hang_Seng">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HongKong"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hong_Kong_Stock_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Hong_Kong_Stock_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.HongKong"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#IBEX_35 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#IBEX_35">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Spain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#London_Stock_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#London_Stock_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedKingdom"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NASDAQ -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NASDAQ">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalEconomy">
         <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
         <rdfs:comment xml:lang="en">News about financials of a Nation.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#National_Stock_Exchange_of_India -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#National_Stock_Exchange_of_India">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.India"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#New_York_Stock_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#New_York_Stock_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News_agency -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News_agency">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nikkei_225 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Nikkei_225">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
     </owl:NamedIndividual>
     
 
@@ -5211,9 +5176,26 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Reuters -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Reuters">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NewsPublisher"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Severstal -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Severstal"/>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#TOPIX -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#TOPIX">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Japan"/>
+    </owl:NamedIndividual>
     
 
 
@@ -5223,11 +5205,29 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Toronto_Stock_Exchange -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Toronto_Stock_Exchange">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.Canada"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods -->
 
     <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Markets&amp;Goods">
         <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#EconomicsTopics"/>
         <rdfs:comment xml:lang="en">News about markets info and primary goods economy.</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P_500 -->
+
+    <owl:NamedIndividual rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#S&amp;P_500">
+        <rdf:type rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#StockExchange"/>
+        <FinancialNewsOntology:isStockExchangeOf rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.UnitedStates"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 

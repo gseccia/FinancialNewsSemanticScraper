@@ -3,7 +3,7 @@ from src.fuseki_wrapper import FusekiSparqlWrapper
 from src.fsanalysis import *
 import requests
 from src.info_lookup import *
-# from src.utils import get_dbpedia_uri
+from src.utils import get_dbpedia_uri
 
 
 class Tripleizer():
@@ -61,14 +61,11 @@ class Tripleizer():
             if news_source == "B":
                 # news retrieved from Bloomberg
                 partial_query = partial_query + "\n<" + news + "> ont:publishedBy <ont:Bloomberg_News> ."
-                #partial_query = partial_query + "\n<" + news + "> ont:publishedBy <" + get_dbpedia_uri('Bloomberg_News') + "> ."
             elif news_source == "R":
                 # news retrieved from Reuters
                 partial_query = partial_query + "\n<" + news + "> ont:publishedBy <ont:Reuters> ."
-                #partial_query = partial_query + "\n<" + news + "> ont:publishedBy <" + get_dbpedia_uri('Reuters') + "> ."
             else:
                 # news retrieved from other publishers
-                #partial_query = partial_query + "\n<" + news + "> ont:publishedBy <" + get_dbpedia_uri('News_agency') + "> ."
                 partial_query = partial_query + "\n<" + news + "> ont:publishedBy <ont:News_agency> ."
 
             # get info about persons cited in the news title
@@ -94,9 +91,10 @@ class Tripleizer():
 
                 # add triple about company type
                 company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
-                # look for the company in dbpedia (?), otherwise create a new customized individual in the ontology
                 partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> rdf:type ont:' \
                                 + company_type + ', owl:NamedIndividual .'
+                partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> rdfs:seeAlso <' \
+                                + get_dbpedia_uri(companies[company]['name']) + '> .'
 
                 # add company stock name
                 partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:hasStockName: "' \
@@ -108,6 +106,8 @@ class Tripleizer():
                     partial_query = partial_query + '\n<ont:' + companies[company]['market_index'] + '>' \
                                     ' rdf:type ont:StockExchange, owl:NamedIndividual .'
                     self.__lookuper.update_table(False, companies[company]["market_index"])
+                    partial_query = partial_query + '\n<ont:' + companies[company]['market_index'] + '> rdfs:seeAlso <' \
+                                    + get_dbpedia_uri(companies[company]['market_index']) + '> .'
                 partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:isQuotedOn <ont:' \
                                 + companies[company]['market_index'] + '> .'
 
@@ -118,6 +118,7 @@ class Tripleizer():
                         partial_query = partial_query + '\n<ont:' + ceo + '> rdf:type ont:Person, ' \
                                         'owl:NamedIndividual .'
                         self.__lookuper.update_table(True, ceo, False)
+                        partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
                     partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:hasCEO <ont:'\
                                     + ceo + '> .'
 

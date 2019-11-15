@@ -1,10 +1,9 @@
 from src.fuseki_wrapper import FusekiSparqlWrapper
-from src.topic_classifier import TopicClassifier
+# from src.topic_classifier import TopicClassifier
 from src.fsanalysis import *
-import json
 import requests
 from src.info_lookup import *
-from src.utils import get_dbpedia_uri
+# from src.utils import get_dbpedia_uri
 
 
 class Tripleizer():
@@ -12,7 +11,7 @@ class Tripleizer():
 
     def __init__(self):
         self.__db_manager = FusekiSparqlWrapper()
-        self.__topic_classifier = TopicClassifier()
+        # self.__topic_classifier = TopicClassifier()
         self.__query_prefix = """
         PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -46,7 +45,8 @@ class Tripleizer():
             partial_query = partial_query + '\n<' + news + '> ont:hasDateTime "' + datetime + '"^^xsd:dateTime .'
 
             # news topic is defined by the ML classifier
-            macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
+            # macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
+            macro_topic, specific_topic = "EconomicsTopic", "NationalEconomy"
             if macro_topic == "EconomicsTopic":
                 partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic ont:" + specific_topic + " ."
             else:
@@ -167,22 +167,59 @@ class Tripleizer():
 if __name__ == "__main__":
     trp = Tripleizer()
     test_dict = {
-    'https://www.bloomberg.com//news/articles/2019-11-06/french-economic-renaissance-gives-europe-new-engine-for-growth?srnd=markets-vp':
-        {
-            'date': '2019-11-04T23:00:00',
-            'text': 'Hedge Funds Flock to Support Johnson, Fueled by Fears of Corbyn',
-            'source': 'B',
-            'author': ['Antonio Vicinanza'],
-            'companies':
-                [
-                {
-                    'name': 'Dell Technologies Inc',
-                    'site': 'France',
-                    'market_index': 'New York Stock Exchange',
-                    'type': 'Computer & Electronics Retailers',
-                    'ceo': ['Michael S. Dell']
-                }
-                ]
+    "http://feeds.reuters.com/~r/reuters/businessNews/~3/0iLYrt1zylE/coca-cola-chooses-plastic-bottle-collection-over-aluminum-cans-to-cut-carbon-footprint-idUSKBN1XG2J6": {
+        "authors": "Alexis Akwagyiram;",
+        "companies": {
+            "KO.N": {
+                "ceo": ["James R. Quincey"],
+                "change": "(-0,17%)",
+                "last_trade": "52,20USD",
+                "market_index": " New York Stock Exchange ",
+                "name": "Coca-Cola Co",
+                "type": "Beverages (Nonalcoholic)"
+            },
+            "PEP.O": {
+                "ceo": ["Ramon Laguarta", "Kirk C. Tanner", "Steven C. Williams", "Ram Krishnan"],
+                "change": "(-0,55%)",
+                "last_trade": "132,59USD",
+                "market_index": " NASDAQ ",
+                "name": "PepsiCo, Inc.",
+                "type": "Beverages (Nonalcoholic)"
+            }
+        },
+        "date": "2019-11-06T11:21:00+02:00",
+        "text": "Coca-Cola chooses plastic bottle collection over aluminum cans to cut carbon footprint"
+    },
+    "http://feeds.reuters.com/~r/reuters/businessNews/~3/4MmtENHAslA/britains-virgin-media-switches-to-vodafones-mobile-network-idUSKBN1XG26L": {
+        "authors": "Louise Heavens,",
+        "companies": {
+            "BT.L": {
+                "ceo": [],
+                "change": "(-1,71%)",
+                "last_trade": "187,14GBP",
+                "market_index": " London Stock Exchange (LON) ",
+                "name": "BT Group plc",
+                "type": "Software & Programming"
+            },
+            "LBTYA.O": {
+                "ceo": ["Michael Thomas Fries"],
+                "change": "(-0,12%)",
+                "last_trade": "24,82USD",
+                "market_index": " NASDAQ ",
+                "name": "Liberty Global PLC",
+                "type": "Broadcasting & Cable TV"
+            },
+            "TEF.MC": {
+                "ceo": ["Jose Maria Alvarez-Pallete Lopez"],
+                "change": "(-0,12%)",
+                "last_trade": "6,86EUR",
+                "market_index": " Mercado Continuo Espana ",
+                "name": "Telefonica SA",
+                "type": "Communications Services"
+            }
+        },
+        "date": "2019-11-06T13:04:00+02:00",
+        "text": "Britain's Virgin Media switches to Vodafone's mobile network"
         }
     }
 

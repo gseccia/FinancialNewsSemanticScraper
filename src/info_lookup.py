@@ -31,6 +31,14 @@ class InfoLookup():
             self.__person_table = {re.sub('[^a-z]', '', k): v for k, v in self.__person_table.items()}
 
     """
+    Exposes the lookup table for persons in the knowledge base
+    @:param None
+    @:return persons lookup table
+    """
+    def get_person_table(self):
+        return self.__person_table
+
+    """
     Load a lookup table for stock exchanges in the knowledge base
     @:param person_table filename of the json file containing the table of information about stock exchanges
     @:return None
@@ -41,6 +49,14 @@ class InfoLookup():
             t = json.load(file)
             self.__market_table = {k.lower(): v for k, v in t.items()}
             self.__market_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__market_table.items()}
+
+    """
+    Exposes the lookup table for stock exchange markets in the knowledge base
+    @:param None
+    @:return stock exchange lookup table
+    """
+    def get_market_table(self):
+        return self.__market_table
 
     """
     Load a lookup table for countries in the knowledge base

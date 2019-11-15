@@ -25,6 +25,8 @@ class Tripleizer():
         self.__lookuper.set_person_table("../resources/Data/vips.json")
         self.__lookuper.set_market_table('../resources/Data/stock_exchange.json')
         self.__lookuper.set_countries_table('../resources/Data/countries.json')
+        # populate the ontology with the a priori knowledge
+        self.load_persons_and_markets()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -104,7 +106,7 @@ class Tripleizer():
                 # check if the market index of the company is already into the knowledge base, otherwise add it
                 if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
                     partial_query = partial_query + '\n<ont:' + companies[company]['market_index'] + '>' \
-                                    ' rdf:type ont:MarketIndex, owl:NamedIndividual .'
+                                    ' rdf:type ont:StockExchange, owl:NamedIndividual .'
                     self.__lookuper.update_table(False, companies[company]["market_index"])
                 partial_query = partial_query + '\n<ont:' + companies[company]['name'] + '> ont:isQuotedOn <ont:' \
                                 + companies[company]['market_index'] + '> .'
@@ -133,20 +135,19 @@ class Tripleizer():
         print()
 
     """ 
-    Loads the individuals representing some of the most influential persons in the economics field 
-    @:param person_filename indicates the file in which data is stored
+    Loads the individuals representing some of the most influential persons in the economics field and the most important
+    stock exchange markets 
     @:return None
     """
-    def load_persons(self, persons_filename: str = "vips.json"):
-        with open(persons_filename, encoding="UTF-8") as json_file:
-            persons = json.load(json_file)
+    def load_persons_and_markets(self):
         partial_query = self.__query_prefix
         partial_query = partial_query + self.__insert_prefix
-        for person in persons:
-            partial_query = partial_query+"\n<"+persons[person]["uri"]+"> rdf:type ont:Person, owl:NamedIndividual ."
+        for person in self.__lookuper.get_person_table():
+            partial_query = partial_query + '\n<ont:' + person + '> rdf:type ont:Person, owl:NamedIndividual .'
+        for market in self.__lookuper.get_market_table():
+            partial_query = partial_query + '\n<ont:' + market + '> rdf:type ont:StockExchange, owl:NamedIndividual .'
         partial_query = partial_query + "\n}"
         self.__db_manager.doUpdate(partial_query)
-
 
     """
     Looks for some concept on DBPedia semantic database.

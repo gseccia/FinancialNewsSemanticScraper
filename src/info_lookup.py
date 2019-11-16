@@ -26,9 +26,7 @@ class InfoLookup():
     def set_person_table(self, person_table: str):
         self.__person_table_filename = person_table
         with open(person_table, mode='r', encoding="utf-8") as file:
-            t = json.load(file)
-            self.__person_table = {k.lower(): v for k, v in t.items()}
-            self.__person_table = {re.sub('[^a-z]', '', k): v for k, v in self.__person_table.items()}
+            self.__person_table = json.load(file)
 
     """
     Exposes the lookup table for persons in the knowledge base
@@ -38,6 +36,10 @@ class InfoLookup():
     def get_person_table(self):
         return self.__person_table
 
+    def person_table_format(self):
+        self.__person_table = {k.lower(): v for k, v in self.__person_table.items()}
+        self.__person_table = {re.sub('[^a-z]', '', k): v for k, v in self.__person_table.items()}
+
     """
     Load a lookup table for stock exchanges in the knowledge base
     @:param person_table filename of the json file containing the table of information about stock exchanges
@@ -46,9 +48,7 @@ class InfoLookup():
     def set_market_table(self, market_table: str):
         self.__market_table_filename = market_table
         with open(market_table, mode='r', encoding="utf-8") as file:
-            t = json.load(file)
-            self.__market_table = {k.lower(): v for k, v in t.items()}
-            self.__market_table = {re.sub('[^a-z|&]', '', k): v for k, v in self.__market_table.items()}
+            self.__market_table = json.load(file)
 
     """
     Exposes the lookup table for stock exchange markets in the knowledge base
@@ -57,6 +57,10 @@ class InfoLookup():
     """
     def get_market_table(self):
         return self.__market_table
+
+    def market_table_format(self):
+        self.__market_table = {k.lower(): v for k, v in self.__market_table_filename.items()}
+        self.__market_table = {re.sub('[^a-z|0-9|&]', '', k): v for k, v in self.__market_table.items()}
 
     """
     Load a lookup table for countries in the knowledge base
@@ -102,7 +106,7 @@ class InfoLookup():
     """
     def market_index_lookup(self, stock_name: str, default=True):
         key_to_find = stock_name.lower()
-        key_to_find = re.sub('[^a-z|&]', '', key_to_find)
+        key_to_find = re.sub('[^a-z|0-9|&]', '', key_to_find)
         if default:
             if key_to_find in self.__market_table.keys():
                 return self.__market_table[key_to_find]

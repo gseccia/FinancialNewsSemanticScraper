@@ -25,9 +25,11 @@ class Tripleizer():
         self.__lookuper = InfoLookup()
         self.__lookuper.set_person_table("../resources/Data/vips.json")
         self.__lookuper.set_market_table('../resources/Data/stock_exchange.json')
-        self.__lookuper.set_countries_table('../resources/Data/countries.json')
+        #self.__lookuper.set_countries_table('../resources/Data/countries.json')
         # populate the ontology with the a priori knowledge
-        #self.load_persons_and_markets()
+        self.load_persons_and_markets()
+        #self.__lookuper.person_table_format()
+        #self.__lookuper.market_table_format()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -150,11 +152,14 @@ class Tripleizer():
         partial_query = self.__query_prefix
         partial_query = partial_query + self.__insert_prefix
         for person in self.__lookuper.get_person_table():
-            partial_query = partial_query + '\n<ont:' + person + '> rdf:type ont:Person, owl:NamedIndividual .'
+            partial_query = partial_query + '\n<ont:' + format_name(person) + '> rdf:type ont:Person, owl:NamedIndividual .'
+            partial_query = partial_query + '\n<ont:' + format_name(person) + '> rdfs:seeAlso <'+ get_dbpedia_uri(person) + '> .'
         for market in self.__lookuper.get_market_table():
-            partial_query = partial_query + '\n<ont:' + market + '> rdf:type ont:StockExchange, owl:NamedIndividual .'
+            partial_query = partial_query + '\n<ont:' + market.replace(" ", "_") + '> rdf:type ont:StockExchange, owl:NamedIndividual .'
+            partial_query = partial_query + '\n<ont:' + market.replace(" ", "_") + '> rdfs:seeAlso <' + get_dbpedia_uri(market) + '> .'
         partial_query = partial_query + "\n}"
-        self.__db_manager.doUpdate(partial_query)
+        #self.__db_manager.doUpdate(partial_query)
+        print(partial_query)
 
     """
     Looks for some concept on DBPedia semantic database.
@@ -231,5 +236,5 @@ if __name__ == "__main__":
         }
     }
 
-    trp.generate_insert(news_pool=test_dict)
+    #trp.generate_insert(news_pool=test_dict)
 

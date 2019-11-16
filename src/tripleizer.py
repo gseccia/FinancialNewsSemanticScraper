@@ -27,7 +27,7 @@ class Tripleizer():
         self.__lookuper.set_market_table('../resources/Data/stock_exchange.json')
         self.__lookuper.set_countries_table('../resources/Data/countries.json')
         # populate the ontology with the a priori knowledge
-        self.load_persons_and_markets()
+        #self.load_persons_and_markets()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -110,8 +110,9 @@ class Tripleizer():
                     self.__lookuper.update_table(False, companies[company]["market_index"])
                     partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
                                     + get_dbpedia_uri(market_name) + '> .'
-                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <ont:' \
-                                + market_name + '> .'
+                # In both cases, retrieve correct uri from lookup
+                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <' \
+                                + self.__lookuper.market_index_lookup(companies[company]["market_index"]) + '> .'
 
                 # add triples about company's ceo
                 for ceo in companies[company]['ceo']:
@@ -136,7 +137,7 @@ class Tripleizer():
                 # add triple about company citation in a news
                 partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
         partial_query = partial_query + "\n}"
-        self.__db_manager.doUpdate(partial_query)
+        #self.__db_manager.doUpdate(partial_query)
         print(partial_query)
         print()
 

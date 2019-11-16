@@ -107,7 +107,11 @@ class InfoLookup():
             if key_to_find in self.__market_table.keys():
                 return self.__market_table[key_to_find]
             else:
-                return None
+                for key in self.__market_table.keys():
+                    if key in key_to_find:
+                        return self.__market_table[key]
+                else:
+                    return None
         else:
             stocks_found = list()
             for key in self.__market_table:

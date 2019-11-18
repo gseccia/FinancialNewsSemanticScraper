@@ -25,7 +25,7 @@ class Tripleizer():
         self.__lookuper = InfoLookup()
         self.__lookuper.set_person_table("../resources/Data/vips.json")
         self.__lookuper.set_market_table('../resources/Data/stock_exchange.json')
-        #self.__lookuper.set_countries_table('../resources/Data/countries.json')
+        self.__lookuper.set_countries_table('../resources/Data/countries.json')
         # populate the ontology with the a priori knowledge
         self.load_persons_and_markets()
         #self.__lookuper.person_table_format()
@@ -71,9 +71,7 @@ class Tripleizer():
                 # news retrieved from other publishers
                 partial_query = partial_query + "\n<" + news + "> ont:publishedBy <ont:News_agency> ."
 
-            # get info about persons cited in the news title
-            # get info about market indices cited in the news title
-            # get info about nations cited in the news title
+            # build citation in news title triples
             person_list, market_list, nation_list = self.__lookuper.lookup(news_title)
 
             if person_list:
@@ -127,6 +125,8 @@ class Tripleizer():
                         partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
                     partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasCEO <ont:'\
                                     + ceo + '> .'
+                    partial_query = partial_query + '\n<ont:' + ceo + '> ont:isImportantPersonOf <ont:' + \
+                                    company_name + '> .'
 
                 # add triples about company location
                 try:
@@ -138,6 +138,15 @@ class Tripleizer():
 
                 # add triple about company citation in a news
                 partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
+
+                # add triples about persons relevance for countries and organizations
+                for person in person_list:
+                    for company in companies:
+                        for country in nation_list:
+                            partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
+                                            country + '> .'
+                            partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
+                                            format_name(companies[company]['name']) + '> .'
         partial_query = partial_query + "\n}"
         #self.__db_manager.doUpdate(partial_query)
         print(partial_query)
@@ -159,22 +168,7 @@ class Tripleizer():
             partial_query = partial_query + '\n<ont:' + market.replace(" ", "_") + '> rdfs:seeAlso <' + get_dbpedia_uri(market) + '> .'
         partial_query = partial_query + "\n}"
         #self.__db_manager.doUpdate(partial_query)
-        print(partial_query)
-
-    """
-    Looks for some concept on DBPedia semantic database.
-    @:param concept concept to look for
-    @:return true if the concept is found, false otherwise
-    
-    The assumption is that dbpedia exposes concepts using the format dbpedia.org/page/concept
-    """
-    def ask_concept(concept: str) -> bool:
-        # ATTENZIONE VANNO GESTITI ERRORI ED ECCEZIONI
-        req = requests.get("http://dbpedia.org/page/" + concept)
-        if req.status_code == 200:
-            return True
-        else:
-            return False
+        #print(partial_query)
 
 
 if __name__ == "__main__":
@@ -236,5 +230,5 @@ if __name__ == "__main__":
         }
     }
 
-    #trp.generate_insert(news_pool=test_dict)
+    trp.generate_insert(news_pool=test_dict)
 

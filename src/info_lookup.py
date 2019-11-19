@@ -80,10 +80,13 @@ class InfoLookup():
     """
     Identifies uniquely the type of a company by checking a predefined lookup table 
     @:param cat indicates the company category
-    @:return The exact type of the company
+    @:return The exact type of the company if found, None if not
     """
-    def company_type_lookup(self, cat: str) -> str:
-        return remove_whitespaces(br_classes[cat])
+    def company_type_lookup(self, cat: str):
+        try:
+            return remove_whitespaces(br_classes[cat])
+        except KeyError:
+            return None
 
     """
     Looks for a person cited in the title of a news into the lookup knowledge of the system 

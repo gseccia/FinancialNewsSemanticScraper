@@ -93,8 +93,13 @@ class Tripleizer():
                 market_name = format_name(companies[company]['market_index'][1:-1])
                 # add triple about company type
                 company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
-                partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
-                                + company_type + ', owl:NamedIndividual .'
+                if company_type is not None:
+                    partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
+                                    + company_type + ', owl:NamedIndividual .'
+                else:
+                    # If the company is not found in the lookup (None), set it as OtherEntity
+                    partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
+                                    + 'OtherEntity' + ', owl:NamedIndividual .'
                 partial_query = partial_query + '\n<ont:' + company_name + '> rdfs:seeAlso <' \
                                 + get_dbpedia_uri(company_name) + '> .'
 
@@ -241,7 +246,7 @@ if __name__ == "__main__":
                     "last_trade": "52,20USD",
                     "market_index": " New York Stock Exchange ",
                     "name": "Coca-Cola Co",
-                    "type": "Beverages (Nonalcoholic)"
+                    "type": "peppe"
                 },
                 "PEP.O": {
                     "ceo": ["Ramon Laguarta", "Kirk C. Tanner", "Steven C. Williams", "Ram Krishnan"],

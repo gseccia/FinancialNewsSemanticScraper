@@ -7,6 +7,7 @@ from keras.preprocessing.text import Tokenizer, text_to_word_sequence
 from keras.preprocessing.sequence import pad_sequences
 import pandas as pd
 import numpy as np
+import keras
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import pickle
@@ -16,31 +17,29 @@ import codecs
 class TopicClassifier():
 
     """ Class constructor """
-    def __init__(self,classes_dict:dict, tokenizer_path:str, max_words:int, path_to_h5_classifier:str=None, num_classes:int=None, vocab_size:int=None):
+    def __init__(self,classes_dict:dict, tokenizer_path:str, path_to_h5_classifier:str=None, num_classes:int=None, vocab_size:int=None):
         """
         - tokenizer must be the same used for training
         """
         self._classes_dict = classes_dict
         with open(tokenizer_path, 'rb') as handle:
             self._tokenizer = pickle.load(handle)
-        self._maxlen = max_words
+        
+        self._maxlen = self._tokenizer.num_words
 
         if path_to_h5_classifier:
-            try:
-                self._model = keras.models.load_model(path_to_h5_classifier)
-                self._trained = True
-            except:
-                print("Unable to load file at path: "+path_to_h5_classifier)
+            self._model = keras.models.load_model(path_to_h5_classifier)
+            self._trained = True
         elif (max_words is not None) and (num_classes is not None) and (vocab_size is not None):
             
             # set parameters:
             self._max_features = vocab_size
-            self._batch_size = 8
-            self._embedding_dims = 20
+            self._batch_size = 4
+            self._embedding_dims = 10
             self._filters = 200
-            self._kernel_size = 3
-            self._hidden_dims = 200
-            self._epochs = 16
+            self._kernel_size = 2
+            self._hidden_dims = 25
+            self._epochs = 100
             self._num_classes = num_classes
 
             # Build model
@@ -64,6 +63,8 @@ class TopicClassifier():
             model.add(GlobalMaxPooling1D())
 
             # We add a vanilla hidden layer:
+            model.add(Dense(self._hidden_dims))
+            model.add(Dropout(0.2))
             model.add(Dense(self._hidden_dims))
             model.add(Dropout(0.2))
             model.add(Activation('relu'))
@@ -134,7 +135,7 @@ if __name__=="__main__":
     
     print(labels)
     
-    sentences_train, sentences_test, y_train, y_test = train_test_split(sentences, labels, test_size=0.25)
+    sentences_train, sentences_test, y_train, y_test = train_test_split(sentences, labels, test_size=0.15)
 
     le = LabelEncoder()
     y_train=le.fit_transform(y_train)
@@ -162,9 +163,20 @@ if __name__=="__main__":
     with open('./resources/keras_model_classifier/tokenizer.pickle', 'wb') as handle:
         pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-    tc = TopicClassifier(classes_dict=dict_classes,tokenizer_path='./resources/keras_model_classifier/tokenizer.pickle',max_words=max_words, num_classes=num_classes, vocab_size=vocab_size)
-    tc.train_and_save(X_train,y_train,X_test,y_test, path="./resources/keras_model_classifier/model_prova.h5")
+    tc = TopicClassifier(classes_dict=dict_classes,tokenizer_path='./resources/keras_model_classifier/tokenizer.pickle', num_classes=num_classes, vocab_size=vocab_size)
+    tc.train_and_save(X_train,y_train,X_test,y_test, path="./resources/keras_model_classifier/model.h5")
 
     print(sentences_test[0])
     print(tc.classify_news(sentences_test[0]))
+
+    """
+    #########  SCRIPT TO USE TRAINED TOPICCLASSIFIER ########
+    classes = {0: 'CompaniesEconomy', 1: 'Markets&Goods', 2: 'NationalEconomy', 3: 'Other'}
+    tc_trained = TopicClassifier(classes_dict=classes,
+                         tokenizer_path='./resources/keras_model_classifier/tokenizer.pickle',
+                         path_to_h5_classifier="./resources/keras_model_classifier/model.h5")
+    test_news = "NYC’s Fifth Avenue Sees Steep Rent Decline as Tenants Struggle"
+    print(test_news)
+    print(tc.classify_news(test_news))
+    """
     

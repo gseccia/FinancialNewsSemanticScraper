@@ -13,7 +13,7 @@ SPARQLWrapper
 testpath
 tornado
 urllib3
-paralleldots
 tensorflow
 keras
 paralleldots
+requests-toolbelt

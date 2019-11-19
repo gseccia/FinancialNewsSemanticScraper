@@ -1,6 +1,6 @@
 from src.brmapping import *
 from src.ner import text_ner
-from src.utils import get_ontology_uri
+from src.utils import get_ontology_uri, format_name
 import json
 import re
 import string
@@ -36,10 +36,6 @@ class InfoLookup():
     def get_person_table(self):
         return self.__person_table
 
-    def person_table_format(self):
-        self.__person_table = {k.lower(): v for k, v in self.__person_table.items()}
-        self.__person_table = {re.sub('[^a-z]', '', k): v for k, v in self.__person_table.items()}
-
     """
     Load a lookup table for stock exchanges in the knowledge base
     @:param person_table filename of the json file containing the table of information about stock exchanges
@@ -57,10 +53,6 @@ class InfoLookup():
     """
     def get_market_table(self):
         return self.__market_table
-
-    def market_table_format(self):
-        self.__market_table = {k.lower(): v for k, v in self.__market_table.items()}
-        self.__market_table = {re.sub('[^a-z|0-9|&]', '', k): v for k, v in self.__market_table.items()}
 
     """
     Load a lookup table for countries in the knowledge base
@@ -97,8 +89,9 @@ class InfoLookup():
     def person_lookup(self, person_name: str):
         key_to_find = person_name.lower()
         key_to_find = re.sub('[^a-z]', '', key_to_find)
-        if key_to_find in self.__person_table.keys():
-            return self.__person_table[key_to_find]["uri"]
+        for key in self.__person_table:
+            if re.sub('[^a-z]', '', key.lower()) == key_to_find:
+                return self.__person_table[key]["uri"]
         else:
             return None
 
@@ -112,15 +105,19 @@ class InfoLookup():
         key_to_find = re.sub('[^a-z|0-9|&]', '', key_to_find)
         key_found = None
         if default:
-            for key in self.__market_table.keys():
-                if key in key_to_find or key_to_find in key:
+            for key in self.__market_table:
+                if re.sub('[^a-z|0-9|&]', '', key.lower()) in key_to_find or key_to_find in re.sub('[^a-z]', '', key.lower()):
                     key_found = self.__market_table[key]
                     break
+            #for key in self.__market_table.keys():
+                #if key in key_to_find or key_to_find in key:
+                    #key_found = self.__market_table[key]
+                    #break
             return key_found
         else:
             stocks_found = list()
             for key in self.__market_table:
-                if key in key_to_find:
+                if re.sub('[^a-z|0-9|&]', '', key.lower()) in key_to_find:
                     if self.__market_table[key] is not None:
                         stocks_found.append(self.__market_table[key])
             return stocks_found
@@ -152,7 +149,7 @@ class InfoLookup():
                 val = self.person_lookup(el["name"])
                 if val is None:
                     # If the person found by the ner is not in the knowledge base update table and return uri
-                    self.update_table(True, el["name"], True)
+                    self.update_table(True, format_name(el["name"]), True)
                     persons.append(self.person_lookup(el["name"]))
                 else:
                     # If the person is already in the knowledge base
@@ -173,25 +170,20 @@ class InfoLookup():
     @:return None
     """
     def update_table(self, update_type: bool, new_individual: str, title_or_scrape: bool=False):
-        key = new_individual.lower()
         if update_type:
             # update persons table, the system found an unknown person
-            key = re.sub('[^a-z]', '', key)
             if not title_or_scrape:
                 # the person found must be a CEO of a company
-                self.__person_table[key] = {"uri": get_ontology_uri(string.capwords(new_individual)),
-                                                                        "isCeo/Chairman": True,
-                                                                        "hasNationalRole": False}
+                self.__person_table[new_individual] = {"uri": get_ontology_uri(new_individual), "isCeo/Chairman": True,
+                                                       "hasNationalRole": False}
             else:
-                self.__person_table[key] = {"uri": get_ontology_uri(string.capwords(new_individual)),
-                                            "isCeo/Chairman": False,
-                                            "hasNationalRole": False}
+                self.__person_table[new_individual] = {"uri": get_ontology_uri(new_individual), "isCeo/Chairman": False,
+                                                       "hasNationalRole": False}
             with open(self.__person_table_filename, 'w', encoding='utf-8') as file:
                 json.dump(self.__person_table, file)
         else:
             # update stocks table, the system found an unknown stock
-            key = re.sub('[^a-z|&]', '', key)
-            self.__market_table[key] = get_ontology_uri(new_individual)
+            self.__market_table[new_individual] = get_ontology_uri(new_individual)
             with open(self.__market_table_filename, 'w', encoding='utf-8') as file:
                 json.dump(self.__market_table, file)
 
@@ -202,11 +194,12 @@ if __name__ == "__main__":
     i.set_market_table('../resources/Data/stock_exchange.json')
     i.set_countries_table('../resources/Data/countries.json')
     #i.update_table(False, "Ilaria Stock")
-    print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
-                   "Italy, America. NASDAQ, CSI 300 and S&P 500 falling quickly"))
+    #print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
+                   #"Italy, America. NASDAQ, CSI 300 and S&P 500 falling quickly"))
     #print(i.country_lookup("Italy"))
     #print(i.country_lookup("Ogliara"))
-    #print(i.person_lookup('Amancio Ortega'))
-    #print(i.person_lookup('Antonio Vicinanza'))
+    print(i.person_lookup('Amancio_Ortega'))
+    print(i.person_lookup('Antonio_Vicinanza'))
     #print(i.market_index_lookup("Nasdaq"))
     #print(i.market_index_lookup("PeppeSeccia_200"))
+    i.update_table(True, "Ilaria_Stock")

@@ -1,7 +1,6 @@
 from src.fuseki_wrapper import FusekiSparqlWrapper
 from src.topic_classifier import TopicClassifier
 from src.fsanalysis import *
-import requests
 from src.info_lookup import *
 from src.utils import get_dbpedia_uri, find_news_source, format_name
 
@@ -31,8 +30,6 @@ class Tripleizer():
         self.__lookuper.set_countries_table('../resources/Data/countries.json')
         # populate the ontology with the a priori knowledge
         self.load_persons_and_markets()
-        self.__lookuper.person_table_format()
-        self.__lookuper.market_table_format()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -115,7 +112,7 @@ class Tripleizer():
                 if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
                     partial_query = partial_query + '\n<ont:' + market_name + '>' \
                                     ' rdf:type ont:StockExchange, owl:NamedIndividual .'
-                    self.__lookuper.update_table(False, companies[company]["market_index"])
+                    self.__lookuper.update_table(False, market_name)
                     partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
                                     + get_dbpedia_uri(market_name) + '> .'
                 # In both cases, retrieve correct uri from lookup

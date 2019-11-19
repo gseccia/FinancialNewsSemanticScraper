@@ -59,7 +59,7 @@ class InfoLookup():
         return self.__market_table
 
     def market_table_format(self):
-        self.__market_table = {k.lower(): v for k, v in self.__market_table_filename.items()}
+        self.__market_table = {k.lower(): v for k, v in self.__market_table.items()}
         self.__market_table = {re.sub('[^a-z|0-9|&]', '', k): v for k, v in self.__market_table.items()}
 
     """
@@ -107,15 +107,13 @@ class InfoLookup():
     def market_index_lookup(self, stock_name: str, default=True):
         key_to_find = stock_name.lower()
         key_to_find = re.sub('[^a-z|0-9|&]', '', key_to_find)
+        key_found = None
         if default:
-            if key_to_find in self.__market_table.keys():
-                return self.__market_table[key_to_find]
-            else:
-                for key in self.__market_table.keys():
-                    if key in key_to_find:
-                        return self.__market_table[key]
-                else:
-                    return None
+            for key in self.__market_table.keys():
+                if key in key_to_find or key_to_find in key:
+                    key_found = self.__market_table[key]
+                    break
+            return key_found
         else:
             stocks_found = list()
             for key in self.__market_table:

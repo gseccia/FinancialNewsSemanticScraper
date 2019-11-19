@@ -94,7 +94,10 @@ class TopicClassifier():
 
         news_ready = pad_sequences(news_sequenced, padding='post', maxlen=self._maxlen)
         predicted = self._model.predict_classes(news_ready)
-        return self._classes_dict[predicted[0]]
+        if predicted is "OtherTopic":
+            return "OtherTopics", "OtherTopic"
+        else:
+            return "EconomicsTopics", self._classes_dict[predicted[0]]
     
     def train_and_save(self, X_train, y_train, X_test, y_test, path):
         self._model.fit(X_train, y_train,

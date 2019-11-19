@@ -1,5 +1,5 @@
 from src.fuseki_wrapper import FusekiSparqlWrapper
-# from src.topic_classifier import TopicClassifier
+from src.topic_classifier import TopicClassifier
 from src.fsanalysis import *
 import requests
 from src.info_lookup import *
@@ -11,7 +11,10 @@ class Tripleizer():
 
     def __init__(self):
         self.__db_manager = FusekiSparqlWrapper()
-        # self.__topic_classifier = TopicClassifier()
+        classes = {0: 'CompaniesEconomy', 1: 'Markets&Goods', 2: 'NationalEconomy', 3: 'OtherTopic'}
+        self.__topic_classifier = TopicClassifier(classes_dict=classes,
+                         tokenizer_path='../resources/keras_model_classifier/tokenizer.pickle',
+                         path_to_h5_classifier="../resources/keras_model_classifier/model.h5")
         self.__query_prefix = """
         PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -50,9 +53,9 @@ class Tripleizer():
             partial_query = partial_query + '\n<' + news + '> ont:hasDateTime "' + datetime + '"^^xsd:dateTime .'
 
             # news topic is defined by the ML classifier
-            # macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
-            macro_topic, specific_topic = "EconomicsTopic", "NationalEconomy"
-            if macro_topic == "EconomicsTopic":
+            print(self.__topic_classifier.classify_news(news_title))
+            macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
+            if macro_topic == "EconomicsTopics":
                 partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic ont:" + specific_topic + " ."
             else:
                 partial_query = partial_query + "\n<" + news + "> ont:hasOtherTopic ont:" + specific_topic + " ."

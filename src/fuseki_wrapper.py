@@ -138,15 +138,16 @@ if __name__ == "__main__":
     time.sleep(10)
     # Load ontology in the dataset
     wrapper.load_ontology()
-    time.sleep(10)
+    print("Loaded ontology")
+    time.sleep(20)
 
     # Clear graph ontology in the dataset
     wrapper.clear_graph()
     print("Cleared graph go check...")
-    time.sleep(1)
+    time.sleep(20)
     # Delete dataset
     wrapper.delete_dataset_fuseki()
-    time.sleep(10)
+    time.sleep(20)
     # Kill Fuseki process
     print("Killing Fuseki")
     wrapper.kill_fuseki(pid)

@@ -35,12 +35,12 @@ class TopicClassifier():
             
             # set parameters:
             self._max_features = vocab_size
-            self._batch_size = 16
-            self._embedding_dims = 50
-            self._filters = 250
+            self._batch_size = 8
+            self._embedding_dims = 20
+            self._filters = 200
             self._kernel_size = 3
-            self._hidden_dims = 250
-            self._epochs = 5
+            self._hidden_dims = 200
+            self._epochs = 16
             self._num_classes = num_classes
 
             # Build model
@@ -112,23 +112,27 @@ if __name__=="__main__":
     num_classes=4
 
     filepath_dict = {
-                    'a': './resources/news_scraper_files/news.csv',
+                    'a': './resources/news_scraper_files/news_utf8.csv',
                     #'b': './resources/news_labeled/news_b.txt'
                     }
 
     df_list = []
     for source, filepath in filepath_dict.items():
-        df = pd.read_csv(filepath, names=['date','sentence','link','label'], sep=',',encoding = "ISO-8859-1")
+        df = pd.read_csv(filepath, names=['date','sentence','link','label'], sep=',', encoding="utf8")
         df['source'] = source  # Add another column filled with the source name
         df_list.append(df)
     df = pd.concat(df_list)
     df = df.sample(frac=1).reset_index(drop=True)
+    df = df.dropna()
 
     print(df['sentence'])
     
 
     sentences = df['sentence'].values
-    labels = df['label'].values
+    labels = df['label'].apply(lambda x: x.replace(' ',''))
+    labels = labels.apply(lambda x: x.replace(';','')).values
+    
+    print(labels)
     
     sentences_train, sentences_test, y_train, y_test = train_test_split(sentences, labels, test_size=0.25)
 

@@ -70,24 +70,25 @@ class Finviz_scraper:
             if os.path.exists(filename):
                 # Check the last news saved
                 with open(filename,"r") as f:
-                    csv_reader = csv.DictReader(f,dialect="excel")
+                    csv_reader = csv.DictReader(f,dialect="excel",delimiter=';',lineterminator='\n')
                     for row in csv_reader:
                         last_date = datetime.datetime.strptime(row["date"],"%Y-%m-%dT%H:%M:%S+02:00")
-                    for row in today_news:
-                        if row["date"] > last_date:
-                            fresh_news[row["link"]] = row
                     newfile = False
             else:
-                fresh_news = today_news
                 newfile = True
+
+            for row in today_news:
+                if row["date"] > last_date:
+                    fresh_news[row["link"]] = row
 
             # Update the news
             with open(filename, mode='a+') as csv_file:
-                fieldnames = ['date', 'text', 'link','authors']
-                writer = csv.DictWriter(csv_file, fieldnames=fieldnames,dialect="excel")
+                fieldnames = ['date', 'text', 'link','authors','category']
+                writer = csv.DictWriter(csv_file,fieldnames=fieldnames,dialect="excel",delimiter=';',lineterminator='\n')
                 if newfile:
                     writer.writeheader()
                 for row in fresh_news.values():
+                    print(row)
                     row["date"] = row["date"].strftime("%Y-%m-%dT%H:%M:%S+02:00")
                     writer.writerow(row)
                 csv_file.close()

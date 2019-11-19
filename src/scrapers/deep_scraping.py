@@ -17,7 +17,11 @@ def make_request(url,date = None,delay=5):
     auth = None
     if "reuters" in url or "bloomberg" in url:
         try:
-            session = webdriver.Chrome()
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("headless")
+
+            session = webdriver.Chrome(options=chrome_options)
+
             session.get(url)
 
             # Wait for the page
@@ -36,7 +40,11 @@ def make_request(url,date = None,delay=5):
             response_obj = {"authors":auth,"companies":triples}
 
         except TimeoutException:
+            visible_session = webdriver.Chrome()
+            visible_session.get(url)
             input("CAPTCHA timeout. Press a key to continue...")
+            visible_session.close()
+            visible_session.quit()
             response_obj = None
 
         finally:
@@ -66,7 +74,7 @@ def save_triples(url,auth,triples,filename="triples.json"):
         f.close()
 
 def scrape_reuters_request(session,text):
-    #print("Reuters request")
+    print("Reuters request")
 
     # Getting authors
     authors_text = session.find_element_by_class_name("Attribution_content").text
@@ -130,7 +138,7 @@ def scrape_reuters_request(session,text):
     return companies,author
 
 def scrape_bloomberg_request(session,text):
-    #print("BLOOMBERG request")
+    print("BLOOMBERG request")
     parser = BeautifulSoup(text, "html.parser")
 
     # Getting authors

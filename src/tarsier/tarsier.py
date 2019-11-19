@@ -22,7 +22,7 @@ from tornado.options import define, options, parse_command_line
 import traceback
 
 # local reqs
-from lib.sparqllib import *
+from libr.sparqllib import *
 
 ########################################################################
 #
@@ -314,7 +314,7 @@ class HTTPThread(threading.Thread):
 #
 ########################################################################
 
-if __name__ == '__main__':
+def main():
     relpath  = re.sub("tarsier.py","",os.path.realpath(__file__))
 
     # init
@@ -353,3 +353,5 @@ if __name__ == '__main__':
     logging.debug("Ready! Tarsier is now running on http://localhost:%s" % myConf["httpPort"])
     threadHTTP.start()
 
+if __name__ == '__main__':
+    main()

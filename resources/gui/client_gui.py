@@ -11,13 +11,18 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_finNSEMA(object):
-    def setupUi(self, finNSEMA):
+    def setupUi(self, finNSEMA, show_tarsier,launch_clicked,config_clicked):
+        self.show_tarsier = show_tarsier
+        self.launch_clicked = launch_clicked
+        self.config_clicked = config_clicked
+        self.text_log = ""
+
         finNSEMA.setObjectName("finNSEMA")
         finNSEMA.resize(651, 549)
         self.bg_image_label = QtWidgets.QLabel(finNSEMA)
         self.bg_image_label.setGeometry(QtCore.QRect(-90, -40, 931, 611))
         self.bg_image_label.setText("")
-        self.bg_image_label.setPixmap(QtGui.QPixmap("resources\\gui\\big_data_fintech_globe_thinkstock_826139768-100749747-large.jpg"))
+        self.bg_image_label.setPixmap(QtGui.QPixmap("../resources/gui/big_data_fintech_globe_thinkstock_826139768-100749747-large.jpg"))
         self.bg_image_label.setScaledContents(False)
         self.bg_image_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.bg_image_label.setWordWrap(False)
@@ -67,8 +72,9 @@ class Ui_finNSEMA(object):
 "color: rgb(244, 68, 79);")
         self.scroll_area_log.setWidgetResizable(True)
         self.scroll_area_log.setObjectName("scroll_area_log")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents = QtWidgets.QPlainTextEdit()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 529, 149))
+        self.scrollAreaWidgetContents.setReadOnly(True)
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.scroll_area_log.setWidget(self.scrollAreaWidgetContents)
         self.log_label = QtWidgets.QLabel(finNSEMA)
@@ -111,7 +117,7 @@ class Ui_finNSEMA(object):
         self.label = QtWidgets.QLabel(finNSEMA)
         self.label.setGeometry(QtCore.QRect(-100, -120, 801, 451))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources\\gui\\logo_stroke.png"))
+        self.label.setPixmap(QtGui.QPixmap("../resources/gui/logo_stroke.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.conf_button = QtWidgets.QPushButton(finNSEMA)
@@ -156,6 +162,9 @@ class Ui_finNSEMA(object):
         self.news_counter_label.raise_()
 
         self.retranslateUi(finNSEMA)
+
+        self.setupEvent()
+
         QtCore.QMetaObject.connectSlotsByName(finNSEMA)
 
     def retranslateUi(self, finNSEMA):
@@ -170,8 +179,15 @@ class Ui_finNSEMA(object):
         self.motto2.setText(_translate("finNSEMA", "embracing the power of semantic analysis"))
         self.conf_button.setToolTip(_translate("finNSEMA", "<html><head/><body><p>Visualize Data</p></body></html>"))
         self.conf_button.setText(_translate("finNSEMA", "Configure"))
-        self.news_counter_label.setText(_translate("finNSEMA", "News processed up to now:"))
+        self.news_counter_label.setText(_translate("finNSEMA", "News processed up to now: 0"))
 
+    def setupEvent(self):
+        self.vis_button.clicked.connect(self.show_tarsier)
+        self.launch_button.clicked.connect(self.launch_clicked)
+        self.conf_button.clicked.connect(self.config_clicked)
+
+    def add_log_message(self,text_message):
+        self.scrollAreaWidgetContents.appendPlainText(text_message)
 
 if __name__ == "__main__":
     import sys

@@ -457,14 +457,6 @@
     
 
 
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalPersonality -->
-
-    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#NationalPersonality">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#Person"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News -->
 
     <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#News">
@@ -554,14 +546,6 @@
     <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Utilities">
         <rdfs:subClassOf rdf:resource="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#Organization"/>
         <rdfs:comment xml:lang="en">Organization providing utilities services, such as electricity, water etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CEO/Chairman -->
-
-    <owl:Class rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#CEO/Chairman">
-        <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/10/swap/pim/contact#Person"/>
     </owl:Class>
     
 

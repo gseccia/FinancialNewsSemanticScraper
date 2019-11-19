@@ -28,8 +28,8 @@ class Tripleizer():
         self.__lookuper.set_countries_table('../resources/Data/countries.json')
         # populate the ontology with the a priori knowledge
         self.load_persons_and_markets()
-        #self.__lookuper.person_table_format()
-        #self.__lookuper.market_table_format()
+        self.__lookuper.person_table_format()
+        self.__lookuper.market_table_format()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -139,14 +139,15 @@ class Tripleizer():
                 # add triple about company citation in a news
                 partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
 
-                # add triples about persons relevance for countries and organizations
-                for person in person_list:
-                    for company in companies:
-                        for country in nation_list:
-                            partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
-                                            country + '> .'
-                            partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
-                                            format_name(companies[company]['name']) + '> .'
+            # add triples about persons relevance for countries and organizations
+            for person in person_list:
+                for company in companies:
+                        partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
+                                        format_name(companies[company]['name']) + '> .'
+            for person in person_list:
+                for country in nation_list:
+                    partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
+                                    country + '> .'
         partial_query = partial_query + "\n}"
         #self.__db_manager.doUpdate(partial_query)
         print(partial_query)
@@ -230,5 +231,31 @@ if __name__ == "__main__":
         }
     }
 
-    trp.generate_insert(news_pool=test_dict)
+    test_dict_ner = {
+        "http://feeds.reuters.com/~r/reuters/businessNews/~3/0iLYrt1zylE/coca-cola-chooses-plastic-bottle-collection-over-aluminum-cans-to-cut-carbon-footprint-idUSKBN1XG2J6": {
+            "authors": "Alexis Akwagyiram;",
+            "companies": {
+                "KO.N": {
+                    "ceo": ["James R. Quincey"],
+                    "change": "(-0,17%)",
+                    "last_trade": "52,20USD",
+                    "market_index": " New York Stock Exchange ",
+                    "name": "Coca-Cola Co",
+                    "type": "Beverages (Nonalcoholic)"
+                },
+                "PEP.O": {
+                    "ceo": ["Ramon Laguarta", "Kirk C. Tanner", "Steven C. Williams", "Ram Krishnan"],
+                    "change": "(-0,55%)",
+                    "last_trade": "132,59USD",
+                    "market_index": " NASDAQ ",
+                    "name": "PepsiCo, Inc.",
+                    "type": "Beverages (Nonalcoholic)"
+                }
+            },
+            "date": "2019-11-06T11:21:00+02:00",
+            "text": "Elon Musk wants to invest in India, in the National Stock Exchange of India"
+        },
+    }
+
+    trp.generate_insert(news_pool=test_dict_ner)
 

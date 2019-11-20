@@ -1,0 +1,78 @@
+- Mostrare tutto il grafo, mostrerebbe anche tutte le triple con le istanze:
+  CONSTRUCT { ?s ?p ?o }
+  WHERE { ?s ?p ?o }
+
+- Mostrare tutte le news positive dell'ultimo giorno (?) in ordine di positività/negatività
+  SELECT  ?news ?news_title
+  WHERE
+    { ?news  ont:hasTitle          ?news_title ;
+             ont:hasDateTime       "DATA DI OGGI"^^xsd:dateTime ;
+             ont:hasPositivenessRank  ?rank
+    }
+  ORDER BY DESC(?rank)
+
+- Mostrare tutti i concetti associati a news positive (organizzazione, indice, paese, persona) in ordine di 
+  numero di news positive
+  SELECT  ?x (COUNT(DISTINCT ?x) AS ?positive_count)
+  WHERE
+    { ?x     ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?val
+      FILTER ( ?val > "SOGLIA" )
+    }
+  GROUP BY ?x
+  ORDER BY DESC(?positive_count)
+
+- Mostrare tutti i concetti associati a news negative (organizzazione, indice, paese, persona) in ordine di 
+  numero di news negative
+  SELECT  ?x (COUNT(DISTINCT ?x) AS ?positive_count)
+  WHERE
+    { ?x     ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?val
+      FILTER ( ?val < "SOGLIA" )
+    }
+  GROUP BY ?x
+  ORDER BY DESC(?positive_count)
+  
+- Mostrare i tipi di organizzazione ordinati per trend di positività delle notizie
+  SELECT  ?company_type (AVG(?rank) AS ?avg_positiveness)
+  WHERE
+    { ?company_type
+                rdfs:subclassOf       ont:Organization .
+      ?news     ont:hasPositivenessRank  ?rank .
+      ?company  ont:isCitedIn         ?news ;
+                rdf:type              ?company_type
+    }
+ GROUP BY ?company_type
+ ORDER BY DESC(?avg_positiveness)
+
+- Tutte le compagnie che hanno almeno una news positiva nell'ultimo x temporale
+  SELECT  ?company (COUNT(?news) AS ?count)
+  WHERE
+    { ?company  rdf:type         ?company_type .
+      ?company_type
+                rdfs:subclassOf  ont:Organization .
+      ?company  ont:isCitedIn    ?news .
+      ?news     ont:hasDateTime  ?date
+      FILTER ( ( ?date > "DATA1"^^xsd:dateTime ) && ( ?date < "DATA2"^^xsd:dateTime ) )
+    }
+  GROUP BY ?company
+  HAVING ( ?count >= 1 )
+
+- Ricava gli indici di mercato in base alle compagnie in ordine di positività delle news
+  SELECT  ?stock (AVG(?rank) AS ?average_positiveness)
+  WHERE
+    { ?stock    rdf:type              ont:StockExchange .
+      ?company  ont:isQuotedOn        ?stock ;
+                ont:isCitedIn         ?news .
+      ?news     ont:hasPositivenessRank  ?rank
+    }
+  GROUP BY ?stock
+  ORDER BY ?average_positiveness
+
+- Ricava i paesi con associate news positive/negative
+
+- Ricavare le news in cui è citato un certo concetto
+
+- Ricavare le news di uno specifico topic
+
+- Ricavare le persone/nazioni/organizzazioni più citate in news positive/negative

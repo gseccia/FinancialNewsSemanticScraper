@@ -3,13 +3,14 @@ from src.topic_classifier import TopicClassifier
 from src.fsanalysis import *
 from src.info_lookup import *
 from src.utils import get_dbpedia_uri, find_news_source, format_name
+import time
 
 
 class Tripleizer():
     """ Class constructor """
 
     def __init__(self):
-        self.__db_manager = FusekiSparqlWrapper()
+        self.__db_manager = None
         classes = {0: 'CompaniesEconomy', 1: 'Markets&Goods', 2: 'NationalEconomy', 3: 'OtherTopic'}
         self.__topic_classifier = TopicClassifier(classes_dict=classes,
                          tokenizer_path='../resources/keras_model_classifier/tokenizer.pickle',
@@ -28,6 +29,13 @@ class Tripleizer():
         self.__lookuper.set_person_table("../resources/Data/vips.json")
         self.__lookuper.set_market_table('../resources/Data/stock_exchange.json')
         self.__lookuper.set_countries_table('../resources/Data/countries.json')
+
+    """
+    Sets the db manager to interface Fuseki
+    @:param db_manager instance of db wrapper
+    """
+    def set_db_manager(self, db_manager):
+        self.__db_manager = db_manager
         # populate the ontology with the a priori knowledge
         self.load_persons_and_markets()
 
@@ -50,7 +58,7 @@ class Tripleizer():
             partial_query = partial_query + '\n<' + news + '> ont:hasDateTime "' + datetime + '"^^xsd:dateTime .'
 
             # news topic is defined by the ML classifier
-            print(self.__topic_classifier.classify_news(news_title))
+            #print(self.__topic_classifier.classify_news(news_title))
             macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
             if macro_topic == "EconomicsTopics":
                 partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic ont:" + specific_topic + " ."
@@ -154,7 +162,7 @@ class Tripleizer():
                     partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
                                     country + '> .'
         partial_query = partial_query + "\n}"
-        #self.__db_manager.doUpdate(partial_query)
+        self.__db_manager.doUpdate(partial_query)
         print(partial_query)
         print()
 
@@ -167,18 +175,17 @@ class Tripleizer():
         partial_query = self.__query_prefix
         partial_query = partial_query + self.__insert_prefix
         for person in self.__lookuper.get_person_table():
-            partial_query = partial_query + '\n<ont:' + format_name(person) + '> rdf:type ont:Person, owl:NamedIndividual .'
-            partial_query = partial_query + '\n<ont:' + format_name(person) + '> rdfs:seeAlso <'+ get_dbpedia_uri(person) + '> .'
+            partial_query = partial_query + '\n<ont:' + person + '> rdf:type ont:Person, owl:NamedIndividual .'
+            partial_query = partial_query + '\n<ont:' + person + '> rdfs:seeAlso <'+ get_dbpedia_uri(person) + '> .'
         for market in self.__lookuper.get_market_table():
-            partial_query = partial_query + '\n<ont:' + market.replace(" ", "_") + '> rdf:type ont:StockExchange, owl:NamedIndividual .'
-            partial_query = partial_query + '\n<ont:' + market.replace(" ", "_") + '> rdfs:seeAlso <' + get_dbpedia_uri(market) + '> .'
+            partial_query = partial_query + '\n<ont:' + market + '> rdf:type ont:StockExchange, owl:NamedIndividual .'
+            partial_query = partial_query + '\n<ont:' + market + '> rdfs:seeAlso <' + get_dbpedia_uri(market) + '> .'
         partial_query = partial_query + "\n}"
-        #self.__db_manager.doUpdate(partial_query)
-        #print(partial_query)
+        self.__db_manager.doUpdate(partial_query)
+        print(partial_query)
 
 
 if __name__ == "__main__":
-    trp = Tripleizer()
     test_dict = {
     "http://feeds.reuters.com/~r/reuters/businessNews/~3/0iLYrt1zylE/coca-cola-chooses-plastic-bottle-collection-over-aluminum-cans-to-cut-carbon-footprint-idUSKBN1XG2J6": {
         "authors": "Alexis Akwagyiram;",
@@ -262,5 +269,27 @@ if __name__ == "__main__":
         },
     }
 
-    trp.generate_insert(news_pool=test_dict_ner)
+    """
+    wrapper = FusekiSparqlWrapper(dataset_name='koshka')
+    pid = wrapper.start_fuseki()
+    print("Fuseki started with PID: ", pid)
+    time.sleep(10)
+    # Create the dataset requested
+    wrapper.create_dataset_fuseki()
+    time.sleep(10)
+    # Load ontology in the dataset
+    wrapper.load_ontology()
+    print("Loaded ontology")
+    time.sleep(20)
+    """
+
+    wrapper = FusekiSparqlWrapper(dataset_name='koshka')
+    pid = wrapper.start_fuseki()
+    wrapper.clear_graph()
+
+
+    #trp = Tripleizer()
+    #trp.load_persons_and_markets()
+    #trp.set_db_manager(wrapper)
+    #trp.generate_insert(news_pool=test_dict_ner)
 

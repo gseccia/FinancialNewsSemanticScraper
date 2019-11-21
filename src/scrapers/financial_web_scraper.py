@@ -50,7 +50,7 @@ class Finviz_scraper:
         current_time = datetime.datetime.now()
         today_news = []
         today = datetime.date.today()
-        today_sec = (datetime.datetime(today.year,today.month,today.day)-datetime.datetime(1970,1,1)).total_seconds() - 2*60*60
+        today_sec = (datetime.datetime(today.year,today.month,today.day)-datetime.datetime(1970,1,1)).total_seconds() + (7 - 2)*60*60
         for row in news:
             try:
                 date_time = datetime.datetime.strptime(row["date"],"%I:%M%p")

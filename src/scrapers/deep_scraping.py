@@ -13,15 +13,18 @@ import re
 import datetime
 import time
 
-def make_request(url,date = None,delay=5):
+def make_request(url,date = None,delay=10):
     triples = None
     auth = None
     if "reuters" in url or "bloomberg" in url:
         try:
             chrome_options = webdriver.ChromeOptions()
-            # chrome_options.add_argument("headless")
+            chrome_options.add_argument("--headless")
 
-            session = webdriver.Chrome(options=chrome_options)
+            if "reuters" in url:
+                session = webdriver.Chrome(options=chrome_options)
+            elif "bloomberg" in url:
+                session = webdriver.Chrome()
 
             session.get(url)
 
@@ -31,7 +34,7 @@ def make_request(url,date = None,delay=5):
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
                 triples,auth = scrape_reuters_request(session,response)
             elif "bloomberg" in url:
-                myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__container')))
+                myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
                 triples,auth = scrape_bloomberg_request(session,response)
 
             # Save info
@@ -41,12 +44,15 @@ def make_request(url,date = None,delay=5):
             response_obj = {"authors":auth,"companies":triples}
 
         except TimeoutException:
-            #visible_session = webdriver.Chrome()
-            #visible_session.get(url)
+            print("Timeout")
+            visible_session = webdriver.Chrome()
+            visible_session.get(url)
             # input("CAPTCHA timeout. Press a key to continue...")
-            time.sleep(30)
-            #visible_session.close()
-            #visible_session.quit()
+            time.sleep(60)
+            visible_session.close()
+            visible_session.quit()
+
+            session = webdriver.Chrome(options=chrome_options)
             response_obj = None
 
         finally:

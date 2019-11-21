@@ -7,6 +7,7 @@ import datetime
 import time
 import os
 import json
+import subprocess
 from resources.gui.client_gui import Ui_finNSEMA
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
@@ -95,7 +96,10 @@ def main_loop(sleep_time,fuseki):
 def tarsier_execution(tarsier_path):
     """ Start tarsier """
     DEBUG("Starting Tarsier..")
-    os.startfile(tarsier_path + "tarsier.py")
+    subprocess.Popen(['pythonw',tarsier_path + "tarsier.py"],
+                     creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                    close_fds=True)
+    # os.startfile(tarsier_path + "tarsier.py")
     DEBUG("Tarsier is running!")
 
 

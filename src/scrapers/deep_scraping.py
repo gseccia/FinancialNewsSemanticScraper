@@ -220,9 +220,9 @@ def scrape_bloomberg_request(session,text):
                         elif section.h2.text == "ADDRESS":
                             companies[company]["site"] = section.div.text
 
-                    companies[company]["market_index"] = ""
-                    companies[company]["change"] = ""
-                    companies[company]["last_trade"] = ""
+                    companies[company]["market_index"] = "Empty"
+                    companies[company]["change"] = "Empty"
+                    companies[company]["last_trade"] = "Empty"
 
 
                 # CEO

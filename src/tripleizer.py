@@ -37,7 +37,7 @@ class Tripleizer():
     def set_db_manager(self, db_manager):
         self.__db_manager = db_manager
         # populate the ontology with the a priori knowledge
-        self.load_persons_and_markets()
+        # self.load_persons_and_markets()
 
     """
     Generates an insert query for an RDF triples storage. 
@@ -181,8 +181,9 @@ class Tripleizer():
             partial_query = partial_query + '\n<ont:' + market + '> rdf:type ont:StockExchange, owl:NamedIndividual .'
             partial_query = partial_query + '\n<ont:' + market + '> rdfs:seeAlso <' + get_dbpedia_uri(market) + '> .'
         partial_query = partial_query + "\n}"
-        self.__db_manager.doUpdate(partial_query)
         print(partial_query)
+        self.__db_manager.doUpdate(partial_query)
+
 
 
 if __name__ == "__main__":

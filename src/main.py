@@ -10,10 +10,12 @@ import json
 from resources.gui.client_gui import Ui_finNSEMA
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+import paralleldots
 
 import traceback
 
 debug_mode = True
+TOKEN = "zmxvDWsLaMuo6cxA1ZuIhjaqw6vtNVc9OVB5RgHQWFw"
 max_blocked_loops = 10
 
 
@@ -23,16 +25,25 @@ def DEBUG(x):
         print(x)
 
 
-def main_loop(sleep_time):
+def main_loop(sleep_time,fuseki):
     """Retrieve news and insert into database"""
     counter_news = 0
     scraper = Finviz_scraper.scraper_factory()
     tripleizer = Tripleizer()
+    tripleizer.set_db_manager(fuseki)
     while True:
         try:
             # Retrieving fresh news
 
             news = scraper.autoretrieve_news()  # filename = "../resources/news_scraper_files/news_news.csv"
+
+            # Filter only Bloomberg and Reuters news
+            del_link = []
+            for k,v in news.items():
+                if v["source"] == "other":
+                    del_link.append(k)
+            for link in del_link:
+                del news[link]
 
             # Deep analysis of fresh news
             for link in news.keys():
@@ -98,7 +109,7 @@ def show_tarsier():
 
 def launch_clicked():
     """Run scraper"""
-    update_thread = Thread(target=main_loop, args=(sleep_time,))
+    update_thread = Thread(target=main_loop, args=(sleep_time,fuseki))
     update_thread.start()
     ui.launch_button.setText("Running")
     ui.launch_button.disconnect()
@@ -151,6 +162,9 @@ if __name__ == "__main__":
 
         # Starting Tarsier
         tarsier_execution(tarsier_path)
+
+        # Init Paralleldots
+        paralleldots.set_api_key(TOKEN)
 
         finNSEMA.show()
         app.exec_()

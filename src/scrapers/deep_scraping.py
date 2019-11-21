@@ -11,6 +11,7 @@ from selenium.common.exceptions import TimeoutException
 
 import re
 import datetime
+import time
 
 def make_request(url,date = None,delay=5):
     triples = None
@@ -42,7 +43,8 @@ def make_request(url,date = None,delay=5):
         except TimeoutException:
             #visible_session = webdriver.Chrome()
             #visible_session.get(url)
-            input("CAPTCHA timeout. Press a key to continue...")
+            # input("CAPTCHA timeout. Press a key to continue...")
+            time.sleep(30)
             #visible_session.close()
             #visible_session.quit()
             response_obj = None
@@ -160,75 +162,83 @@ def scrape_bloomberg_request(session,text):
     # Company pages scraping
     #print("Company pages: ",company_pages)
     companies = {}
-    for company,link in company_pages:
-        companies[company] = {}
-        
+    it = iter(company_pages)
+    error = False
+    # for company,link in company_pages:
+    while True:
         try:
-            session.get("https://www.bloomberg.com"+link)
-            parser = BeautifulSoup(session.page_source, "html.parser")
-            #print(session.current_url)
-            
-            if "quote" in session.current_url:
-                # Name
-                companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
-                #print("NAME ",companies[company]["name"])
-                
-                # Last_trade
-                companies[company]["last_trade"] = ""
-                last_trade_container = parser.find_all("div",class_="overviewRow__0956421f")[0]
-                for span in last_trade_container.find_all("span"):
-                    companies[company]["last_trade"] += span.text
-                #print("LAST TRADE ",companies[company]["last_trade"])
-                
-                # Change
-                span_change = parser.find_all("span",class_=re.compile("changePercent__2d7dc0d2 .*"))
-                companies[company]["change"] = span_change[0].text
-                
-                #print("CHANGE ",companies[company]["change"])
-                
-                # Market index
-                companies[company]["market_index"] = parser.find_all("span",class_="exchange__c62926ba")[0].text
-                #print("MARKET INDEX ",companies[company]["market_index"])
-                
-                # Type
-                companies[company]["type"] = parser.find_all("div",class_="industry labelText__6f58d7c0")[0].text
-                #print("TYPE ",companies[company]["type"])
-                
-                # Site
-                box = parser.find_all("section",class_="dataBox address")[0]
-                companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
-                #print("SITE ",companies[company]["site"])
+            company,link = (company,link) if error else next(it)
+            error = False
+            companies[company] = {}
 
-            else:
-                # Name
-                companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
-                #print("NAME ",companies[company]["name"])
-                
-                # Type and Site
-                container = parser.find_all("div",class_="infoTable__96162ad6")[0]
-                for section in container.find_all("section"):
-                    if section.h2.text == "SECTOR":
-                        companies[company]["type"] = section.div.text
-                    elif section.h2.text == "ADDRESS":
-                        companies[company]["site"] = section.div.text
+            try:
+                session.get("https://www.bloomberg.com"+link)
+                parser = BeautifulSoup(session.page_source, "html.parser")
+                #print(session.current_url)
 
-                companies[company]["market_index"] = None
-                companies[company]["change"] = None
-                companies[company]["last_trade"] = None
-                
-            
-            # CEO
-            container = parser.find_all("div",class_="executivesContainer__7f9fc250")[0]
-            companies[company]["ceo"] = []
-            for div in container.find_all("div",class_="info__368b37b6"):
-                divin = div.find_all("div")
-                if divin[0]["data-resource-type"]=="Person" and "CEO" in divin[1].text:
-                    companies[company]["ceo"].append(divin[0].text)
-            #print("CEO ",companies[company]["ceo"])
-        except Exception as e:
-            pass
-            #print("Error retriving info: ", e)
-                
+                if "quote" in session.current_url:
+                    # Name
+                    companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
+                    #print("NAME ",companies[company]["name"])
+
+                    # Last_trade
+                    companies[company]["last_trade"] = ""
+                    last_trade_container = parser.find_all("div",class_="overviewRow__0956421f")[0]
+                    for span in last_trade_container.find_all("span"):
+                        companies[company]["last_trade"] += span.text
+                    #print("LAST TRADE ",companies[company]["last_trade"])
+
+                    # Change
+                    span_change = parser.find_all("span",class_=re.compile("changePercent__2d7dc0d2 .*"))
+                    companies[company]["change"] = span_change[0].text
+
+                    #print("CHANGE ",companies[company]["change"])
+
+                    # Market index
+                    companies[company]["market_index"] = parser.find_all("span",class_="exchange__c62926ba")[0].text
+                    #print("MARKET INDEX ",companies[company]["market_index"])
+
+                    # Type
+                    companies[company]["type"] = parser.find_all("div",class_="industry labelText__6f58d7c0")[0].text
+                    #print("TYPE ",companies[company]["type"])
+
+                    # Site
+                    box = parser.find_all("section",class_="dataBox address")[0]
+                    companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
+                    #print("SITE ",companies[company]["site"])
+
+                else:
+                    # Name
+                    companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
+                    #print("NAME ",companies[company]["name"])
+
+                    # Type and Site
+                    container = parser.find_all("div",class_="infoTable__96162ad6")[0]
+                    for section in container.find_all("section"):
+                        if section.h2.text == "SECTOR":
+                            companies[company]["type"] = section.div.text
+                        elif section.h2.text == "ADDRESS":
+                            companies[company]["site"] = section.div.text
+
+                    companies[company]["market_index"] = ""
+                    companies[company]["change"] = ""
+                    companies[company]["last_trade"] = ""
+
+
+                # CEO
+                container = parser.find_all("div",class_="executivesContainer__7f9fc250")[0]
+                companies[company]["ceo"] = []
+                for div in container.find_all("div",class_="info__368b37b6"):
+                    divin = div.find_all("div")
+                    if divin[0]["data-resource-type"]=="Person" and "CEO" in divin[1].text:
+                        companies[company]["ceo"].append(divin[0].text)
+                #print("CEO ",companies[company]["ceo"])
+            except TimeoutException:
+                time.sleep(30)
+                error = True
+                #print("Error retriving info: ", e)
+        except StopIteration:
+            break
     # print(author,repr(companies))
     return companies,author
 

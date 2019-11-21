@@ -28,6 +28,12 @@ class TopicClassifier():
         self._maxlen = self._tokenizer.num_words
 
         if path_to_h5_classifier:
+
+            # MEGA PEZZA
+            import keras.backend.tensorflow_backend as tb
+            tb._SYMBOLIC_SCOPE.value = True
+            # FINE MEGA PEZZA
+
             self._model = keras.models.load_model(path_to_h5_classifier)
             self._trained = True
         elif (max_words is not None) and (num_classes is not None) and (vocab_size is not None):

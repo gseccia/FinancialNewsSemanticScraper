@@ -61,7 +61,7 @@ class FusekiSparqlWrapper:
         """
         Execute Fuseki jar and returns PID of the process, necessary to shut down Fuseki by the program.
         """
-        path = str(Path(ROOT_DIR).parents[0]) + fuseki_location
+        path = fuseki_location # str(Path(ROOT_DIR).parents[0]) + fuseki_location
         # subprocess.call(['java', '-jar', 'fuseki-server.jar'], cwd=path.replace("\\","/"))
 
         # Execute jar file

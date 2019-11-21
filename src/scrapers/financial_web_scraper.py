@@ -113,7 +113,10 @@ class Finviz_scraper:
         with open("../resources/scraper.dat","w") as f:
             f.write(self.last_date.strftime("%Y-%m-%dT%H:%M:%S+02:00"))
             f.close()
-        
+
+        print("LAST DATE: ", self.last_date)
+        print("fresh news: ", fresh_news)
+
         return fresh_news
 
 if __name__=="__main__":

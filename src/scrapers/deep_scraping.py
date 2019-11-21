@@ -18,7 +18,7 @@ def make_request(url,date = None,delay=5):
     if "reuters" in url or "bloomberg" in url:
         try:
             chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument("headless")
+            # chrome_options.add_argument("headless")
 
             session = webdriver.Chrome(options=chrome_options)
 
@@ -40,11 +40,11 @@ def make_request(url,date = None,delay=5):
             response_obj = {"authors":auth,"companies":triples}
 
         except TimeoutException:
-            visible_session = webdriver.Chrome()
-            visible_session.get(url)
+            #visible_session = webdriver.Chrome()
+            #visible_session.get(url)
             input("CAPTCHA timeout. Press a key to continue...")
-            visible_session.close()
-            visible_session.quit()
+            #visible_session.close()
+            #visible_session.quit()
             response_obj = None
 
         finally:

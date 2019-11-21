@@ -72,7 +72,7 @@ class Ui_finNSEMA(object):
 "color: rgb(244, 68, 79);")
         self.scroll_area_log.setWidgetResizable(True)
         self.scroll_area_log.setObjectName("scroll_area_log")
-        self.scrollAreaWidgetContents = QtWidgets.QPlainTextEdit()
+        self.scrollAreaWidgetContents = QtWidgets.QPlainTextEdit(finNSEMA)
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 529, 149))
         self.scrollAreaWidgetContents.setReadOnly(True)
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")

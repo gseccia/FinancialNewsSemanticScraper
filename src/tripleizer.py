@@ -34,10 +34,11 @@ class Tripleizer():
     Sets the db manager to interface Fuseki
     @:param db_manager instance of db wrapper
     """
-    def set_db_manager(self, db_manager):
+    def set_db_manager(self, db_manager,initialize=False):
         self.__db_manager = db_manager
         # populate the ontology with the a priori knowledge
-        # self.load_persons_and_markets()
+        if initialize:
+            self.load_persons_and_markets()
 
     """
     Generates an insert query for an RDF triples storage. 

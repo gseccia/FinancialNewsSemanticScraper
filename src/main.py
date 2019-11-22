@@ -161,7 +161,10 @@ if __name__ == "__main__":
         time.sleep(5)
         if not os.path.exists("../resources/scraper.dat"):
             # First Execution
+            fuseki.create_dataset_fuseki()
             fuseki.load_ontology()
+            trip_init = Tripleizer()
+            trip_init.set_db_manager(fuseki,initialize=True)
             time.sleep(1)
 
         # Starting Tarsier

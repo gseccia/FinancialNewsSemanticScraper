@@ -20,6 +20,8 @@ def make_request(url,date = None,delay=10):
         try:
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument("--headless")
+            # chrome_options.add_argument('--user-agent="Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 640 XL LTE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.10166"')
+            # chrome_options.add_argument('--accept-language="en-US;en;q=0.9"')
 
             if "reuters" in url:
                 session = webdriver.Chrome(options=chrome_options)
@@ -34,6 +36,7 @@ def make_request(url,date = None,delay=10):
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
                 triples,auth = scrape_reuters_request(session,response)
             elif "bloomberg" in url:
+                print(response)
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
                 triples,auth = scrape_bloomberg_request(session,response)
 

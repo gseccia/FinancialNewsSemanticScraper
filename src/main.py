@@ -1,3 +1,5 @@
+from builtins import Exception
+
 from scrapers.financial_web_scraper import Finviz_scraper
 from scrapers.deep_scraping import make_request
 from tripleizer import Tripleizer
@@ -6,6 +8,7 @@ from threading import Thread
 import datetime
 import time
 import os
+import signal
 import json
 import subprocess
 from resources.gui.client_gui import Ui_finNSEMA
@@ -96,11 +99,13 @@ def main_loop(sleep_time,fuseki):
 def tarsier_execution(tarsier_path):
     """ Start tarsier """
     DEBUG("Starting Tarsier..")
-    subprocess.Popen(['pythonw',tarsier_path + "tarsier.py"],
+    process = subprocess.Popen(['pythonw',tarsier_path + "tarsier.py"],
                      creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                    close_fds=True)
+                    # close_fds=True
+                               )
     # os.startfile(tarsier_path + "tarsier.py")
     DEBUG("Tarsier is running!")
+    return process.pid
 
 
 # Interaction function with GUI
@@ -128,7 +133,7 @@ def config_clicked():
         try:
             load_configuration(filenames[0])
             ui.scrollAreaWidgetContents.appendPlainText("Load configuration completed")
-        except:
+        except Exception:
             ui.scrollAreaWidgetContents.appendPlainText("Impossible load configuration file")
 
 
@@ -141,42 +146,65 @@ def load_configuration(filename="../resources/configuration/configuration.config
     FUSEKI_PATH = config_param["fuseki_path"]
     TARSIER_PATH = config_param["tarsier_path"]
     SLEEP_TIME = config_param["news_update"]
+    try:
+        FIRST_START = bool(config_param["first_start"])
+    except KeyError:    # if there's no key
+        FIRST_START = True
 
-    return FUSEKI_PATH, TARSIER_PATH, SLEEP_TIME
+    return FUSEKI_PATH, TARSIER_PATH, SLEEP_TIME, FIRST_START
 
 
 if __name__ == "__main__":
     # Load configuration params
     try:
-        fuseki_path, tarsier_path, sleep_time = load_configuration()
-        # RUN GUI
-        app = QtWidgets.QApplication(sys.argv)
-        finNSEMA = QtWidgets.QDialog()
-        ui = Ui_finNSEMA()
-        ui.setupUi(finNSEMA, show_tarsier, launch_clicked, config_clicked)
-
+        fuseki_path, tarsier_path, sleep_time, is_first_start = load_configuration()
         # Starting Fuseki
         fuseki = FusekiSparqlWrapper()
         fuseki_pid = fuseki.start_fuseki(fuseki_location=fuseki_path)
-        time.sleep(5)
-        if not os.path.exists("../resources/scraper.dat"):
-            # First Execution
-            fuseki.create_dataset_fuseki()
-            fuseki.load_ontology()
-            trip_init = Tripleizer()
-            trip_init.set_db_manager(fuseki,initialize=True)
-            time.sleep(1)
 
-        # Starting Tarsier
-        tarsier_execution(tarsier_path)
+        try:
+            # RUN GUI
+            app = QtWidgets.QApplication(sys.argv)
+            finNSEMA = QtWidgets.QDialog()
+            ui = Ui_finNSEMA()
+            ui.setupUi(finNSEMA, show_tarsier, launch_clicked, config_clicked)
 
-        # Init Paralleldots
-        paralleldots.set_api_key(TOKEN)
+            # time.sleep(5)
+            if is_first_start:
+                # First Execution
+                fuseki.create_dataset_fuseki()
+                fuseki.load_ontology()
+                trip_init = Tripleizer()
+                trip_init.set_db_manager(fuseki, initialize=True)
+                time.sleep(1)
+                # Not anymore a first start...
+                with open("../resources/configuration/configuration.config", "r") as jsonFile:
+                    data = json.load(jsonFile)
+                tmp = data["first_start"]
+                data["first_start"] = False
+                with open("../resources/configuration/configuration.config", "w") as jsonFile:
+                    json.dump(data, jsonFile)
 
-        finNSEMA.show()
-        app.exec_()
+            # Starting Tarsier
+            tarsier_pid = tarsier_execution(tarsier_path)
+            print(tarsier_pid)
 
-        # Closing Fuseki
-        fuseki.kill_fuseki(fuseki_pid)
+            # Init Paralleldots
+            paralleldots.set_api_key(TOKEN)
+
+            finNSEMA.show()
+            app.exec_()
+
+            # Closing Tarsier
+            import signal
+            os.kill(tarsier_pid, signal.SIGTERM)
+
+            # Closing Fuseki
+            fuseki.kill_fuseki(fuseki_pid)
+            print("Fuseki closed normally")
+        except Exception as e:
+            print(e)
+            fuseki.kill_fuseki(fuseki_pid)
+            print("Fuseki closed in exception")
     except Exception as e:
         print(e)

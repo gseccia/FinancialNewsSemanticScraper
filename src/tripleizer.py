@@ -1,9 +1,8 @@
-from src.fuseki_wrapper import FusekiSparqlWrapper
-from src.topic_classifier import TopicClassifier
-from src.fsanalysis import *
-from src.info_lookup import *
-from src.utils import get_dbpedia_uri, find_news_source, format_name
-import time
+from fuseki_wrapper import FusekiSparqlWrapper
+from topic_classifier import TopicClassifier
+from fsanalysis import *
+from info_lookup import *
+from utils import get_dbpedia_uri, find_news_source, format_name
 
 
 class Tripleizer():

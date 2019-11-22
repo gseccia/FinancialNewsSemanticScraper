@@ -8,6 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 
 
 class Ui_finNSEMA(object):
@@ -188,6 +189,10 @@ class Ui_finNSEMA(object):
 
     def add_log_message(self,text_message):
         self.scrollAreaWidgetContents.appendPlainText(text_message)
+
+    def closeEvent(self):
+        sys.exit(0)
+
 
 if __name__ == "__main__":
     import sys

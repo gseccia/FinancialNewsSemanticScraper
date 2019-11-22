@@ -3,7 +3,6 @@ from src.ner import text_ner
 from src.utils import get_ontology_uri, format_name
 import json
 import re
-import string
 
 
 class InfoLookup():
@@ -170,20 +169,21 @@ class InfoLookup():
     @:return None
     """
     def update_table(self, update_type: bool, new_individual: str, title_or_scrape: bool=False):
+        link = get_ontology_uri(new_individual)
         if update_type:
             # update persons table, the system found an unknown person
             if not title_or_scrape:
                 # the person found must be a CEO of a company
-                self.__person_table[new_individual] = {"uri": get_ontology_uri(new_individual), "isCeo/Chairman": True,
+                self.__person_table[new_individual] = {"uri": link, "isCeo/Chairman": True,
                                                        "hasNationalRole": False}
             else:
-                self.__person_table[new_individual] = {"uri": get_ontology_uri(new_individual), "isCeo/Chairman": False,
+                self.__person_table[new_individual] = {"uri": link, "isCeo/Chairman": False,
                                                        "hasNationalRole": False}
             with open(self.__person_table_filename, 'w', encoding='utf-8') as file:
                 json.dump(self.__person_table, file)
         else:
             # update stocks table, the system found an unknown stock
-            self.__market_table[new_individual] = get_ontology_uri(new_individual)
+            self.__market_table[new_individual] = link
             with open(self.__market_table_filename, 'w', encoding='utf-8') as file:
                 json.dump(self.__market_table, file)
 
@@ -202,4 +202,3 @@ if __name__ == "__main__":
     print(i.person_lookup('Antonio_Vicinanza'))
     #print(i.market_index_lookup("Nasdaq"))
     #print(i.market_index_lookup("PeppeSeccia_200"))
-    i.update_table(True, "Ilaria_Stock")

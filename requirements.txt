@@ -3,7 +3,6 @@ beautifulsoup4
 nltk
 numpy
 pandas
-pyodbc
 PyYAML
 rdflib
 request

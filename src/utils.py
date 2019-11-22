@@ -18,7 +18,7 @@ def get_ontology_uri(concept: str) -> str:
 
 
 def find_news_source(link: str) -> str:
-    """From news link, returns B if Bloombergor or R if Reuters
+    """From news link, returns B if Bloomberg or or R if Reuters
     @:param news link as a string
     @:return B/R
     """
@@ -26,10 +26,10 @@ def find_news_source(link: str) -> str:
 
 
 def format_name(text: str) -> str:
-    return re.sub('[^a-z|A-Z|&|" "]', '', text).replace(" ","_")
+    return re.sub('[^a-z|A-Z|&| ]', '', text).replace(" ","_")
 
 
 if __name__ == "__main__":
     text = "http://feeds.reuters.com/~r/reuters/businessNews/~3/0iLYrt1zylE/coca-cola-chooses-plastic-bottle-collection-over-aluminum-cans-to-cut-carbon-footprint-idUSKBN1XG2J6"
     print(find_news_source(text))
-    print(format_name("Telefonica SA"), format_name("PepsiCo, Inc."))
+    print(format_name('Telefonica SA "Tel"'), format_name("PepsiCo, Inc."))

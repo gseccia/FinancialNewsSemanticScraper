@@ -100,7 +100,7 @@ class Tripleizer():
             companies = news_pool[news]['companies']
             for company in companies:
                 company_name = format_name(companies[company]['name'])
-                market_name = format_name(companies[company]['market_index'][1:-1])
+
                 # add triple about company type
                 company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
                 if company_type is not None:
@@ -118,16 +118,21 @@ class Tripleizer():
                                 + company + '"^^xsd:string .'
 
                 # add triples about market index
-                # check if the market index of the company is already into the knowledge base, otherwise add it
-                if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
-                    partial_query = partial_query + '\n<ont:' + market_name + '>' \
-                                    ' rdf:type ont:StockExchange, owl:NamedIndividual .'
-                    self.__lookuper.update_table(False, market_name)
-                    partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
-                                    + get_dbpedia_uri(market_name) + '> .'
-                # In both cases, retrieve correct uri from lookup
-                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <' \
-                                + self.__lookuper.market_index_lookup(companies[company]["market_index"]) + '> .'
+                # NB market index could not be retrieved by scraper -> KeyError event
+                try:
+                    market_name = format_name(companies[company]['market_index'][1:-1])
+                    # check if the market index of the company is already into the knowledge base, otherwise add it
+                    if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
+                        partial_query = partial_query + '\n<ont:' + market_name + '>' \
+                                        ' rdf:type ont:StockExchange, owl:NamedIndividual .'
+                        self.__lookuper.update_table(False, market_name)
+                        partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
+                                        + get_dbpedia_uri(market_name) + '> .'
+                    # In both cases, retrieve correct uri from lookup
+                    partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <' \
+                                    + self.__lookuper.market_index_lookup(companies[company]["market_index"]) + '> .'
+                except KeyError:
+                    pass
 
                 # add triples about company's ceo
                 for ceo in companies[company]['ceo']:

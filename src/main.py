@@ -1,5 +1,4 @@
 from builtins import Exception
-
 from scrapers.financial_web_scraper import Finviz_scraper
 from scrapers.deep_scraping import make_request
 from tripleizer import Tripleizer
@@ -74,6 +73,9 @@ class Main:
         self.fuseki = FusekiSparqlWrapper()
         paralleldots.set_api_key(token_dots)
 
+        # Init Tripleizer as a class attribute
+        self.__tripleizer = None
+
         # GUI
         self.app = QtWidgets.QApplication(sys.argv)
         self.ui = Ui_finNSEMA()
@@ -94,8 +96,7 @@ class Main:
             # First Execution
             self.fuseki.create_dataset_fuseki()
             self.fuseki.load_ontology()
-            trip_init = Tripleizer()
-            trip_init.set_db_manager(self.fuseki, initialize=True)
+            self.__tripleizer = Tripleizer(initialize=True)
             time.sleep(1)
             # Not anymore a first start...
             with open(os.path.join(Main.rel_path,"resources/configuration/configuration.config"), "r") as jsonFile:
@@ -104,6 +105,9 @@ class Main:
             data["first_start"] = False
             with open(os.path.join(Main.rel_path,"resources/configuration/configuration.config"), "w") as jsonFile:
                 json.dump(data, jsonFile)
+        else:
+            self.__tripleizer = Tripleizer(initialize=False)
+        self.__tripleizer.set_db_manager(self.fuseki)
 
         self.finNSEMA.show()
         self.app.exec_()
@@ -121,8 +125,6 @@ class Main:
         """Retrieve news and insert into database"""
         counter_news = 0
         scraper = Finviz_scraper.scraper_factory()
-        tripleizer = Tripleizer()
-        tripleizer.set_db_manager(self.fuseki)
         while True:
             try:
                 # Retrieving fresh news
@@ -170,7 +172,7 @@ class Main:
                 # Generate and insert triples
                 if len(news) != 0:
                     DEBUG("Try to insert triples..")
-                    tripleizer.generate_insert(news_pool=news)
+                    self.__tripleizer.generate_insert(news_pool=news)
                 else:
                     DEBUG("No fresh news")
                 # DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")

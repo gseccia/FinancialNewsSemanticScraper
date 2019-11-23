@@ -22,9 +22,8 @@ class InfoLookup():
     @:param person_table filename of the json file containing the table of information about persons
     @:return None
     """
-    def set_person_table(self, person_table: str):
-        self.__person_table_filename = person_table
-        with open(person_table, mode='r', encoding="utf-8") as file:
+    def set_person_table(self):
+        with open(self.__person_table_filename, mode='r', encoding="utf-8") as file:
             self.__person_table = json.load(file)
 
     """
@@ -40,9 +39,8 @@ class InfoLookup():
     @:param person_table filename of the json file containing the table of information about stock exchanges
     @:return None
     """
-    def set_market_table(self, market_table: str):
-        self.__market_table_filename = market_table
-        with open(market_table, mode='r', encoding="utf-8") as file:
+    def set_market_table(self):
+        with open(self.__market_table_filename, mode='r', encoding="utf-8") as file:
             self.__market_table = json.load(file)
 
     """
@@ -52,6 +50,12 @@ class InfoLookup():
     """
     def get_market_table(self):
         return self.__market_table
+
+    def set_person_table_filename(self, t: str):
+        self.__person_table_filename = t
+
+    def set_market_table_filename(self, t: str):
+        self.__market_table_filename = t
 
     """
     Load a lookup table for countries in the knowledge base
@@ -190,8 +194,8 @@ class InfoLookup():
 
 if __name__ == "__main__":
     i = InfoLookup()
-    i.set_person_table('../resources/Data/vips.json')
-    i.set_market_table('../resources/Data/stock_exchange.json')
+    i.set_person_table('../resources/Data/vips_original.json')
+    i.set_market_table('../resources/Data/stock_exchange_original.json')
     i.set_countries_table('../resources/Data/countries.json')
     #i.update_table(False, "Ilaria Stock")
     #print(i.lookup("SoftBank Takes Control of WeWork as Part of Bailout, Adam Neumann Leaves Board in Spain, "
@@ -200,5 +204,6 @@ if __name__ == "__main__":
     #print(i.country_lookup("Ogliara"))
     print(i.person_lookup('Amancio_Ortega'))
     print(i.person_lookup('Antonio_Vicinanza'))
-    #print(i.market_index_lookup("Nasdaq"))
-    #print(i.market_index_lookup("PeppeSeccia_200"))
+    print(i.update_table(False,"Nasdaq"))
+    print(i.market_index_lookup("PeppeSeccia_200"))
+    print(i.update_table(True, "Marco_Carpentiero"))

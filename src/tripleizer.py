@@ -8,7 +8,7 @@ from utils import get_dbpedia_uri, find_news_source, format_name
 class Tripleizer():
     """ Class constructor """
 
-    def __init__(self):
+    def __init__(self, initialize=False):
         self.__db_manager = None
         classes = {0: 'CompaniesEconomy', 1: 'Markets&Goods', 2: 'NationalEconomy', 3: 'OtherTopic'}
         self.__topic_classifier = TopicClassifier(classes_dict=classes,
@@ -25,21 +25,24 @@ class Tripleizer():
         self.__delete_prefix = "DELETE DATA {"
         self.__analyser = FinancialSentimentAnalysis()
         self.__lookuper = InfoLookup()
-        self.__lookuper.set_person_table("../resources/Data/vips.json")
-        self.__lookuper.set_market_table('../resources/Data/stock_exchange.json')
+        if initialize:
+            self.__lookuper.set_person_table_filename("../resources/Data/vips_original.json")
+            self.__lookuper.set_person_table()
+            self.__lookuper.set_market_table_filename('../resources/Data/stock_exchange_original.json')
+            self.__lookuper.set_market_table()
+        else:
+            self.__lookuper.set_person_table_filename("../resources/Data/vips.json")
+            self.__lookuper.set_person_table()
+            self.__lookuper.set_market_table_filename('../resources/Data/stock_exchange.json')
+            self.__lookuper.set_market_table()
         self.__lookuper.set_countries_table('../resources/Data/countries.json')
 
     """
     Sets the db manager to interface Fuseki
     @:param db_manager instance of db wrapper
     """
-    def set_db_manager(self, db_manager,initialize=False):
+    def set_db_manager(self, db_manager):
         self.__db_manager = db_manager
-        # populate the ontology with the a priori knowledge
-        if initialize:
-            self.__lookuper.set_person_table("../resources/Data/vips_original.json")
-            self.__lookuper.set_market_table('../resources/Data/stock_exchange_original.json')
-            self.load_persons_and_markets()
 
     """
     Generates an insert query for an RDF triples storage. 

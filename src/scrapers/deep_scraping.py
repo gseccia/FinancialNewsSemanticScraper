@@ -13,23 +13,23 @@ import re
 import datetime
 import time
 
-def make_request(url,date = None,delay=10):
+def make_request(url,exe_path,date = None,delay=10):
     triples = None
     auth = None
     if "reuters" in url or "bloomberg" in url:
         chrome_options = webdriver.ChromeOptions()
         chrome_options.add_argument("--headless")
+
+        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36")
+        chrome_options.add_argument('accept-language="it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7"')
+
         if "reuters" in url:
-            session = webdriver.Chrome(options=chrome_options, executable_path='C:/Users/ilari/Documents/Big capocchie/Project/FinancialNewsSemanticScraper/src/scrapers/chromedriver.exe')
+            session = webdriver.Chrome(options=chrome_options, executable_path=exe_path+"chromedriver.exe")
         elif "bloomberg" in url:
-            session = webdriver.Chrome(executable_path='C:/Users/ilari/Documents/Big capocchie/Project/FinancialNewsSemanticScraper/src/scrapers/chromedriver.exe')
+            session = webdriver.Chrome(options=chrome_options,executable_path=exe_path+"chromedriver.exe")
         else:
-            session = webdriver.Chrome(options=chrome_options, executable_path='C:/Users/ilari/Documents/Big capocchie/Project/FinancialNewsSemanticScraper/src/scrapers/chromedriver.exe')
+            session = webdriver.Chrome(options=chrome_options, executable_path=exe_path+"chromedriver.exe")
         try:
-
-            # chrome_options.add_argument('--user-agent="Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; Microsoft; Lumia 640 XL LTE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Mobile Safari/537.36 Edge/12.10166"')
-            # chrome_options.add_argument('--accept-language="en-US;en;q=0.9"')
-
             session.get(url)
 
             # Wait for the page
@@ -38,7 +38,6 @@ def make_request(url,date = None,delay=10):
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
                 triples,auth = scrape_reuters_request(session,response)
             elif "bloomberg" in url:
-                print(response)
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
                 triples,auth = scrape_bloomberg_request(session,response)
 
@@ -50,14 +49,12 @@ def make_request(url,date = None,delay=10):
 
         except TimeoutException:
             print("Timeout")
-            visible_session = webdriver.Chrome()
+            visible_session = webdriver.Chrome(executable_path=exe_path+"chromedriver.exe")
             visible_session.get(url)
             # input("CAPTCHA timeout. Press a key to continue...")
             time.sleep(60)
             visible_session.close()
             visible_session.quit()
-
-            session = webdriver.Chrome(options=chrome_options)
             response_obj = None
 
         finally:
@@ -153,7 +150,6 @@ def scrape_reuters_request(session,text):
 def scrape_bloomberg_request(session,text):
     print("BLOOMBERG request")
     parser = BeautifulSoup(text, "html.parser")
-
     # Getting authors
     authors = parser.find_all("a",attrs={"rel":"author"})
     author = []
@@ -171,7 +167,7 @@ def scrape_bloomberg_request(session,text):
             company_pages.append((company_name,p.a["href"]))
 
     # Company pages scraping
-    #print("Company pages: ",company_pages)
+    print("Company pages: ",company_pages)
     companies = {}
     it = iter(company_pages)
     error = False
@@ -218,6 +214,14 @@ def scrape_bloomberg_request(session,text):
                     companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
                     #print("SITE ",companies[company]["site"])
 
+                    # CEO
+                    container = parser.find_all("div", class_="executivesContainer__7f9fc250")[0]
+                    companies[company]["ceo"] = []
+                    for div in container.find_all("div", class_="info__368b37b6"):
+                        divin = div.find_all("div")
+                        if divin[0]["data-resource-type"] == "Person" and "CEO" in divin[1].text:
+                            companies[company]["ceo"].append(divin[0].text)
+                    # print("CEO ",companies[company]["ceo"])
                 else:
                     # Name
                     companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
@@ -234,16 +238,8 @@ def scrape_bloomberg_request(session,text):
                     companies[company]["market_index"] = "Empty"
                     companies[company]["change"] = "Empty"
                     companies[company]["last_trade"] = "Empty"
+                    companies[company]["ceo"] = []
 
-
-                # CEO
-                container = parser.find_all("div",class_="executivesContainer__7f9fc250")[0]
-                companies[company]["ceo"] = []
-                for div in container.find_all("div",class_="info__368b37b6"):
-                    divin = div.find_all("div")
-                    if divin[0]["data-resource-type"]=="Person" and "CEO" in divin[1].text:
-                        companies[company]["ceo"].append(divin[0].text)
-                #print("CEO ",companies[company]["ceo"])
             except TimeoutException:
                 time.sleep(30)
                 error = True

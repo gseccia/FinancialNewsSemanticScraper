@@ -37,6 +37,8 @@ class Tripleizer():
         self.__db_manager = db_manager
         # populate the ontology with the a priori knowledge
         if initialize:
+            self.__lookuper.set_person_table("../resources/Data/vips_original.json")
+            self.__lookuper.set_market_table('../resources/Data/stock_exchange_original.json')
             self.load_persons_and_markets()
 
     """

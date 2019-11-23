@@ -1,17 +1,14 @@
-from keras.preprocessing import sequence
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation
 from keras.layers import Embedding
 from keras.layers import Conv1D, GlobalMaxPooling1D
-from keras.preprocessing.text import Tokenizer, text_to_word_sequence
+from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 import pandas as pd
-import numpy as np
 import keras
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import pickle
-import codecs
 
 
 class TopicClassifier():

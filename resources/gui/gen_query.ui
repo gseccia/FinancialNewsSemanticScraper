@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>462</width>
+    <width>565</width>
     <height>447</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>511</width>
+     <width>581</width>
      <height>451</height>
     </rect>
    </property>
@@ -33,20 +33,31 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>180</y>
-     <width>371</width>
+     <y>200</y>
+     <width>481</width>
      <height>191</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI Semibold</family>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generated query&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
    <property name="styleSheet">
-    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 7, 42, 255), stop:1 rgba(34, 139, 169, 255));</string>
+    <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 7, 42, 255), stop:1 rgba(34, 139, 169, 255));
+color: rgb(255, 255, 255);</string>
    </property>
   </widget>
   <widget class="QPushButton" name="generateButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>110</y>
+     <x>220</x>
+     <y>130</y>
      <width>131</width>
      <height>41</height>
     </rect>
@@ -58,6 +69,9 @@
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate a query with the specified parameters&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(1, 65, 92);
@@ -75,14 +89,25 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>170</x>
      <y>390</y>
-     <width>371</width>
+     <width>221</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI Semibold</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(0, 9, 44);</string>
+   </property>
    <property name="text">
-    <string>DEVI COPIARLO QUA</string>
+    <string>Copy this query to Tarsier interface</string>
    </property>
   </widget>
   <widget class="QLabel" name="group_label">
@@ -112,7 +137,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="subgroup_label">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>170</x>
      <y>30</y>
      <width>91</width>
      <height>31</height>
@@ -136,7 +161,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>360</x>
      <y>30</y>
      <width>41</width>
      <height>31</height>
@@ -160,7 +185,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>460</x>
      <y>30</y>
      <width>31</width>
      <height>31</height>
@@ -186,8 +211,8 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
     <rect>
      <x>40</x>
      <y>60</y>
-     <width>81</width>
-     <height>21</height>
+     <width>101</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -201,22 +226,27 @@ color: rgb(255, 255, 255);</string>
    </item>
    <item>
     <property name="text">
+     <string>Stock</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
      <string>Company</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>Name</string>
+     <string>Country</string>
     </property>
    </item>
   </widget>
   <widget class="QListWidget" name="subgroup_list">
    <property name="geometry">
     <rect>
-     <x>140</x>
+     <x>170</x>
      <y>60</y>
-     <width>91</width>
-     <height>21</height>
+     <width>161</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -227,10 +257,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QListWidget" name="order_list">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>360</x>
      <y>60</y>
      <width>61</width>
-     <height>21</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -251,10 +281,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QListWidget" name="limit_list">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>460</x>
      <y>60</y>
      <width>61</width>
-     <height>21</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">

@@ -246,6 +246,16 @@
     
 
 
+    <!-- http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isG20Country -->
+
+    <owl:DatatypeProperty rdf:about="http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#isG20Country">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -1298,6 +1308,7 @@
         <Countries:countryCodeISO3166Alpha3>ARG</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>32</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>ARGENTINA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -1334,6 +1345,7 @@
         <Countries:countryCodeISO3166Alpha3>AUS</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>36</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>AUSTRALIA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -1538,6 +1550,7 @@
         <Countries:countryCodeISO3166Alpha3>BRA</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>76</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>BRAZIL</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -1634,6 +1647,7 @@
         <Countries:countryCodeISO3166Alpha3>CAN</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>124</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>CANADA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -1706,6 +1720,7 @@
         <Countries:countryCodeISO3166Alpha3>CHN</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>156</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>CHINA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2067,6 +2082,7 @@
         <Countries:countryCodeISO3166Alpha3>FRA</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>250</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>FRANCE</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2164,6 +2180,7 @@
         <Countries:countryCodeISO3166Alpha3>DEU</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>276</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>GERMANY</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2392,6 +2409,7 @@
         <Countries:countryCodeISO3166Alpha3>IND</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>356</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>INDIA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2404,6 +2422,7 @@
         <Countries:countryCodeISO3166Alpha3>IDN</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>360</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>INDONESIA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2464,6 +2483,7 @@
         <Countries:countryCodeISO3166Alpha3>ITA</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>380</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>ITALY</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2488,6 +2508,7 @@
         <Countries:countryCodeISO3166Alpha3>JPN</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>392</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>JAPAN</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2560,6 +2581,7 @@
         <Countries:countryCodeISO3166Alpha3>KOR</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>410</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>KOREA, REPUBLIC OF</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -2860,6 +2882,7 @@
         <Countries:countryCodeISO3166Alpha3>MEX</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>484</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>MEXICO</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -3328,6 +3351,7 @@
         <Countries:countryCodeISO3166Alpha3>RUS</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>643</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>RUSSIAN FEDERATION</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -3448,6 +3472,7 @@
         <Countries:countryCodeISO3166Alpha3>SAU</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>682</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>SAUDI ARABIA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -3568,6 +3593,7 @@
         <Countries:countryCodeISO3166Alpha3>ZAF</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>710</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>SOUTH AFRICA</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -3808,6 +3834,7 @@
         <Countries:countryCodeISO3166Alpha3>TUR</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>792</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>TURKEY</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -3892,6 +3919,7 @@
         <Countries:countryCodeISO3166Alpha3>GBR</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>826</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>UNITED KINGDOM</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 
@@ -3904,6 +3932,7 @@
         <Countries:countryCodeISO3166Alpha3>USA</Countries:countryCodeISO3166Alpha3>
         <Countries:countryCodeUNNumeric3>840</Countries:countryCodeUNNumeric3>
         <Countries:countryNameISO3166Short>UNITED STATES</Countries:countryNameISO3166Short>
+        <FinancialNewsOntology:isG20Country rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</FinancialNewsOntology:isG20Country>
     </owl:NamedIndividual>
     
 

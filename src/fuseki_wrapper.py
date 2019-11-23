@@ -67,9 +67,9 @@ class FusekiSparqlWrapper:
         # Execute jar file
         process = subprocess.Popen(['java', '-jar', 'fuseki-server.jar'],
                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                                   close_fds=True, cwd=path.replace("\\", "/"),
+                                   cwd=path.replace("\\", "/"),
                                    # Comment following line to use Fuseki verbose mode
-                                   # stderr=subprocess.PIPE, stdout=subprocess.PIPE
+                                   stderr=subprocess.PIPE, stdout=subprocess.PIPE
                                    )
         return process.pid
 
@@ -78,10 +78,9 @@ class FusekiSparqlWrapper:
         Load ontology to the current dataset specified in the init.
         Location and name of the ontology is hardcoded but can be transferred to a parameter if needed.
         """
-
         multipart_data = MultipartEncoder(fields={'file': ('FinancialNewsOntology_beta3.owl',
                                                            open(
-                                                               '../resources/ontologies/FinancialNewsOntology_beta3.owl',
+                                                               '../../resources/ontologies/FinancialNewsOntology_beta3.owl',
                                                                'rb'), 'text/plain')
                                                   })
         response = requests.put('http://localhost:3030/' + self.__dataset + '/data', data=multipart_data,

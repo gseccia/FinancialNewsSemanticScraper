@@ -12,8 +12,8 @@ class Tripleizer():
         self.__db_manager = None
         classes = {0: 'CompaniesEconomy', 1: 'Markets&Goods', 2: 'NationalEconomy', 3: 'OtherTopic'}
         self.__topic_classifier = TopicClassifier(classes_dict=classes,
-                         tokenizer_path='../resources/keras_model_classifier/tokenizer.pickle',
-                         path_to_h5_classifier="../resources/keras_model_classifier/model.h5")
+                         tokenizer_path='../../resources/keras_model_classifier/tokenizer.pickle',
+                         path_to_h5_classifier="../../resources/keras_model_classifier/model.h5")
         self.__query_prefix = """
         PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -26,16 +26,16 @@ class Tripleizer():
         self.__analyser = FinancialSentimentAnalysis()
         self.__lookuper = InfoLookup()
         if initialize:
-            self.__lookuper.set_person_table_filename("../resources/Data/vips_original.json")
+            self.__lookuper.set_person_table_filename("../../resources/Data/vips_original.json")
             self.__lookuper.set_person_table()
-            self.__lookuper.set_market_table_filename('../resources/Data/stock_exchange_original.json')
+            self.__lookuper.set_market_table_filename('../../resources/Data/stock_exchange_original.json')
             self.__lookuper.set_market_table()
         else:
-            self.__lookuper.set_person_table_filename("../resources/Data/vips.json")
+            self.__lookuper.set_person_table_filename("../../resources/Data/vips.json")
             self.__lookuper.set_person_table()
-            self.__lookuper.set_market_table_filename('../resources/Data/stock_exchange.json')
+            self.__lookuper.set_market_table_filename('../../resources/Data/stock_exchange.json')
             self.__lookuper.set_market_table()
-        self.__lookuper.set_countries_table('../resources/Data/countries.json')
+        self.__lookuper.set_countries_table('../../resources/Data/countries.json')
 
     """
     Sets the db manager to interface Fuseki

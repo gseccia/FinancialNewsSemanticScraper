@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'resources/gui/client_gui.ui'
+# Form implementation generated from reading ui file './resources/gui/client_gui.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -15,6 +15,7 @@ class Ui_finNSEMA(object):
         finNSEMA.setObjectName("finNSEMA")
         finNSEMA.setEnabled(True)
         finNSEMA.resize(650, 549)
+        finNSEMA.setFixedSize(650, 549)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -23,7 +24,7 @@ class Ui_finNSEMA(object):
         self.bg_image_label = QtWidgets.QLabel(finNSEMA)
         self.bg_image_label.setGeometry(QtCore.QRect(-90, -40, 931, 611))
         self.bg_image_label.setText("")
-        self.bg_image_label.setPixmap(QtGui.QPixmap("resources/gui\\big_data_fintech_globe_thinkstock_826139768-100749747-large.jpg"))
+        self.bg_image_label.setPixmap(QtGui.QPixmap("../../resources/gui/big_data_fintech_globe_thinkstock_826139768-100749747-large.jpg"))
         self.bg_image_label.setScaledContents(False)
         self.bg_image_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.bg_image_label.setWordWrap(False)
@@ -43,7 +44,7 @@ class Ui_finNSEMA(object):
 "background-color: rgba(255, 255, 255, 0);")
         self.launch_button.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/gui\\off_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../resources/gui/off_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.launch_button.setIcon(icon)
         self.launch_button.setIconSize(QtCore.QSize(64, 64))
         self.launch_button.setDefault(False)
@@ -63,24 +64,12 @@ class Ui_finNSEMA(object):
 "background-color: rgba(255, 255, 255, 0);")
         self.vis_button.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/gui\\visualize.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../../resources/gui/visualize.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.vis_button.setIcon(icon1)
         self.vis_button.setIconSize(QtCore.QSize(64, 64))
         self.vis_button.setDefault(False)
         self.vis_button.setFlat(False)
         self.vis_button.setObjectName("vis_button")
-        self.scroll_area_log = QtWidgets.QScrollArea(finNSEMA)
-        self.scroll_area_log.setGeometry(QtCore.QRect(60, 340, 521, 151))
-        self.scroll_area_log.setStyleSheet("background-color: rgb(1, 65, 92);\n"
-"gridline-color: rgb(255, 0, 127);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 7, 42, 255), stop:1 rgba(34, 139, 169, 255));\n"
-"color: rgb(244, 68, 79);")
-        self.scroll_area_log.setWidgetResizable(True)
-        self.scroll_area_log.setObjectName("scroll_area_log")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 519, 149))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.scroll_area_log.setWidget(self.scrollAreaWidgetContents)
         self.log_label = QtWidgets.QLabel(finNSEMA)
         self.log_label.setGeometry(QtCore.QRect(60, 320, 121, 20))
         font = QtGui.QFont()
@@ -121,7 +110,7 @@ class Ui_finNSEMA(object):
         self.label = QtWidgets.QLabel(finNSEMA)
         self.label.setGeometry(QtCore.QRect(-100, -120, 801, 451))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources/gui\\logo_stroke.png"))
+        self.label.setPixmap(QtGui.QPixmap("../../resources/gui/logo_stroke.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.conf_button = QtWidgets.QPushButton(finNSEMA)
@@ -139,7 +128,7 @@ class Ui_finNSEMA(object):
 "")
         self.conf_button.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/gui\\Settings_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("../../resources/gui/Settings_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.conf_button.setIcon(icon2)
         self.conf_button.setIconSize(QtCore.QSize(64, 64))
         self.conf_button.setDefault(False)
@@ -170,14 +159,25 @@ class Ui_finNSEMA(object):
 "")
         self.query_button.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/gui\\query_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("../../resources/gui/query_icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.query_button.setIcon(icon3)
         self.query_button.setIconSize(QtCore.QSize(64, 64))
         self.query_button.setDefault(False)
         self.query_button.setFlat(False)
         self.query_button.setObjectName("query_button")
+        self.log_area = QtWidgets.QTextEdit(finNSEMA)
+        self.log_area.setGeometry(QtCore.QRect(60, 340, 521, 141))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semibold")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        self.log_area.setFont(font)
+        self.log_area.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 7, 42, 255), stop:1 rgba(34, 139, 169, 255));\n"
+"color: rgb(255, 255, 255);")
+        self.log_area.setReadOnly(True)
+        self.log_area.setObjectName("log_area")
         self.bg_image_label.raise_()
-        self.scroll_area_log.raise_()
         self.stripe_label.raise_()
         self.label.raise_()
         self.launch_button.raise_()
@@ -188,6 +188,7 @@ class Ui_finNSEMA(object):
         self.news_counter_label.raise_()
         self.query_button.raise_()
         self.log_label.raise_()
+        self.log_area.raise_()
 
         self.retranslateUi(finNSEMA)
         QtCore.QMetaObject.connectSlotsByName(finNSEMA)
@@ -201,15 +202,5 @@ class Ui_finNSEMA(object):
         self.motto1.setText(_translate("finNSEMA", "Bring your financial business to a higher level"))
         self.motto2.setText(_translate("finNSEMA", "embracing the power of semantic analysis"))
         self.conf_button.setToolTip(_translate("finNSEMA", "<html><head/><body><p>Visualize Data</p></body></html>"))
-        self.news_counter_label.setText(_translate("finNSEMA", "News processed up to now:"))
+        self.news_counter_label.setText(_translate("finNSEMA", "News processed up to now: 0"))
         self.query_button.setToolTip(_translate("finNSEMA", "<html><head/><body><p>Visualize Data</p></body></html>"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    finNSEMA = QtWidgets.QDialog()
-    ui = Ui_finNSEMA()
-    ui.setupUi(finNSEMA)
-    finNSEMA.show()
-    sys.exit(app.exec_())

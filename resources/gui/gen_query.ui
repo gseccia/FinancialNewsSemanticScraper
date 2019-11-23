@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>565</width>
-    <height>447</height>
+    <width>580</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
   <widget class="QTextEdit" name="queryTextArea">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>50</x>
      <y>200</y>
      <width>481</width>
      <height>191</height>
@@ -46,7 +46,7 @@
     </font>
    </property>
    <property name="toolTip">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generated query&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Generated query&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 7, 42, 255), stop:1 rgba(34, 139, 169, 255));
@@ -56,10 +56,10 @@ color: rgb(255, 255, 255);</string>
   <widget class="QPushButton" name="generateButton">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>130</y>
-     <width>131</width>
-     <height>41</height>
+     <x>260</x>
+     <y>120</y>
+     <width>72</width>
+     <height>72</height>
     </rect>
    </property>
    <property name="font">
@@ -74,16 +74,22 @@ color: rgb(255, 255, 255);</string>
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate a query with the specified parameters&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(1, 65, 92);
-color: rgb(255, 255, 255);
-gridline-color: rgb(255, 0, 127);
-border-top-color: rgb(255, 0, 0);
-border-color: rgb(255, 155, 183);
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(0, 7, 42, 255), stop:1 rgba(34, 139, 169, 255));
-</string>
+    <string notr="true">border: 0px;
+background: transparent;
+background-color: rgba(255, 255, 255, 0);</string>
    </property>
    <property name="text">
-    <string>Generate Query</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>gen_query_icon.png</normaloff>gen_query_icon.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>64</width>
+     <height>64</height>
+    </size>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
@@ -113,7 +119,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="group_label">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>50</x>
      <y>30</y>
      <width>41</width>
      <height>31</height>
@@ -137,7 +143,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="subgroup_label">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>180</x>
      <y>30</y>
      <width>91</width>
      <height>31</height>
@@ -161,7 +167,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>370</x>
      <y>30</y>
      <width>41</width>
      <height>31</height>
@@ -209,7 +215,7 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
   <widget class="QListWidget" name="group_list">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>50</x>
      <y>60</y>
      <width>101</width>
      <height>41</height>
@@ -243,7 +249,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QListWidget" name="subgroup_list">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>180</x>
      <y>60</y>
      <width>161</width>
      <height>41</height>
@@ -257,7 +263,7 @@ color: rgb(255, 255, 255);</string>
   <widget class="QListWidget" name="order_list">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>370</x>
      <y>60</y>
      <width>61</width>
      <height>41</height>

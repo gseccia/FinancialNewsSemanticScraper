@@ -110,7 +110,7 @@ class Finviz_scraper:
                 del fresh_news[row["link"]]["link"]
                 self.last_date = row["date"]
         # Update last_date of scraper
-        with open("../resources/scraper.dat","w") as f:
+        with open("../../resources/scraper.dat","w") as f:
             f.write(self.last_date.strftime("%Y-%m-%dT%H:%M:%S+02:00"))
             f.close()
 

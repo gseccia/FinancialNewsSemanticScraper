@@ -1,5 +1,5 @@
-from resources.gui.gen_query import Ui_Dialog
-from PyQt5 import QtCore, QtGui, QtWidgets
+from gui.gen_query import Ui_Dialog
+from PyQt5 import QtCore, QtWidgets, QtGui
 
 
 class QueryGUI(Ui_Dialog):
@@ -108,13 +108,12 @@ class QueryGUI(Ui_Dialog):
             pass
 
     def generate_query(self):
-        query_prefix = """
-        PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        """
+        query_prefix = "" \
+                       "PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>\n" \
+                       "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" \
+                       "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n" \
+                       "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" \
+                       "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
         items_group = self.group_list.selectedItems()
         items_subgroup = self.subgroup_list.selectedItems()
         items_order = self.order_list.selectedItems()
@@ -194,7 +193,7 @@ class QueryGUI(Ui_Dialog):
             print(query)
         self.queryTextArea.clear()
         self.queryTextArea.append(query)
-
+        self.queryTextArea.verticalScrollBar().setValue(self.queryTextArea.verticalScrollBar().minimum())
 
 if __name__ == "__main__":
     import sys

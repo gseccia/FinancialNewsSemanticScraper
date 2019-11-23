@@ -1,9 +1,9 @@
-from resources.gui.client_gui import Ui_finNSEMA
-from PyQt5 import QtCore, QtGui, QtWidgets
+from gui.client_gui import Ui_finNSEMA
+from PyQt5 import QtGui, QtWidgets
 from main import Main
-from resources.gui.gen_query_specialized import QueryGUI
-import sys
+from gui.gen_query_specialized import QueryGUI
 import traceback
+import os
 
 
 class ClientGUI(Ui_finNSEMA):
@@ -21,7 +21,7 @@ class ClientGUI(Ui_finNSEMA):
         except Exception as e:
             print("Exception in starting Fuseki and Tarsier daemons:\n", e)
 
-    def setup_event(self):
+    def setupEvent(self):
         self.conf_button.clicked.connect(self.configure)
         self.query_button.clicked.connect(self.open_query_builder)
         self.vis_button.clicked.connect(self.visualize_data)
@@ -29,9 +29,10 @@ class ClientGUI(Ui_finNSEMA):
 
     def open_query_builder(self):
         dialog = QtWidgets.QDialog()
-        gui = QueryGUI()
-        gui.setupUi(dialog)
-        gui.setupEvent()
+        dialog.ui = QueryGUI()
+        dialog.ui.setupUi(dialog)
+        dialog.ui.setupEvent()
+        dialog.exec_()
         dialog.show()
 
     def visualize_data(self):
@@ -41,19 +42,24 @@ class ClientGUI(Ui_finNSEMA):
         driver.get("localhost:8080")
 
     def start_stop_finNSEMA(self):
-        if not self.__is_on:
-            self.update_log("System scraper starting...")
-            self.__main.start_scraping(logger_area=self.scroll_area_log, label=self.news_counter_label)
-            self.launch_button.setIcon(QtGui.QIcon(QtGui.QPixmap("off_icon.png")))
-            self.__is_on = not self.__is_on
-            self.update_log("SUCCESS: Scraper is on")
-        else:
-            self.update_log("System scraper stopping...")
-            self.__main.stop_scraping()
-            self.update_log("SUCCESS: Scraper is off")
+        try:
+            if not self.__is_on:
+                self.update_log("System scraper starting...")
+                self.__main.start_scraping(logger_area=self.log_area, label=self.news_counter_label)
+                self.launch_button.setIcon(QtGui.QIcon(QtGui.QPixmap("../../resources/gui/on_icon.png")))
+                self.__is_on = not self.__is_on
+                self.update_log("SUCCESS: Scraper is on")
+            else:
+                self.update_log("System scraper stopping...")
+                self.__main.stop_scraping()
+                self.launch_button.setIcon(QtGui.QIcon(QtGui.QPixmap("../../resources/gui/off_icon.png")))
+                self.__is_on = not self.__is_on
+                self.update_log("SUCCESS: Scraper is off")
+        except Exception as e:
+            print(e)
 
     def update_log(self, s: str):
-        self.scroll_area_log.appendPlainText(s)
+        self.log_area.append(s)
 
     def configure(self):
         file_browser = QtWidgets.QFileDialog()
@@ -77,12 +83,15 @@ class ClientGUI(Ui_finNSEMA):
     def closeEvent(self, event):
         print("Sto chiudendo")
 
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     dialog = QtWidgets.QDialog()
     ui = ClientGUI()
+    ui.setupUi(dialog)
     dialog.show()
-    #sys.exit(app.exec_())
+    ui.setupEvent()
+    sys.exit(app.exec_())
 
 

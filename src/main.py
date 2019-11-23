@@ -9,8 +9,6 @@ import time
 import os
 import json
 import subprocess
-from resources.gui.client_gui import Ui_finNSEMA
-from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import paralleldots
 
@@ -127,11 +125,13 @@ class Main:
 
     def start_scraping(self, logger_area, label):
         # launch scraping engine
-        self.__scraper_thread = Thread(target=self.loop, args=(self, logger_area, label))
+        self.__scraper_thread = Thread(target=self.loop, args=(logger_area, label))
         self.__scraper_thread.start()
 
     def stop_scraping(self):
-        self.__scraper_thread.join()
+        print("Arrivato in stop")
+        self.__scraper_thread.join(3)
+        print("Arrivato in join")
 
     def loop(self, logger_area, label, max_blocked_loops=10):
         """Retrieve news and insert into database"""
@@ -139,35 +139,35 @@ class Main:
         scraper = Finviz_scraper.scraper_factory()
         while True:
             try:
-                # Retrieving fresh news
-
-                news = scraper.autoretrieve_news()  # filename = "../resources/news_scraper_files/news_news.csv"
-
-                # Filter only Bloomberg and Reuters news
-                del_link = []
-                for k, v in news.items():
-                    if v["source"] == "other":
-                        del_link.append(k)
-                for link in del_link:
-                    del news[link]
-
-                # Deep analysis of fresh news
-                for link in news.keys():
-                    more_info = make_request(link, self.__exe_path)
-                    blocked_loops = 0
-                    while more_info is None:
-                        more_info = make_request(link,self.__exe_path)
-                        blocked_loops += 1
-                        if blocked_loops == max_blocked_loops:
-                            logger_area.appendPlainText("ERROR: Captcha not resolved!")
-                            more_info = {}
-
-                    # Update fresh news information
-                    news[link].update(more_info)
-
-                counter_news += len(news)
-
-                DEBUG("INFO RETRIEVE " + str(news))
+                # # Retrieving fresh news
+                #
+                # news = scraper.autoretrieve_news()  # filename = "../resources/news_scraper_files/news_news.csv"
+                #
+                # # Filter only Bloomberg and Reuters news
+                # del_link = []
+                # for k, v in news.items():
+                #     if v["source"] == "other":
+                #         del_link.append(k)
+                # for link in del_link:
+                #     del news[link]
+                #
+                # # Deep analysis of fresh news
+                # for link in news.keys():
+                #     more_info = make_request(link, self.__exe_path)
+                #     blocked_loops = 0
+                #     while more_info is None:
+                #         more_info = make_request(link,self.__exe_path)
+                #         blocked_loops += 1
+                #         if blocked_loops == max_blocked_loops:
+                #             logger_area.append("ERROR: Captcha not resolved!")
+                #             more_info = {}
+                #
+                #     # Update fresh news information
+                #     news[link].update(more_info)
+                #
+                # counter_news += len(news)
+                #
+                # DEBUG("INFO RETRIEVE " + str(news))
 
                 ##########################################
                 """ Da cancellare quando sarà in funzione
@@ -182,18 +182,18 @@ class Main:
                 ##########################################
 
                 # Generate and insert triples
-                if len(news) != 0:
-                    DEBUG("Try to insert triples..")
-                    self.__tripleizer.generate_insert(news_pool=news)
-                else:
-                    DEBUG("No fresh news")
-                # DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")
+                # if len(news) != 0:
+                #     DEBUG("Try to insert triples..")
+                #     self.__tripleizer.generate_insert(news_pool=news)
+                # else:
+                #     DEBUG("No fresh news")
+                # # DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")
 
-                logger_area.appendPlainText("SUCCESS: Acquisition at " + str(datetime.datetime.now()))
+                logger_area.append("SUCCESS: Acquisition at " + str(datetime.datetime.now()))
                 label.setText("News processed up to now: " + str(counter_news))
             except Exception as e:
                 # DEBUG("Acquisition at "+str(datetime.datetime.now())+" FAILED")
-                logger_area.appendPlainText("ERROR: Acquisition at " + str(datetime.datetime.now()))
+                logger_area.append("ERROR: Acquisition at " + str(datetime.datetime.now()))
                 print("Exception " + repr(e))
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 traceback.print_tb(exc_tb)

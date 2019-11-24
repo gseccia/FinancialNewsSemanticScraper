@@ -39,7 +39,7 @@ def make_request(url,exe_path,date = None,delay=10):
                 triples,auth = scrape_reuters_request(session,response)
             elif "bloomberg" in url:
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
-                triples,auth = scrape_bloomberg_request(session,response)
+                triples,auth = scrape_bloomberg_request(session,response,exe_path)
 
             # Save info
             if date is not None:
@@ -147,7 +147,7 @@ def scrape_reuters_request(session,text):
     #print(author,repr(companies))
     return companies,author
 
-def scrape_bloomberg_request(session,text):
+def scrape_bloomberg_request(session,text,exe_path):
     print("BLOOMBERG request")
     parser = BeautifulSoup(text, "html.parser")
     # Getting authors
@@ -171,77 +171,103 @@ def scrape_bloomberg_request(session,text):
     companies = {}
     it = iter(company_pages)
     error = False
+    force_next = 0
     # for company,link in company_pages:
     while True:
         try:
-            company,link = (company,link) if error else next(it)
+            company,link = (company,link) if (error and force_next < 10) else next(it)
             error = False
             companies[company] = {}
 
             try:
                 session.get("https://www.bloomberg.com"+link)
+
                 parser = BeautifulSoup(session.page_source, "html.parser")
-                #print(session.current_url)
-
-                if "quote" in session.current_url:
-                    # Name
-                    companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
-                    #print("NAME ",companies[company]["name"])
-
-                    # Last_trade
-                    companies[company]["last_trade"] = ""
-                    last_trade_container = parser.find_all("div",class_="overviewRow__0956421f")[0]
-                    for span in last_trade_container.find_all("span"):
-                        companies[company]["last_trade"] += span.text
-                    #print("LAST TRADE ",companies[company]["last_trade"])
-
-                    # Change
-                    span_change = parser.find_all("span",class_=re.compile("changePercent__2d7dc0d2 .*"))
-                    companies[company]["change"] = span_change[0].text
-
-                    #print("CHANGE ",companies[company]["change"])
-
-                    # Market index
-                    companies[company]["market_index"] = parser.find_all("span",class_="exchange__c62926ba")[0].text
-                    #print("MARKET INDEX ",companies[company]["market_index"])
-
-                    # Type
-                    companies[company]["type"] = parser.find_all("div",class_="industry labelText__6f58d7c0")[0].text
-                    #print("TYPE ",companies[company]["type"])
-
-                    # Site
-                    box = parser.find_all("section",class_="dataBox address")[0]
-                    companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
-                    #print("SITE ",companies[company]["site"])
-
-                    # CEO
-                    container = parser.find_all("div", class_="executivesContainer__7f9fc250")[0]
-                    companies[company]["ceo"] = []
-                    for div in container.find_all("div", class_="info__368b37b6"):
-                        divin = div.find_all("div")
-                        if divin[0]["data-resource-type"] == "Person" and "CEO" in divin[1].text:
-                            companies[company]["ceo"].append(divin[0].text)
-                    # print("CEO ",companies[company]["ceo"])
+                print(parser.title)
+                if parser.title == "<title>404 - Bloomberg Markets</title>":
+                    del companies[company]
+                    print("404 - page")
                 else:
-                    # Name
-                    companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
-                    #print("NAME ",companies[company]["name"])
+                    force_next = 0
+                    if "quote" in session.current_url:
+                        myElem = WebDriverWait(session, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'companyName__99a4824b')))
+                        # Name
+                        companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
+                        #print("NAME ",companies[company]["name"])
 
-                    # Type and Site
-                    container = parser.find_all("div",class_="infoTable__96162ad6")[0]
-                    for section in container.find_all("section"):
-                        if section.h2.text == "SECTOR":
-                            companies[company]["type"] = section.div.text
-                        elif section.h2.text == "ADDRESS":
-                            companies[company]["site"] = section.div.text
+                        # Last_trade
+                        last_trade_containers = parser.find_all("div",class_="overviewRow__0956421f")
+                        if len(last_trade_containers) > 0:
+                            companies[company]["last_trade"] = ""
+                            last_trade_container = last_trade_containers[0]
+                            for span in last_trade_container.find_all("span"):
+                                companies[company]["last_trade"] += span.text
+                        #print("LAST TRADE ",companies[company]["last_trade"])
 
-                    companies[company]["market_index"] = "Empty"
-                    companies[company]["change"] = "Empty"
-                    companies[company]["last_trade"] = "Empty"
-                    companies[company]["ceo"] = []
+                        # Change
+                        span_change = parser.find_all("span", class_=re.compile("changePercent__2d7dc0d2 .*"))
+                        if len(last_trade_containers) > 0:
+                            companies[company]["change"] = span_change[0].text
+
+                        #print("CHANGE ",companies[company]["change"])
+
+                        # Market index
+                        market_index_container = parser.find_all("span", class_="exchange__c62926ba")
+                        if len(market_index_container)>0:
+                            companies[company]["market_index"] = market_index_container[0].text
+                            #print("MARKET INDEX ",companies[company]["market_index"])
+
+                        # Type
+                        type_container = parser.find_all("div",class_="industry labelText__6f58d7c0")
+                        if len(type_container) > 0:
+                            companies[company]["type"] = type_container[0].text
+                            #print("TYPE ",companies[company]["type"])
+
+                        # Site
+                        boxs = parser.find_all("section",class_="dataBox address")
+                        if len(boxs)>0:
+                            box = boxs[0]
+                            companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
+                            #print("SITE ",companies[company]["site"])
+
+                        # CEO
+                        containers = parser.find_all("div", class_="executivesContainer__7f9fc250")
+                        if len(containers)>0:
+                            container = containers[0]
+                            companies[company]["ceo"] = []
+                            for div in container.find_all("div", class_="info__368b37b6"):
+                                divin = div.find_all("div")
+                                if divin[0]["data-resource-type"] == "Person" and "CEO" in divin[1].text:
+                                    companies[company]["ceo"].append(divin[0].text)
+                            # print("CEO ",companies[company]["ceo"])
+                    else:
+                        myElem = WebDriverWait(session, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'companyName__9bd88132')))
+                        # Name
+                        companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
+                        #print("NAME ",companies[company]["name"])
+
+                        # Type and Site
+                        container = parser.find_all("div",class_="infoTable__96162ad6")[0]
+                        for section in container.find_all("section"):
+                            if section.h2.text == "SECTOR":
+                                companies[company]["type"] = section.div.text
+                            elif section.h2.text == "ADDRESS":
+                                companies[company]["site"] = section.div.text
+
+                        # companies[company]["market_index"] = "Empty"
+                        # companies[company]["change"] = "Empty"
+                        # companies[company]["last_trade"] = "Empty"
+                        # companies[company]["ceo"] = []
 
             except TimeoutException:
-                time.sleep(30)
+                print("Timeout")
+                visible_session = webdriver.Chrome(executable_path=exe_path + "chromedriver.exe")
+                visible_session.get("https://www.bloomberg.com"+link)
+                # input("CAPTCHA timeout. Press a key to continue...")
+                time.sleep(60)
+                visible_session.close()
+                visible_session.quit()
+                force_next += 1
                 error = True
                 #print("Error retriving info: ", e)
         except StopIteration:
@@ -263,6 +289,8 @@ def save_file(new_file):
 
 
 if __name__ == "__main__":
+    print(make_request("https://www.bloomberg.com//news/articles/2019-11-24/swiss-rate-cut-isn-t-ruled-out-snb-chief-economist-tells-nzz?srnd=markets-vp","./"))
+    """
     new_file = []
     filename = "news_2019119.json"
     select_news = False
@@ -288,3 +316,4 @@ if __name__ == "__main__":
             f.close()
     else:
         print("No news")
+    """

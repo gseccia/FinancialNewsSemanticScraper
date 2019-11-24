@@ -139,35 +139,34 @@ class Main:
         scraper = Finviz_scraper.scraper_factory()
         while True:
             try:
-                # # Retrieving fresh news
-                #
-                # news = scraper.autoretrieve_news()  # filename = "../resources/news_scraper_files/news_news.csv"
-                #
-                # # Filter only Bloomberg and Reuters news
-                # del_link = []
-                # for k, v in news.items():
-                #     if v["source"] == "other":
-                #         del_link.append(k)
-                # for link in del_link:
-                #     del news[link]
-                #
-                # # Deep analysis of fresh news
-                # for link in news.keys():
-                #     more_info = make_request(link, self.__exe_path)
-                #     blocked_loops = 0
-                #     while more_info is None:
-                #         more_info = make_request(link,self.__exe_path)
-                #         blocked_loops += 1
-                #         if blocked_loops == max_blocked_loops:
-                #             logger_area.append("ERROR: Captcha not resolved!")
-                #             more_info = {}
-                #
-                #     # Update fresh news information
-                #     news[link].update(more_info)
-                #
-                # counter_news += len(news)
-                #
-                # DEBUG("INFO RETRIEVE " + str(news))
+                #  Retrieving fresh news
+
+                news = scraper.autoretrieve_news()  # filename = "../resources/news_scraper_files/news_news.csv"
+
+                # Filter only Bloomberg and Reuters news
+                del_link = []
+                for k, v in news.items():
+                    if v["source"] == "other":
+                        del_link.append(k)
+                for link in del_link:
+                    del news[link]
+
+                # Deep analysis of fresh news
+                for link in news.keys():
+                    more_info = make_request(link, self.__exe_path)
+                    blocked_loops = 0
+                    while more_info is None:
+                        more_info = make_request(link,self.__exe_path)
+                        blocked_loops += 1
+                        if blocked_loops == max_blocked_loops:
+                            logger_area.append("ERROR: Captcha not resolved!")
+                            more_info = {}
+                    # Update fresh news information
+                    news[link].update(more_info)
+
+                counter_news += len(news)
+
+                DEBUG("INFO RETRIEVE " + str(news))
 
                 ##########################################
                 """ Da cancellare quando sarà in funzione
@@ -182,12 +181,12 @@ class Main:
                 ##########################################
 
                 # Generate and insert triples
-                # if len(news) != 0:
-                #     DEBUG("Try to insert triples..")
-                #     self.__tripleizer.generate_insert(news_pool=news)
-                # else:
-                #     DEBUG("No fresh news")
-                # # DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")
+                if len(news) != 0:
+                     DEBUG("Try to insert triples..")
+                     self.__tripleizer.generate_insert(news_pool=news)
+                else:
+                     DEBUG("No fresh news")
+                # DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")
 
                 logger_area.append("SUCCESS: Acquisition at " + str(datetime.datetime.now()))
                 label.setText("News processed up to now: " + str(counter_news))

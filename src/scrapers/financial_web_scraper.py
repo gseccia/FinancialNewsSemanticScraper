@@ -10,8 +10,8 @@ import pickle
 class Finviz_scraper:
 
     def scraper_factory(last_date = None):
-        if last_date == None and os.path.exists("../resources/scraper.dat"):
-            with open("../resources/scraper.dat","r") as f:
+        if last_date == None and os.path.exists("../../resources/scraper.dat"):
+            with open("../../resources/scraper.dat","r") as f:
                 retr_date = datetime.datetime.strptime(f.readline(),"%Y-%m-%dT%H:%M:%S+02:00")
                 f.close()
             # print(retr_date,type(retr_date))
@@ -121,11 +121,9 @@ class Finviz_scraper:
 
 if __name__=="__main__":
     scraper = Finviz_scraper.scraper_factory()
-    while True:
-        try:
-            print(scraper.autoretrieve_news())
-            print("Acquisition at ",datetime.datetime.now(), "SUCCESS")
-            print("last_date",scraper.last_date)
-        except Exception as e:
-            print("Acquisition at ",datetime.datetime.now(), "FAILED")
-        time.sleep(5*60)
+    try:
+        print(scraper.autoretrieve_news())
+        print("Acquisition at ",datetime.datetime.now(), "SUCCESS")
+        print("last_date",scraper.last_date)
+    except Exception as e:
+        print("Acquisition at ",datetime.datetime.now(), "FAILED")

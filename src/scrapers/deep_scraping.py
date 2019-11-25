@@ -13,7 +13,7 @@ import re
 import datetime
 import time
 
-def make_request(url,exe_path,date = None,delay=10):
+def make_request(url,exe_path,date = None,delay=10,verbose=False):
     triples = None
     auth = None
     if "reuters" in url or "bloomberg" in url:
@@ -30,16 +30,18 @@ def make_request(url,exe_path,date = None,delay=10):
         else:
             session = webdriver.Chrome(options=chrome_options, executable_path=exe_path+"chromedriver.exe")
         try:
+            if verbose:
+                print("Make a request to ",url)
             session.get(url)
 
             # Wait for the page
             response = session.page_source
             if "reuters" in url:
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
-                triples,auth = scrape_reuters_request(session,response)
+                triples,auth = scrape_reuters_request(session,response,verbose=verbose)
             elif "bloomberg" in url:
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
-                triples,auth = scrape_bloomberg_request(session,response,exe_path)
+                triples,auth = scrape_bloomberg_request(session,response,exe_path,verbose=verbose)
 
             # Save info
             if date is not None:
@@ -48,7 +50,8 @@ def make_request(url,exe_path,date = None,delay=10):
             response_obj = {"authors":auth,"companies":triples}
 
         except TimeoutException:
-            print("Timeout")
+            if verbose:
+                print("Timeout ==> Solve the captcha")
             visible_session = webdriver.Chrome(executable_path=exe_path+"chromedriver.exe")
             visible_session.get(url)
             # input("CAPTCHA timeout. Press a key to continue...")
@@ -83,13 +86,16 @@ def save_triples(url,auth,triples,filename="triples.json"):
         f.write(json.dumps(saved_triples))
         f.close()
 
-def scrape_reuters_request(session,text):
-    print("Reuters request")
+def scrape_reuters_request(session,text,verbose = False):
+    if verbose:
+        print("Reuters Request")
 
     # Getting authors
     authors_text = session.find_element_by_class_name("Attribution_content").text
     author = ' '.join(authors_text.split()[2:4])
-    #print("author ",author)
+
+    if verbose:
+        print("author ",author)
     
     # Retrieve companies in the article
     corpus_text = session.find_element_by_class_name("StandardArticleBody_body")
@@ -100,7 +106,10 @@ def scrape_reuters_request(session,text):
             a = span[0].find_elements_by_tag_name("a")
             if len(a) > 0:
                 company_pages.append((a[0].text,a[0].get_attribute("href")))
-    #print(company_pages)
+    if verbose:
+        print("Company pages: ",company_pages)
+        if len(company_pages) > 0:
+            print("Starting companies scraping")
 
     # Company pages scraping
     companies = {}
@@ -112,13 +121,19 @@ def scrape_reuters_request(session,text):
 
             # name
             companies[company]["name"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[1]/div[1]/h1').text
+            if verbose:
+                print("name ",companies[company]["name"])
             
             # last_trade 
             companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
             companies[company]["last_trade"] += session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[2]').text
+            if verbose:
+                print("last_trade ",companies[company]["last_trade"])
             
             # change
             companies[company]["change"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[3]/span[2]').text
+            if verbose:
+                print("change ",companies[company]["change"])
 
             # Market index
             p = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/p').text
@@ -127,10 +142,13 @@ def scrape_reuters_request(session,text):
             p = re.sub("∙ .*","",p)
 
             companies[company]["market_index"] = p
+            if verbose:
+                print("market_index ",companies[company]["market_index"])
 
             # Type
             companies[company]["type"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[1]/div[1]/p[2]').text
-            
+            if verbose:
+                print("Type ",companies[company]["type"])
 
             # CEO
             companies[company]["ceo"] = []
@@ -141,20 +159,27 @@ def scrape_reuters_request(session,text):
                     companies[company]["ceo"].append(p_container[1].text)
                 elif "Chief Executive Officer" in p_container[1].text:
                     companies[company]["ceo"].append(p_container[0].text)
-        except:
-            pass
-            #print("Error retriving info")
-    #print(author,repr(companies))
+
+            if verbose:
+                print("CEO ",companies[company]["ceo"])
+        except Exception as e:
+            if verbose:
+                print("Error retriving info ",e)
+    if verbose:
+        print("End Reuters Request")
     return companies,author
 
-def scrape_bloomberg_request(session,text,exe_path):
-    print("BLOOMBERG request")
+def scrape_bloomberg_request(session,text,exe_path,verbose = False):
+    if verbose:
+        print("BLOOMBERG request")
     parser = BeautifulSoup(text, "html.parser")
     # Getting authors
     authors = parser.find_all("a",attrs={"rel":"author"})
     author = []
     for a in authors:
         author.append(a.text)
+    if verbose:
+        print("author ",author)
 
     # Retrieve companies in the article
     corpus_text = parser.find_all("div", class_="body-copy-v2 fence-body")[0]
@@ -167,12 +192,15 @@ def scrape_bloomberg_request(session,text,exe_path):
             company_pages.append((company_name,p.a["href"]))
 
     # Company pages scraping
-    print("Company pages: ",company_pages)
+    if verbose:
+        print("Company pages: ",company_pages)
     companies = {}
     it = iter(company_pages)
     error = False
     force_next = 0
-    # for company,link in company_pages:
+    if verbose:
+        if len(company_pages) > 0:
+            print("Staring companies scraping")
     while True:
         try:
             company,link = (company,link) if (error and force_next < 10) else next(it)
@@ -183,17 +211,20 @@ def scrape_bloomberg_request(session,text,exe_path):
                 session.get("https://www.bloomberg.com"+link)
 
                 parser = BeautifulSoup(session.page_source, "html.parser")
-                print(parser.title)
                 if parser.title == "<title>404 - Bloomberg Markets</title>":
                     del companies[company]
-                    print("404 - page")
+                    if verbose:
+                        print("FOUND 404 - page")
                 else:
                     force_next = 0
                     if "quote" in session.current_url:
                         myElem = WebDriverWait(session, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'companyName__99a4824b')))
+                        if verbose:
+                            print("Quote type url parsing")
                         # Name
                         companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
-                        #print("NAME ",companies[company]["name"])
+                        if verbose:
+                            print("NAME ",companies[company]["name"])
 
                         # Last_trade
                         last_trade_containers = parser.find_all("div",class_="overviewRow__0956421f")
@@ -202,33 +233,52 @@ def scrape_bloomberg_request(session,text,exe_path):
                             last_trade_container = last_trade_containers[0]
                             for span in last_trade_container.find_all("span"):
                                 companies[company]["last_trade"] += span.text
-                        #print("LAST TRADE ",companies[company]["last_trade"])
+                        if verbose:
+                            if "last_trade" in companies[company]:
+                                print("LAST TRADE ",companies[company]["last_trade"])
+                            else:
+                                print("LAST TRADE EMPTY")
 
                         # Change
                         span_change = parser.find_all("span", class_=re.compile("changePercent__2d7dc0d2 .*"))
                         if len(last_trade_containers) > 0:
                             companies[company]["change"] = span_change[0].text
-
-                        #print("CHANGE ",companies[company]["change"])
+                        if verbose:
+                            if "change" in companies[company]:
+                                print("change ", companies[company]["change"])
+                            else:
+                                print("change EMPTY")
 
                         # Market index
                         market_index_container = parser.find_all("span", class_="exchange__c62926ba")
                         if len(market_index_container)>0:
                             companies[company]["market_index"] = market_index_container[0].text
-                            #print("MARKET INDEX ",companies[company]["market_index"])
+                        if verbose:
+                            if "market_index" in companies[company]:
+                                print("market_index ", companies[company]["market_index"])
+                            else:
+                                print("market_index EMPTY")
 
                         # Type
                         type_container = parser.find_all("div",class_="industry labelText__6f58d7c0")
                         if len(type_container) > 0:
                             companies[company]["type"] = type_container[0].text
-                            #print("TYPE ",companies[company]["type"])
+                        if verbose:
+                            if "type" in companies[company]:
+                                print("type ", companies[company]["type"])
+                            else:
+                                print("type EMPTY")
 
                         # Site
                         boxs = parser.find_all("section",class_="dataBox address")
                         if len(boxs)>0:
                             box = boxs[0]
                             companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
-                            #print("SITE ",companies[company]["site"])
+                        if verbose:
+                            if "site" in companies[company]:
+                                print("site ", companies[company]["site"])
+                            else:
+                                print("site EMPTY")
 
                         # CEO
                         containers = parser.find_all("div", class_="executivesContainer__7f9fc250")
@@ -237,22 +287,43 @@ def scrape_bloomberg_request(session,text,exe_path):
                             companies[company]["ceo"] = []
                             for div in container.find_all("div", class_="info__368b37b6"):
                                 divin = div.find_all("div")
-                                if divin[0]["data-resource-type"] == "Person" and "CEO" in divin[1].text:
+                                if divin[0]["data-resource-type"] == "Person" and ("CEO" in divin[1].text or "Chairman" in divin[1].text):
                                     companies[company]["ceo"].append(divin[0].text)
-                            # print("CEO ",companies[company]["ceo"])
+                        if verbose:
+                            if "ceo" in companies[company]:
+                                print("ceo ", companies[company]["ceo"])
+                            else:
+                                print("ceo EMPTY")
                     else:
                         myElem = WebDriverWait(session, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'companyName__9bd88132')))
+                        if verbose:
+                            print("Scraping NOT a quote page")
                         # Name
                         companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
-                        #print("NAME ",companies[company]["name"])
+                        if verbose:
+                            if "name" in companies[company]:
+                                print("ceo ", companies[company]["name"])
+                            else:
+                                print("name EMPTY")
 
                         # Type and Site
-                        container = parser.find_all("div",class_="infoTable__96162ad6")[0]
-                        for section in container.find_all("section"):
-                            if section.h2.text == "SECTOR":
-                                companies[company]["type"] = section.div.text
-                            elif section.h2.text == "ADDRESS":
-                                companies[company]["site"] = section.div.text
+                        containers = parser.find_all("div",class_="infoTable__96162ad6")
+                        if len(containers) > 0:
+                            container = containers[0]
+                            for section in container.find_all("section"):
+                                if section.h2.text == "SECTOR":
+                                    companies[company]["type"] = section.div.text
+                                elif section.h2.text == "ADDRESS":
+                                    companies[company]["site"] = section.div.text
+                        if verbose:
+                            if "type" in companies[company]:
+                                print("type ", companies[company]["type"])
+                            else:
+                                print("type EMPTY")
+                            if "site" in companies[company]:
+                                print("site ", companies[company]["site"])
+                            else:
+                                print("site EMPTY")
 
                         # companies[company]["market_index"] = "Empty"
                         # companies[company]["change"] = "Empty"
@@ -260,7 +331,8 @@ def scrape_bloomberg_request(session,text,exe_path):
                         # companies[company]["ceo"] = []
 
             except TimeoutException:
-                print("Timeout")
+                if verbose:
+                    print("Timeout ==>  Solve the captcha")
                 visible_session = webdriver.Chrome(executable_path=exe_path + "chromedriver.exe")
                 visible_session.get("https://www.bloomberg.com"+link)
                 # input("CAPTCHA timeout. Press a key to continue...")
@@ -289,7 +361,7 @@ def save_file(new_file):
 
 
 if __name__ == "__main__":
-    print(make_request("https://www.bloomberg.com//news/articles/2019-11-24/swiss-rate-cut-isn-t-ruled-out-snb-chief-economist-tells-nzz?srnd=markets-vp","./"))
+    print(make_request("https://www.bloomberg.com//news/articles/2019-11-24/swiss-rate-cut-isn-t-ruled-out-snb-chief-economist-tells-nzz?srnd=markets-vp","./",verbose=True))
     """
     new_file = []
     filename = "news_2019119.json"

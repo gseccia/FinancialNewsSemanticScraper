@@ -153,10 +153,10 @@ class Main:
 
                 # Deep analysis of fresh news
                 for link in news.keys():
-                    more_info = make_request(link, self.__exe_path)
+                    more_info = make_request(link, self.__exe_path,verbose=True)
                     blocked_loops = 0
                     while more_info is None:
-                        more_info = make_request(link,self.__exe_path)
+                        more_info = make_request(link,self.__exe_path,verbose=True)
                         blocked_loops += 1
                         if blocked_loops == max_blocked_loops:
                             logger_area.append("ERROR: Captcha not resolved!")

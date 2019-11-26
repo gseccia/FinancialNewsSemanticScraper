@@ -204,6 +204,8 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
     while True:
         try:
             company,link = (company,link) if (error and force_next < 10) else next(it)
+            if verbose and error:
+                print("Retry to get ",link)
             error = False
             companies[company] = {}
 
@@ -211,7 +213,9 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                 session.get("https://www.bloomberg.com"+link)
 
                 parser = BeautifulSoup(session.page_source, "html.parser")
-                if parser.title == "<title>404 - Bloomberg Markets</title>":
+                if verbose:
+                    print("Title page: ",parser.title.text)
+                if "404 - Bloomberg" in parser.title.text:
                     del companies[company]
                     if verbose:
                         print("FOUND 404 - page")
@@ -241,7 +245,7 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
 
                         # Change
                         span_change = parser.find_all("span", class_=re.compile("changePercent__2d7dc0d2 .*"))
-                        if len(last_trade_containers) > 0:
+                        if len(span_change) > 0:
                             companies[company]["change"] = span_change[0].text
                         if verbose:
                             if "change" in companies[company]:
@@ -361,7 +365,7 @@ def save_file(new_file):
 
 
 if __name__ == "__main__":
-    print(make_request("https://www.bloomberg.com//news/articles/2019-11-24/swiss-rate-cut-isn-t-ruled-out-snb-chief-economist-tells-nzz?srnd=markets-vp","./",verbose=True))
+    print(make_request("https://www.bloomberg.com//news/articles/2019-11-26/zimbabwe-miners-appeal-to-minister-over-power-supply-failure?srnd=markets-vp","./",verbose=True))
     """
     new_file = []
     filename = "news_2019119.json"

@@ -20,6 +20,8 @@ class ClientGUI(Ui_finNSEMA):
             self.__main.start_daemons()
         except Exception as e:
             print("Exception in starting Fuseki and Tarsier daemons:\n", e)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            traceback.print_tb(exc_tb)
 
     def setupEvent(self):
         self.conf_button.clicked.connect(self.configure)

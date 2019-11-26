@@ -141,7 +141,7 @@ class Main:
             try:
                 #  Retrieving fresh news
 
-                news = scraper.autoretrieve_news()  # filename = "../resources/news_scraper_files/news_news.csv"
+                news = scraper.autoretrieve_news()
 
                 # Filter only Bloomberg and Reuters news
                 del_link = []
@@ -167,18 +167,6 @@ class Main:
                 counter_news += len(news)
 
                 DEBUG("INFO RETRIEVE " + str(news))
-
-                ##########################################
-                """ Da cancellare quando sarà in funzione
-                news_retr = {}
-                with open("../resources/news.tmp",mode="r") as f:
-                    news_retr = json.load(f)
-                    f.close()
-                news_retr.update(news)
-                with open("../resources/news.tmp",mode="w") as f:
-                    f.write(json.dumps(news_retr))
-                    f.close() """
-                ##########################################
 
                 # Generate and insert triples
                 if len(news) != 0:

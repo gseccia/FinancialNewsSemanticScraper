@@ -1,5 +1,4 @@
 import sys
-import time
 from PyQt5 import QtWidgets, QtCore
 from gui.client_gui_specialized import ClientGUI
 
@@ -25,6 +24,7 @@ class MainWindow(QtWidgets.QDialog):
         self.ui.update_log("Welcome in finSEMA, system loading hold on...")
         t = QtCore.QTimer()
         t.singleShot(100, self.ui.startup_finNSEMA_daemons)
+        self.ui.setupEvent()
 
 
 def run_finSEMA():
@@ -32,6 +32,7 @@ def run_finSEMA():
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     run_finSEMA()

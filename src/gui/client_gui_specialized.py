@@ -16,12 +16,6 @@ class ClientGUI(Ui_finNSEMA):
             print("Exception in loading:\n", e)
             exc_type, exc_obj, exc_tb = sys.exc_info()
             traceback.print_tb(exc_tb)
-        try:
-            self.__main.start_daemons()
-        except Exception as e:
-            print("Exception in starting Fuseki and Tarsier daemons:\n", e)
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            traceback.print_tb(exc_tb)
 
     def setupEvent(self):
         self.conf_button.clicked.connect(self.configure)
@@ -77,13 +71,21 @@ class ClientGUI(Ui_finNSEMA):
 
     def shutdown_finNSEMA(self):
         try:
+            self.__main.stop_loop()
+        except Exception:  # If already turned off do nothing
+            print("Main loop was already closed")
+        try:
             self.__main.stop_daemons()
-        except Exception: # If already turned uff do nothing
-            pass
-        self.__main.stop_daemons()
+        except Exception:
+            print("Error in closing Fuseki and Tarsier daemons")
 
-    def closeEvent(self, event):
-        print("Sto chiudendo")
+    def startup_finNSEMA_daemons(self):
+        try:
+            self.__main.start_daemons()
+        except Exception as e:
+            print("Error in starting Fuseki and Tarsier daemons:\n", e)
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            traceback.print_tb(exc_tb)
 
 
 if __name__ == "__main__":

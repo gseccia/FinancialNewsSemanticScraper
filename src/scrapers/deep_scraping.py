@@ -286,9 +286,9 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
 
                         # CEO
                         containers = parser.find_all("div", class_="executivesContainer__7f9fc250")
+                        companies[company]["ceo"] = []
                         if len(containers)>0:
                             container = containers[0]
-                            companies[company]["ceo"] = []
                             for div in container.find_all("div", class_="info__368b37b6"):
                                 divin = div.find_all("div")
                                 if divin[0]["data-resource-type"] == "Person" and ("CEO" in divin[1].text or "Chairman" in divin[1].text):
@@ -332,7 +332,7 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                         # companies[company]["market_index"] = "Empty"
                         # companies[company]["change"] = "Empty"
                         # companies[company]["last_trade"] = "Empty"
-                        # companies[company]["ceo"] = []
+                        companies[company]["ceo"] = []
 
             except TimeoutException:
                 if verbose:

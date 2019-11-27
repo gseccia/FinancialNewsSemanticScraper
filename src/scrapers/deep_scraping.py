@@ -88,14 +88,14 @@ def save_triples(url,auth,triples,filename="triples.json"):
 
 def scrape_reuters_request(session,text,verbose = False):
     if verbose:
-        print("Reuters Request")
+        print("*** Reuters Request ***")
 
     # Getting authors
     authors_text = session.find_element_by_class_name("Attribution_content").text
     author = ' '.join(authors_text.split()[2:4])
 
-    if verbose:
-        print("author ",author)
+    # if verbose:
+    #     print("author ",author)
     
     # Retrieve companies in the article
     corpus_text = session.find_element_by_class_name("StandardArticleBody_body")
@@ -122,18 +122,18 @@ def scrape_reuters_request(session,text,verbose = False):
             # name
             companies[company]["name"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[1]/div[1]/h1').text
             if verbose:
-                print("name ",companies[company]["name"])
+                print("Company name: ",companies[company]["name"])
             
             # last_trade 
             companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
             companies[company]["last_trade"] += session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[2]').text
-            if verbose:
-                print("last_trade ",companies[company]["last_trade"])
+            # if verbose:
+            #     print("last_trade ",companies[company]["last_trade"])
             
             # change
             companies[company]["change"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[3]/span[2]').text
-            if verbose:
-                print("change ",companies[company]["change"])
+            # if verbose:
+            #     print("change ",companies[company]["change"])
 
             # Market index
             p = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/p').text
@@ -143,12 +143,12 @@ def scrape_reuters_request(session,text,verbose = False):
 
             companies[company]["market_index"] = p
             if verbose:
-                print("market_index ",companies[company]["market_index"])
+                print("Market index: ",companies[company]["market_index"])
 
             # Type
             companies[company]["type"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[1]/div[1]/p[2]').text
             if verbose:
-                print("Type ",companies[company]["type"])
+                print("Company type: ",companies[company]["type"])
 
             # CEO
             companies[company]["ceo"] = []
@@ -161,25 +161,25 @@ def scrape_reuters_request(session,text,verbose = False):
                     companies[company]["ceo"].append(p_container[0].text)
 
             if verbose:
-                print("CEO ",companies[company]["ceo"])
+                print("CEO: ",companies[company]["ceo"])
         except Exception as e:
             if verbose:
-                print("Error retriving info ",e)
+                print("Error retrieving info ",e)
     if verbose:
-        print("End Reuters Request")
+        print("*** End Reuters Request ***")
     return companies,author
 
 def scrape_bloomberg_request(session,text,exe_path,verbose = False):
     if verbose:
-        print("BLOOMBERG request")
+        print("*** Bloomberg request ***")
     parser = BeautifulSoup(text, "html.parser")
     # Getting authors
     authors = parser.find_all("a",attrs={"rel":"author"})
     author = []
     for a in authors:
         author.append(a.text)
-    if verbose:
-        print("author ",author)
+    # if verbose:
+    #     print("author ",author)
 
     # Retrieve companies in the article
     corpus_text = parser.find_all("div", class_="body-copy-v2 fence-body")[0]
@@ -193,19 +193,19 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
 
     # Company pages scraping
     if verbose:
-        print("Company pages: ",company_pages)
+        print("Company pages: ", company_pages)
     companies = {}
     it = iter(company_pages)
     error = False
     force_next = 0
     if verbose:
         if len(company_pages) > 0:
-            print("Staring companies scraping")
+            print("Starting companies scraping")
     while True:
         try:
             company,link = (company,link) if (error and force_next < 10) else next(it)
             if verbose and error:
-                print("Retry to get ",link)
+                print("Retry to get ", link)
             error = False
             companies[company] = {}
 
@@ -223,12 +223,12 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                     force_next = 0
                     if "quote" in session.current_url:
                         myElem = WebDriverWait(session, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'companyName__99a4824b')))
-                        if verbose:
-                            print("Quote type url parsing")
+                        # if verbose:
+                        #     print("Quote type url parsing")
                         # Name
                         companies[company]["name"] = parser.find_all("h1",class_="companyName__99a4824b")[0].text
                         if verbose:
-                            print("NAME ",companies[company]["name"])
+                            print("Company name: ",companies[company]["name"])
 
                         # Last_trade
                         last_trade_containers = parser.find_all("div",class_="overviewRow__0956421f")
@@ -237,21 +237,21 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                             last_trade_container = last_trade_containers[0]
                             for span in last_trade_container.find_all("span"):
                                 companies[company]["last_trade"] += span.text
-                        if verbose:
-                            if "last_trade" in companies[company]:
-                                print("LAST TRADE ",companies[company]["last_trade"])
-                            else:
-                                print("LAST TRADE EMPTY")
+                        # if verbose:
+                        #     if "last_trade" in companies[company]:
+                        #         print("LAST TRADE ",companies[company]["last_trade"])
+                        #     else:
+                        #         print("LAST TRADE EMPTY")
 
                         # Change
                         span_change = parser.find_all("span", class_=re.compile("changePercent__2d7dc0d2 .*"))
                         if len(span_change) > 0:
                             companies[company]["change"] = span_change[0].text
-                        if verbose:
-                            if "change" in companies[company]:
-                                print("change ", companies[company]["change"])
-                            else:
-                                print("change EMPTY")
+                        # if verbose:
+                        #     if "change" in companies[company]:
+                        #         print("change ", companies[company]["change"])
+                        #     else:
+                        #         print("change EMPTY")
 
                         # Market index
                         market_index_container = parser.find_all("span", class_="exchange__c62926ba")
@@ -259,9 +259,9 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                             companies[company]["market_index"] = market_index_container[0].text
                         if verbose:
                             if "market_index" in companies[company]:
-                                print("market_index ", companies[company]["market_index"])
+                                print("Market index: ", companies[company]["market_index"])
                             else:
-                                print("market_index EMPTY")
+                                print("Market index is empty")
 
                         # Type
                         type_container = parser.find_all("div",class_="industry labelText__6f58d7c0")
@@ -269,9 +269,9 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                             companies[company]["type"] = type_container[0].text
                         if verbose:
                             if "type" in companies[company]:
-                                print("type ", companies[company]["type"])
+                                print("Company type: ", companies[company]["type"])
                             else:
-                                print("type EMPTY")
+                                print("Company type is empty")
 
                         # Site
                         boxs = parser.find_all("section",class_="dataBox address")
@@ -280,9 +280,9 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                             companies[company]["site"] = box.find_all("div",class_="value__b93f12ea")[0].text
                         if verbose:
                             if "site" in companies[company]:
-                                print("site ", companies[company]["site"])
+                                print("Company site: ", companies[company]["site"])
                             else:
-                                print("site EMPTY")
+                                print("Company site is empty")
 
                         # CEO
                         containers = parser.find_all("div", class_="executivesContainer__7f9fc250")
@@ -295,20 +295,20 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                                     companies[company]["ceo"].append(divin[0].text)
                         if verbose:
                             if "ceo" in companies[company]:
-                                print("ceo ", companies[company]["ceo"])
+                                print("CEO: ", companies[company]["ceo"])
                             else:
-                                print("ceo EMPTY")
+                                print("CEO is empty")
                     else:
                         myElem = WebDriverWait(session, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'companyName__9bd88132')))
-                        if verbose:
-                            print("Scraping NOT a quote page")
+                        # if verbose:
+                        #     print("Scraping NOT a quote page")
                         # Name
                         companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
                         if verbose:
                             if "name" in companies[company]:
-                                print("ceo ", companies[company]["name"])
+                                print("CEO: ", companies[company]["name"])
                             else:
-                                print("name EMPTY")
+                                print("CEO is empty")
 
                         # Type and Site
                         containers = parser.find_all("div",class_="infoTable__96162ad6")
@@ -321,13 +321,13 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                                     companies[company]["site"] = section.div.text
                         if verbose:
                             if "type" in companies[company]:
-                                print("type ", companies[company]["type"])
+                                print("Company type: ", companies[company]["type"])
                             else:
-                                print("type EMPTY")
+                                print("Company type is empty")
                             if "site" in companies[company]:
-                                print("site ", companies[company]["site"])
+                                print("Company site: ", companies[company]["site"])
                             else:
-                                print("site EMPTY")
+                                print("Company site is empty")
 
                         # companies[company]["market_index"] = "Empty"
                         # companies[company]["change"] = "Empty"

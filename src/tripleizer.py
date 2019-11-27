@@ -3,6 +3,7 @@ from topic_classifier import TopicClassifier
 from fsanalysis import *
 from info_lookup import *
 from utils import get_dbpedia_uri, find_news_source, format_name
+from SPARQLWrapper.Wrapper import QueryBadFormed
 
 
 class Tripleizer():
@@ -53,6 +54,7 @@ class Tripleizer():
         # as first operation generate an insert query using the news pool data
         partial_query = self.__query_prefix
         partial_query = partial_query + self.__insert_prefix
+
 
         for news in news_pool:  # news is the link
             datetime = news_pool[news]["date"]
@@ -160,7 +162,9 @@ class Tripleizer():
 
                 # add triples about company location
                 try:
+                    # NB place can contain the FULL address of the company, must add a lookup
                     place = companies[company]['site']
+                    place = self.__lookuper.country_lookup(place)
                     partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
                            '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + place + '> .'
                 except KeyError:
@@ -179,8 +183,14 @@ class Tripleizer():
                     partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
                                     country + '> .'
         partial_query = partial_query + "\n}"
-        self.__db_manager.doUpdate(partial_query)
         print(partial_query)
+        try:
+            self.__db_manager.doUpdate(partial_query)
+        except QueryBadFormed as e:
+            print("Bad format for query")
+            print("Query not completed")
+        else:
+            print("Query completed")
         print()
 
     """ 

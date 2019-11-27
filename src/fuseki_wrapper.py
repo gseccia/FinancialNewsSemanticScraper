@@ -69,7 +69,7 @@ class FusekiSparqlWrapper:
                                    creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
                                    cwd=path.replace("\\", "/"),
                                    # Comment following line to use Fuseki verbose mode
-                                   stderr=subprocess.PIPE, stdout=subprocess.PIPE
+                                   # stderr=subprocess.PIPE, stdout=subprocess.PIPE
                                    )
         return process.pid
 

@@ -65,6 +65,7 @@ class Main:
         self.sleep_time = sleep_time
         self.__is_first_start = is_first_start
         self.__exe_path = exe_path
+        self.__is_active = True
         self.token_dots = token_dots
 
         # daemons processes
@@ -137,7 +138,7 @@ class Main:
         """Retrieve news and insert into database"""
         counter_news = 0
         scraper = Finviz_scraper.scraper_factory()
-        while True:
+        while self.__is_active:
             try:
                 #  Retrieving fresh news
 
@@ -186,6 +187,8 @@ class Main:
                 traceback.print_tb(exc_tb)
             time.sleep(self.sleep_time)
 
+    def stop_loop(self):
+        self.__is_active = False
     # Interaction function with GUI
     # def __show_tarsier(self):
     #     """ Show Tarsier on broswer"""

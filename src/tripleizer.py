@@ -64,11 +64,14 @@ class Tripleizer():
 
             # news topic is defined by the ML classifier
             #print(self.__topic_classifier.classify_news(news_title))
-            macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
-            if macro_topic == "EconomicsTopics":
-                partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic ont:" + specific_topic + " ."
-            else:
-                partial_query = partial_query + "\n<" + news + "> ont:hasOtherTopic ont:" + specific_topic + " ."
+            try:
+                macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
+                if macro_topic == "EconomicsTopics":
+                    partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic ont:" + specific_topic + " ."
+                else:
+                    partial_query = partial_query + "\n<" + news + "> ont:hasOtherTopic ont:" + specific_topic + " ."
+            except Exception as e:
+                print(e)
 
             # add news sentiment positiveness
             partial_query = partial_query + '\n<' + news + '> ont:hasPositivenessRank "' + \
@@ -105,14 +108,18 @@ class Tripleizer():
                 company_name = format_name(companies[company]['name'])
 
                 # add triple about company type
-                company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
-                if company_type is not None:
-                    partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
-                                    + company_type + ', owl:NamedIndividual .'
-                else:
-                    # If the company is not found in the lookup (None), set it as OtherEntity
-                    partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
-                                    + 'OtherEntity' + ', owl:NamedIndividual .'
+                # NB company type could not be retrieved by scraper -> KeyError event
+                try:
+                    company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
+                    if company_type is not None:
+                        partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
+                                        + company_type + ', owl:NamedIndividual .'
+                    else:
+                        # If the company is not found in the lookup (None), set it as OtherEntity
+                        partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
+                                        + 'OtherEntity' + ', owl:NamedIndividual .'
+                except KeyError:
+                    print("No company type found for the company " + companies[company]['name'])
                 partial_query = partial_query + '\n<ont:' + company_name + '> rdfs:seeAlso <' \
                                 + get_dbpedia_uri(company_name) + '> .'
 
@@ -135,7 +142,7 @@ class Tripleizer():
                     partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <' \
                                     + self.__lookuper.market_index_lookup(companies[company]["market_index"]) + '> .'
                 except KeyError:
-                    pass
+                    print("No market index name found for the company " + companies[company]['name'])
 
                 # add triples about company's ceo
                 for ceo in companies[company]['ceo']:
@@ -157,7 +164,7 @@ class Tripleizer():
                     partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
                            '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + place + '> .'
                 except KeyError:
-                    print("No site took over for the company " + companies[company]['name'])
+                    print("No site found for the company " + companies[company]['name'])
 
                 # add triple about company citation in a news
                 partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
@@ -259,12 +266,8 @@ if __name__ == "__main__":
             "authors": "Alexis Akwagyiram;",
             "companies": {
                 "KO.N": {
-                    "ceo": ["James R. Quincey"],
-                    "change": "(-0,17%)",
-                    "last_trade": "52,20USD",
-                    "market_index": " New York Stock Exchange ",
-                    "name": "Coca-Cola Co",
-                    "type": "peppe"
+                    "ceo": [],
+                    "name": "Coca-Cola Co"
                 },
                 "PEP.O": {
                     "ceo": ["Ramon Laguarta", "Kirk C. Tanner", "Steven C. Williams", "Ram Krishnan"],
@@ -295,12 +298,12 @@ if __name__ == "__main__":
     """
 
     wrapper = FusekiSparqlWrapper(dataset_name='koshka')
-    pid = wrapper.start_fuseki()
-    wrapper.clear_graph()
+    # pid = wrapper.start_fuseki()
+    # wrapper.clear_graph()
 
 
-    #trp = Tripleizer()
-    #trp.load_persons_and_markets()
-    #trp.set_db_manager(wrapper)
-    #trp.generate_insert(news_pool=test_dict_ner)
+    trp = Tripleizer()
+    # trp.load_persons_and_markets()
+    trp.set_db_manager(wrapper)
+    trp.generate_insert(news_pool=test_dict_ner)
 

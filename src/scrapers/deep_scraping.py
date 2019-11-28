@@ -133,43 +133,60 @@ def scrape_reuters_request(session,text,verbose = False):
                     print("Company name: ",companies[company]["name"])
 
                 # last_trade
-                companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
-                companies[company]["last_trade"] += session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[2]').text
+                try:
+                    companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
+                    companies[company]["last_trade"] += session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[2]').text
+                except:
+                    pass
                 # if verbose:
                 #     print("last_trade ",companies[company]["last_trade"])
 
                 # change
-                companies[company]["change"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[3]/span[2]').text
+                try:
+                    companies[company]["change"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[3]/span[2]').text
+                except:
+                    pass
                 # if verbose:
                 #     print("change ",companies[company]["change"])
 
                 # Market index
-                p = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/p').text
+                try:
+                    p = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/p').text
 
-                p = re.sub(".* on the","",p)
-                p = re.sub("∙ .*","",p)
+                    p = re.sub(".* on the","",p)
+                    p = re.sub("∙ .*","",p)
 
-                companies[company]["market_index"] = p
-                if verbose:
-                    print("Market index: ",companies[company]["market_index"])
-
+                    companies[company]["market_index"] = p
+                    if verbose:
+                        print("Market index: ",companies[company]["market_index"])
+                except:
+                    if verbose:
+                        print("Market index: not found")
                 # Type
-                companies[company]["type"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[1]/div[1]/p[2]').text
-                if verbose:
-                    print("Company type: ",companies[company]["type"])
+                try:
+                    companies[company]["type"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[1]/div[1]/p[2]').text
+                    if verbose:
+                        print("Company type: ",companies[company]["type"])
+                except:
+                    if verbose:
+                        print("Company type: not found")
 
                 # CEO
                 companies[company]["ceo"] = []
-                about = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[2]/div')
-                for div in about.find_elements_by_tag_name("div"):
-                    p_container = div.find_elements_by_tag_name("p")
-                    if "Chief Executive Officer" in p_container[0].text:
-                        companies[company]["ceo"].append(p_container[1].text)
-                    elif "Chief Executive Officer" in p_container[1].text:
-                        companies[company]["ceo"].append(p_container[0].text)
+                try:
+                    about = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[2]/div')
+                    for div in about.find_elements_by_tag_name("div"):
+                        p_container = div.find_elements_by_tag_name("p")
+                        if "Chief Executive Officer" in p_container[0].text:
+                            companies[company]["ceo"].append(p_container[1].text)
+                        elif "Chief Executive Officer" in p_container[1].text:
+                            companies[company]["ceo"].append(p_container[0].text)
 
-                if verbose:
-                    print("CEO: ",companies[company]["ceo"])
+                    if verbose:
+                        print("CEO: ",companies[company]["ceo"])
+                except:
+                    if verbose:
+                        print("CEO: not found")
         except Exception as e:
             if verbose:
                 print("Error retrieving info ",e)

@@ -176,9 +176,11 @@ class Main:
                 else:
                      DEBUG("No fresh news")
                 # DEBUG("Acquisition at "+str(datetime.datetime.now())+" SUCCESS")
-
-                logger_area.append("SUCCESS: Acquisition at " + str(datetime.datetime.now()))
-                label.setText("News processed up to now: " + str(counter_news))
+                if len(news) == 0:
+                    logger_area.append("NO FRESH NEWS: Acquisition at " + str(datetime.datetime.now()))
+                else:
+                    logger_area.append("SUCCESS: Acquisition at " + str(datetime.datetime.now()))
+                    label.setText("News processed up to now: " + str(counter_news))
             except Exception as e:
                 # DEBUG("Acquisition at "+str(datetime.datetime.now())+" FAILED")
                 logger_area.append("ERROR: Acquisition at " + str(datetime.datetime.now()))

@@ -118,12 +118,15 @@ def scrape_reuters_request(session,text,verbose = False):
 
         try:
             session.get(link)
-            element = session.find_element(By.XPATH, '// *[ @ id = "__next"] / div / h2[1]')
-            if element is not None and element.text == "404":
-                del companies[company]
-                if verbose:
-                    print("Page 404")
-            else:
+            try:
+                element = session.find_element(By.XPATH, '// *[ @ id = "__next"] / div / h2[1]')
+                if element is not None and element.text == "404":
+                    del companies[company]
+                    if verbose:
+                        print("Page 404")
+                else:
+                    print("???")
+            except:
                 # name
                 companies[company]["name"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[1]/div[1]/h1').text
                 if verbose:

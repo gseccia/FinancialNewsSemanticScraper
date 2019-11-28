@@ -1,6 +1,7 @@
 import sys
 from PyQt5 import QtWidgets, QtCore
 from gui.client_gui_specialized import ClientGUI
+from animation import LoadingView
 
 
 class MainWindow(QtWidgets.QDialog):
@@ -11,12 +12,13 @@ class MainWindow(QtWidgets.QDialog):
         self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, True)
 
     def closeEvent(self, event):
+        # NB if main loop is kept opened it may take a while to be closed...
         result = QtWidgets.QMessageBox.question(
             self, 'Confirm Close', 'Are you sure you want to close?',
             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
         if result == QtWidgets.QMessageBox.Yes:
-            event.accept()
             self.ui.shutdown_finNSEMA()
+            event.accept()
         else:
             event.ignore()
 

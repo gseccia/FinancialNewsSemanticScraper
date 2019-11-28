@@ -17,3 +17,4 @@ tensorflow
 keras
 paralleldots
 requests-toolbelt
+lazy-import

@@ -1,9 +1,11 @@
 from fuseki_wrapper import FusekiSparqlWrapper
+import sys
 from topic_classifier import TopicClassifier
 from fsanalysis import *
 from info_lookup import *
 from utils import get_dbpedia_uri, find_news_source, format_name
 from SPARQLWrapper.Wrapper import QueryBadFormed
+
 
 
 class Tripleizer():
@@ -65,7 +67,6 @@ class Tripleizer():
             partial_query = partial_query + '\n<' + news + '> ont:hasDateTime "' + datetime + '"^^xsd:dateTime .'
 
             # news topic is defined by the ML classifier
-            #print(self.__topic_classifier.classify_news(news_title))
             try:
                 macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
                 if macro_topic == "EconomicsTopics":
@@ -147,18 +148,22 @@ class Tripleizer():
                     print("No market index name found for the company " + companies[company]['name'])
 
                 # add triples about company's ceo
-                for ceo in companies[company]['ceo']:
-                    ceo = format_name(ceo)
-                    # verify if the system already knows this person, otherwise update it with a new individual
-                    if self.__lookuper.person_lookup(ceo) is None:
-                        partial_query = partial_query + '\n<ont:' + ceo + '> rdf:type ont:Person, ' \
-                                        'owl:NamedIndividual .'
-                        self.__lookuper.update_table(True, ceo, False)
-                        partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
-                    partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasCEO <ont:'\
-                                    + ceo + '> .'
-                    partial_query = partial_query + '\n<ont:' + ceo + '> ont:isImportantPersonOf <ont:' + \
-                                    company_name + '> .'
+                try:
+                    for ceo in companies[company]['ceo']:
+                        ceo = format_name(ceo)
+                        # verify if the system already knows this person, otherwise update it with a new individual
+                        if self.__lookuper.person_lookup(ceo) is None:
+                            partial_query = partial_query + '\n<ont:' + ceo + '> rdf:type ont:Person, ' \
+                                            'owl:NamedIndividual .'
+                            self.__lookuper.update_table(True, ceo, False)
+                            partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
+                        partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasCEO <ont:'\
+                                        + ceo + '> .'
+                        partial_query = partial_query + '\n<ont:' + ceo + '> ont:isImportantPersonOf <ont:' + \
+                                        company_name + '> .'
+                except Exception as e:
+                    print("Exception in parsing ceo: ", e)
+                    print(sys.exc_info())
 
                 # add triples about company location
                 try:

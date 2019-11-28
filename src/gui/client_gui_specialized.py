@@ -47,7 +47,7 @@ class ClientGUI(Ui_finNSEMA):
                 self.update_log("SUCCESS: Scraper is on")
             else:
                 self.update_log("System scraper stopping...")
-                self.__main.stop_scraping()
+                self.__main.stop_loop()
                 self.launch_button.setIcon(QtGui.QIcon(QtGui.QPixmap("../../resources/gui/off_icon.png")))
                 self.__is_on = not self.__is_on
                 self.update_log("SUCCESS: Scraper is off")
@@ -72,10 +72,12 @@ class ClientGUI(Ui_finNSEMA):
     def shutdown_finNSEMA(self):
         try:
             self.__main.stop_loop()
+            print("Main loop closed")
         except Exception:  # If already turned off do nothing
             print("Main loop was already closed")
         try:
             self.__main.stop_daemons()
+            print("Daemons closed")
         except Exception:
             print("Error in closing Fuseki and Tarsier daemons")
 
@@ -86,6 +88,7 @@ class ClientGUI(Ui_finNSEMA):
             print("Error in starting Fuseki and Tarsier daemons:\n", e)
             exc_type, exc_obj, exc_tb = sys.exc_info()
             traceback.print_tb(exc_tb)
+            print(sys.exc_info())
 
 
 if __name__ == "__main__":

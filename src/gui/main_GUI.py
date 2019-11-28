@@ -1,7 +1,6 @@
 import sys
 from PyQt5 import QtWidgets, QtCore
 from gui.client_gui_specialized import ClientGUI
-from animation import LoadingView
 
 
 class MainWindow(QtWidgets.QDialog):

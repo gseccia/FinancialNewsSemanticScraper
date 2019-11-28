@@ -144,12 +144,18 @@ class Main:
             print("Tarsier exc: ", e)
             print(sys.exc_info())
 
-    def start_scraping(self, logger_area, label):
+    def start_loop(self, logger_area, label):
         if self.__is_proxy:
             self.__change_configuration()
         # launch scraping engine
+        self.__is_active = True
         self.__scraper_thread = Thread(target=self.loop, args=(logger_area, label))
         self.__scraper_thread.start()
+
+    def stop_loop(self):
+        # if self.__is_proxy:
+        #     self.__change_configuration()
+        self.__is_active = False
 
     def loop(self, logger_area, label, max_blocked_loops=10):
         if self.__is_proxy:
@@ -207,40 +213,8 @@ class Main:
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 traceback.print_tb(exc_tb)
             time.sleep(self.sleep_time)
-
-    def stop_loop(self):
-        if self.__is_proxy:
-            self.__change_configuration()
-        self.__is_active = False
-    # Interaction function with GUI
-    # def __show_tarsier(self):
-    #     """ Show Tarsier on broswer"""
-    #     from selenium import webdriver
-    #     print(self.exe_path+"chromedriver.exe")
-    #     driver = webdriver.Chrome(executable_path=self.exe_path+"chromedriver.exe")
-    #     driver.get("localhost:8080")
-
-
-    # def __launch_clicked(self):
-    #     """Run scraper"""
-    #     update_thread = Thread(target=self.loop, args=(self,))
-    #     update_thread.start()
-    #     self.ui.launch_button.setText("Running")
-    #     self.ui.launch_button.disconnect()
-
-    # def __config_clicked(self):
-    #     """ Show Tarsier on broswer"""
-    #     file_broswer = QtWidgets.QFileDialog()
-    #     file_broswer.setVisible(True)
-    #     if file_broswer.exec_():
-    #         filenames = file_broswer.selectedFiles()
-    #         try:
-    #             instance = Main.load_configuration(filenames[0])
-    #             instance.save_configuration()
-    #             self.ui.scrollAreaWidgetContents.appendPlainText("Load configuration completed")
-    #         except Exception:
-    #             self.ui.scrollAreaWidgetContents.appendPlainText("Impossible load configuration file")
-
+        else:
+            print("Scraper loop is now down... :c")
 
 if __name__ == "__main__":
     try:

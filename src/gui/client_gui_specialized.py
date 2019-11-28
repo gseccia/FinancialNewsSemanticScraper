@@ -41,7 +41,7 @@ class ClientGUI(Ui_finNSEMA):
         try:
             if not self.__is_on:
                 self.update_log("System scraper starting...")
-                self.__main.start_scraping(logger_area=self.log_area, label=self.news_counter_label)
+                self.__main.start_loop(logger_area=self.log_area, label=self.news_counter_label)
                 self.launch_button.setIcon(QtGui.QIcon(QtGui.QPixmap("../../resources/gui/on_icon.png")))
                 self.__is_on = not self.__is_on
                 self.update_log("SUCCESS: Scraper is on")

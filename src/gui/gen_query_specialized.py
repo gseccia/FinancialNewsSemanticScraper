@@ -128,67 +128,85 @@ class QueryGUI(Ui_Dialog):
             query = query_prefix
             if group == "Person":
                 if subgroup == "NationalPersonality":
-                    query = query + "\nSELECT ?person" \
-                                    "\nWHERE { ?person rdf:type ont:Person\n " \
-                                    "?person ont:isImportantPersonOf ?country\n" \
-                                    "?country rdf:type ont:ISO3166DefinedCountry }\n" \
-                                    "ORDER BY "+order+"(?person)\n" \
-                                    "LIMIT "+limit
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o .\n " \
+                                    "?s rdf:type ont:Person .\n" \
+                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> . }\n" \
+                                    "ORDER BY " + order + "(?s)\n" \
+                                    "LIMIT " + limit
                 elif subgroup == "CompanyPersonality":
-                    query = query + "\nSELECT ?person" \
-                                    "\nWHERE { ?person rdf:type ont:Person\n " \
-                                    "?person ont:isImportantPersonOf ?company\n" \
-                                    "?country rdf:type ont:Organization }\n" \
-                                    "ORDER BY " + order + "(?person)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o .\n " \
+                                    "?s rdf:type ont:Person .\n" \
+                                    "?o rdf:type ?company_type .\n" \
+                                    "?company_type rdfs:subClassOf ont:Organization . }\n" \
+                                    "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
                 else:
-                    query = query + "\nSELECT ?person" \
-                                    "\nWHERE { ?person rdf:type ont:Person }\n " \
-                                    "ORDER BY " + order + "(?person)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o  .\n " \
+                                    "?s rdf:type ont:Person .\n" \
+                                    "{?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>}\n" \
+                                    "UNION \n" \
+                                    "{?o rdf:type ?company_type .\n" \
+                                    " ?company_type rdfs:subClassOf ont:Organization}\n" \
+                                    "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
             elif group == "Company":
                 if subgroup == "No subgroup":
-                    query = query + "\nSELECT ?company" \
-                                    "\nWHERE { ?company rdf:type ?company_type\n " \
-                                    "?company_type rfs:subclassOf ont:Organization }\n" \
-                                    "ORDER BY " + order + "(?person)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o .\n" \
+                                    "?s rdf:type ?company_type . \n" \
+                                    "?company_type rdfs:subClassOf ont:Organization .\n" \
+                                    "?o rdf:type ont:StockExchange . }\n" \
+                                    "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
                 else:
-                    query = query + "\nSELECT ?company" \
-                                    "\nWHERE { ?company rdf:type ont:" + subgroup + "}\n " \
-                                    "ORDER BY " + order + "(?company)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o . \n" \
+                                    "?s rdf:type ont:" + subgroup + ".\n " \
+                                    "?o rdf:type ont:StockExchange . }\n" \
+                                    "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
             elif group == "Country":
-                if subgroup == "G20Counrty":
-                    query = query + '\nSELECT ?country' \
-                                    '\nWHERE { ?country rdf:type ont:ISO3166DefinedCountry \n ' \
-                                    '?country ont:isG20Country "true"^^xsd:boolean }\n ' \
-                                    'ORDER BY ' + order + '(?country)\n'\
+                if subgroup == "G20Country":
+                    query = query + '\nSELECT ?s ?p ?o' \
+                                    '\nWHERE { ?s ?p ?o .\n" \
+                                    "?s rdf:type ont:StockExchange .\n ' \
+                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n" \
+                                    '?o ont:isG20Country "true"^^xsd:boolean .}\n ' \
+                                    'ORDER BY ' + order + '(?o)\n'\
                                     'LIMIT ' + limit
                 elif subgroup == "NonG20Country":
-                    query = query + '\nSELECT ?country' \
-                                    '\nWHERE { ?country rdf:type ont:ISO3166DefinedCountry \n ' \
-                                    'NOT EXISTS {?country ont:isG20Country "true"^^xsd:boolean}\n ' \
-                                    'ORDER BY ' + order + '(?country)\n' \
+                    query = query + '\nSELECT ?s ?p ?o' \
+                                    '\nWHERE { ?s ?p ?o .\n' \
+                                    '?s rdf:type ont:StockExchange .\n ' \
+                                    '?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n ' \
+                                    'NOT EXISTS {?o ont:isG20Country "true"^^xsd:boolean .}\n ' \
+                                    'ORDER BY ' + order + '(?o)\n' \
                                     'LIMIT ' + limit
                 else:
-                    query = query + "\nSELECT ?country" \
-                                    "\nWHERE { ?country rdf:type ont:ISO3166DefinedCountry }\n " \
-                                    "ORDER BY " + order + "(?country)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o .\n" \
+                                    "?s rdf:type ont:StockExchange .\n " \
+                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n " \
+                                    "ORDER BY " + order + "(?o)\n" \
                                     "LIMIT " + limit
             else:
                 if subgroup == "No subgroup":
-                    query = query + "\nSELECT ?stock ?company" \
-                                    "\nWHERE { ?stock rdf:type ont:StockExchange \n " \
-                                    " ?company rdf:type ?company_type \n " \
-                                    " ?company_type rdfs:subclassOf ont:Organization \n" \
-                                    "ORDER BY " + order + "(?company)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o .\n" \
+                                    "?s rdf:type ?company_type .\n" \
+                                    "?company_type rdfs:subClassOf ont:Organization .\n" \
+                                    "?o rdf:type ont:StockExchange .}\n " \
+                                    "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
                 else:
-                    query = query + "\nSELECT ?stock ?company" \
-                                    "\nWHERE { ?stock rdf:type ont:StockExchange \n " \
-                                    " ?company rdf:type ont:" + subgroup + "\n " \
-                                    "ORDER BY " + order + "(?company)\n" \
+                    query = query + "\nSELECT ?s ?p ?o" \
+                                    "\nWHERE { ?s ?p ?o .\n " \
+                                    "?s rdf:type ont:" + subgroup + ".\n " \
+                                    "?o rdf:type ont:StockExchange .}\n " \
+                                    "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
             print(query)
         self.queryTextArea.clear()

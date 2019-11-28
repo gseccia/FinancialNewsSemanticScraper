@@ -42,6 +42,10 @@ class HTTPHandler(tornado.web.RequestHandler):
 
         
     def post(self):
+        global httpServerUri
+        global yamlConf
+        global graphs
+        global myConf
 
         # parse the request
         msg = json.loads(self.request.body)
@@ -86,6 +90,7 @@ class HTTPHandler(tornado.web.RequestHandler):
             st = time.time()
             #print("number of results is: ",len(results["results"]["bindings"]))
             #print(sum(map(lambda x : x["o"]["type"] == "bnode", results["results"]["bindings"])))
+            # print(results["results"]["bindings"])
             for r in results["results"]["bindings"]:
                 # 2.1 - build the triple
                 # subject
@@ -101,14 +106,17 @@ class HTTPHandler(tornado.web.RequestHandler):
                             f_results["bnodes"][str(l)] = {}
                             f_results["bnodes"][str(l)]["statements"] = {}
                 except:
-                    l = str(r["s"]["value"])
-                    if r["s"]["type"] == "uri":                        
-                        s = URIRef(l)
-                    else:
-                        s = BNode(r["s"]["value"])
-                        if not str(l) in f_results["bnodes"]:
-                            f_results["bnodes"][str(l)] = {}
-                            f_results["bnodes"][str(l)]["statements"] = {}
+                    try:
+                        l = str(r["s"]["value"])
+                        if r["s"]["type"] == "uri":
+                            s = URIRef(l)
+                        else:
+                            s = BNode(r["s"]["value"])
+                            if not str(l) in f_results["bnodes"]:
+                                f_results["bnodes"][str(l)] = {}
+                                f_results["bnodes"][str(l)]["statements"] = {}
+                    except:
+                        s = Literal("NoSubject")
                 
                 # predicate
                 p = None
@@ -117,8 +125,11 @@ class HTTPHandler(tornado.web.RequestHandler):
                     l = str(r["predicate"]["value"])
                     p = URIRef(l)
                 except:
-                    l = str(r["p"]["value"])
-                    p = URIRef(l)
+                    try:
+                        l = str(r["p"]["value"])
+                        p = URIRef(l)
+                    except:
+                        p = Literal("NoPredicate")
                 
                 # object
                 o = None
@@ -137,26 +148,29 @@ class HTTPHandler(tornado.web.RequestHandler):
                         if not l in f_results["literals"]:
                             f_results["literals"].append(l)
                 except:
-                    l = str(r["o"]["value"])
-                    if r["o"]["type"] == "uri":                
-                        o = URIRef(l)
-                    elif r["o"]["type"] == "bnode":                
-                        o = BNode(l)
-                        if not str(l) in f_results["bnodes"]:
-                            try:
-                                
-                                f_results["bnodes"][str(l)]={}
-                                f_results["bnodes"][str(l)]["statements"]={}
-                                #f_results["bnodes"][str(l)]["statements"] = {}
-                            except Exception:
-                                traceback.print_exc()
-                    else:
-                        o = Literal(l)
-                        if not l in f_results["literals"]:
-                            f_results["literals"].append(l)
+                    try:
+                        l = str(r["o"]["value"])
+                        if r["o"]["type"] == "uri":
+                            o = URIRef(l)
+                        elif r["o"]["type"] == "bnode":
+                            o = BNode(l)
+                            if not str(l) in f_results["bnodes"]:
+                                try:
+
+                                    f_results["bnodes"][str(l)]={}
+                                    f_results["bnodes"][str(l)]["statements"]={}
+                                    #f_results["bnodes"][str(l)]["statements"] = {}
+                                except Exception:
+                                    traceback.print_exc()
+                        else:
+                            o = Literal(l)
+                            if not l in f_results["literals"]:
+                                f_results["literals"].append(l)
+                    except:
+                        o = Literal("NoObject")
                 
                 graphs[sessionID].add((s,p,o))
-                
+
             # get all the resources
             results = graphs[sessionID].query(yamlConf["queries"]["ALL_RESOURCES"]["sparql"])
             for row in results:
@@ -176,46 +190,57 @@ class HTTPHandler(tornado.web.RequestHandler):
             # get all the data properties
             results = graphs[sessionID].query(yamlConf["queries"]["DATA_PROPERTIES"]["sparql"])
             for r in results:
-                key = str(r["p"])
-                f_results["properties"]["datatype"].append(key)
-                f_results["resources"][key]["drawAsRes"] = False
+                try:
+                    key = str(r["p"])
+                    f_results["properties"]["datatype"].append(key)
+                    f_results["resources"][key]["drawAsRes"] = False
+                except KeyError:
+                    continue
 
             # get all the data properties and their values
             results = graphs[sessionID].query(yamlConf["queries"]["DATA_PROPERTIES_AND_VALUES"]["sparql"])
             for row in results:
+                try:
+                    key = str(row["p"])
+                    if not(key in f_results["pvalues"]["datatype"]):
+                        f_results["pvalues"]["datatype"][key] = []
 
-                key = str(row["p"])
-                if not(key in f_results["pvalues"]["datatype"]):
-                    f_results["pvalues"]["datatype"][key] = []
+                    # bind the property to the proper structure
+                    f_results["pvalues"]["datatype"][key].append({"s":row["s"], "o":row["o"]})
 
-                # bind the property to the proper structure
-                f_results["pvalues"]["datatype"][key].append({"s":row["s"], "o":row["o"]})
-
-                # also bind the property to the individual
-                newkey = str(row["s"])
-                if newkey in f_results["resources"]:                
-                    if not key in f_results["resources"][newkey]["statements"]:
-                        f_results["resources"][newkey]["statements"][key] = []                        
-                    f_results["resources"][newkey]["statements"][key].append(row["o"])
-                if newkey in f_results["bnodes"]:
-                    if not key in f_results["bnodes"][newkey]["statements"]:
-                        f_results["bnodes"][newkey]["statements"][key] = []
-                    f_results["bnodes"][newkey]["statements"][key].append(row["o"])
+                    # also bind the property to the individual
+                    newkey = str(row["s"])
+                    if newkey in f_results["resources"]:
+                        if not key in f_results["resources"][newkey]["statements"]:
+                            f_results["resources"][newkey]["statements"][key] = []
+                        f_results["resources"][newkey]["statements"][key].append(row["o"])
+                    if newkey in f_results["bnodes"]:
+                        if not key in f_results["bnodes"][newkey]["statements"]:
+                            f_results["bnodes"][newkey]["statements"][key] = []
+                        f_results["bnodes"][newkey]["statements"][key].append(row["o"])
+                except KeyError:
+                    continue
              
             # get all the object properties
             results = graphs[sessionID].query(yamlConf["queries"]["OBJECT_PROPERTIES"]["sparql"])
             for row in results:
-                key = str(row["p"])
-                f_results["properties"]["object"].append(key)
-                f_results["resources"][key]["drawAsRes"] = False
+                try:
+                    key = str(row["p"])
+                    f_results["properties"]["object"].append(key)
+                    f_results["resources"][key]["drawAsRes"] = False
+                except KeyError:
+                    continue
 
             # get all the object properties and their values
             results = graphs[sessionID].query(yamlConf["queries"]["OBJECT_PROPERTIES_AND_VALUES"]["sparql"])
             for row in results:
-                key = row["p"]
-                if not(key in f_results["pvalues"]["object"]):
-                    f_results["pvalues"]["object"][key] = []
-                f_results["pvalues"]["object"][key].append({"s":row["s"], "o":row["o"]})
+                try:
+                    key = row["p"]
+                    if not(key in f_results["pvalues"]["object"]):
+                        f_results["pvalues"]["object"][key] = []
+                    f_results["pvalues"]["object"][key].append({"s":row["s"], "o":row["o"]})
+                except KeyError:
+                    continue
 
                 # new data struct
                 #full["uris"][str(key)]["isOP"] = True
@@ -241,6 +266,8 @@ class HTTPHandler(tornado.web.RequestHandler):
             self.write(f_results)
     
         elif msg["command"] == "sparql":
+            # Fixing
+            msg["sessionID"] = sessionID
 
             # do the query            
             results = graphs[msg["sessionID"]].query(msg["sparql"])
@@ -271,6 +298,7 @@ class HTTPHandler(tornado.web.RequestHandler):
 
             et = time.time()
             self.write(res_dict)
+            print("Res_dict",res_dict)
 
         
 
@@ -314,8 +342,13 @@ class HTTPThread(threading.Thread):
 #
 ########################################################################
 
-def main():
+if __name__ == '__main__':
     relpath  = re.sub("tarsier.py","",os.path.realpath(__file__))
+
+    global httpServerUri
+    global yamlConf
+    global graphs
+    global myConf
 
     # init
     httpServerUri = None
@@ -352,6 +385,3 @@ def main():
     # Start new Threads
     logging.debug("Ready! Tarsier is now running on http://localhost:%s" % myConf["httpPort"])
     threadHTTP.start()
-
-if __name__ == '__main__':
-    main()

@@ -115,53 +115,58 @@ def scrape_reuters_request(session,text,verbose = False):
     companies = {}
     for company,link in company_pages:
         companies[company] = {}
-        
+
         try:
             session.get(link)
+            element = session.find_element(By.XPATH, '// *[ @ id = "__next"] / div / h2[1]')
+            if element is not None and element.text == "404":
+                del companies[company]
+                if verbose:
+                    print("Page 404")
+            else:
+                # name
+                companies[company]["name"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[1]/div[1]/h1').text
+                if verbose:
+                    print("Company name: ",companies[company]["name"])
 
-            # name
-            companies[company]["name"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[1]/div[1]/h1').text
-            if verbose:
-                print("Company name: ",companies[company]["name"])
-            
-            # last_trade 
-            companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
-            companies[company]["last_trade"] += session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[2]').text
-            # if verbose:
-            #     print("last_trade ",companies[company]["last_trade"])
-            
-            # change
-            companies[company]["change"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[3]/span[2]').text
-            # if verbose:
-            #     print("change ",companies[company]["change"])
+                # last_trade
+                companies[company]["last_trade"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[1]').text
+                companies[company]["last_trade"] += session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[2]/span[2]').text
+                # if verbose:
+                #     print("last_trade ",companies[company]["last_trade"])
 
-            # Market index
-            p = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/p').text
+                # change
+                companies[company]["change"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/div[3]/span[2]').text
+                # if verbose:
+                #     print("change ",companies[company]["change"])
 
-            p = re.sub(".* on the","",p)
-            p = re.sub("∙ .*","",p)
+                # Market index
+                p = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[3]/div/div/div[1]/p').text
 
-            companies[company]["market_index"] = p
-            if verbose:
-                print("Market index: ",companies[company]["market_index"])
+                p = re.sub(".* on the","",p)
+                p = re.sub("∙ .*","",p)
 
-            # Type
-            companies[company]["type"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[1]/div[1]/p[2]').text
-            if verbose:
-                print("Company type: ",companies[company]["type"])
+                companies[company]["market_index"] = p
+                if verbose:
+                    print("Market index: ",companies[company]["market_index"])
 
-            # CEO
-            companies[company]["ceo"] = []
-            about = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[2]/div')
-            for div in about.find_elements_by_tag_name("div"):
-                p_container = div.find_elements_by_tag_name("p")
-                if "Chief Executive Officer" in p_container[0].text:
-                    companies[company]["ceo"].append(p_container[1].text)
-                elif "Chief Executive Officer" in p_container[1].text:
-                    companies[company]["ceo"].append(p_container[0].text)
+                # Type
+                companies[company]["type"] = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[1]/div[1]/p[2]').text
+                if verbose:
+                    print("Company type: ",companies[company]["type"])
 
-            if verbose:
-                print("CEO: ",companies[company]["ceo"])
+                # CEO
+                companies[company]["ceo"] = []
+                about = session.find_element(By.XPATH,'//*[@id="__next"]/div/div[4]/div[1]/div/div/div/div[4]/div[2]/div/div[2]/div')
+                for div in about.find_elements_by_tag_name("div"):
+                    p_container = div.find_elements_by_tag_name("p")
+                    if "Chief Executive Officer" in p_container[0].text:
+                        companies[company]["ceo"].append(p_container[1].text)
+                    elif "Chief Executive Officer" in p_container[1].text:
+                        companies[company]["ceo"].append(p_container[0].text)
+
+                if verbose:
+                    print("CEO: ",companies[company]["ceo"])
         except Exception as e:
             if verbose:
                 print("Error retrieving info ",e)
@@ -306,9 +311,9 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
                         companies[company]["name"] = parser.find_all("h1",class_="companyName__9bd88132")[0].text
                         if verbose:
                             if "name" in companies[company]:
-                                print("CEO: ", companies[company]["name"])
+                                print("Namw: ", companies[company]["name"])
                             else:
-                                print("CEO is empty")
+                                print("Name is empty")
 
                         # Type and Site
                         containers = parser.find_all("div",class_="infoTable__96162ad6")
@@ -365,7 +370,7 @@ def save_file(new_file):
 
 
 if __name__ == "__main__":
-    print(make_request("https://www.bloomberg.com//news/articles/2019-11-26/zimbabwe-miners-appeal-to-minister-over-power-supply-failure?srnd=markets-vp","./",verbose=True))
+    print(make_request("https://www.reuters.com/article/us-cannabis-stocks-europe/wave-of-european-cannabis-firms-to-list-in-2020-analyst-says-idUSKBN1Y21WS?feedType=RSS&feedName=businessNews&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+reuters%2FbusinessNews+%28Business+News%29","./",verbose=True))
     """
     new_file = []
     filename = "news_2019119.json"

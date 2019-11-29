@@ -127,7 +127,7 @@ class Tripleizer():
                                 + get_dbpedia_uri(company_name) + '> .'
 
                 # add company stock name
-                partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasStockName: "' \
+                partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasStockName "' \
                                 + company + '"^^xsd:string .'
 
                 # add triples about market index

@@ -149,7 +149,7 @@ class QueryGUI(Ui_Dialog):
                                     "{?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>}\n" \
                                     "UNION \n" \
                                     "{?o rdf:type ?company_type .\n" \
-                                    " ?company_type rdfs:subClassOf ont:Organization}\n" \
+                                    " ?company_type rdfs:subClassOf ont:Organization}}\n" \
                                     "ORDER BY " + order + "(?s)\n" \
                                     "LIMIT " + limit
             elif group == "Company":

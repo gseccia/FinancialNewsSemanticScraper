@@ -9,6 +9,7 @@ class MainWindow(QtWidgets.QDialog):
         self.ui = ClientGUI()
         self.ui.setupUi(self)
         self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, True)
+        self.isInitialized = False
 
     def closeEvent(self, event):
         # NB if main loop is kept opened it may take a while to be closed...
@@ -22,10 +23,19 @@ class MainWindow(QtWidgets.QDialog):
             event.ignore()
 
     def showEvent(self, event):
-        self.ui.update_log("Welcome in finSEMA, system loading hold on...")
-        t = QtCore.QTimer()
-        t.singleShot(100, self.ui.startup_finNSEMA_daemons)
-        self.ui.setupEvent()
+        if not self.isInitialized:
+            self.ui.update_log("Welcome in finSEMA, system loading hold on...")
+            t = QtCore.QTimer()
+            t.singleShot(100, self.ui.startup_finNSEMA_daemons)
+            self.ui.setupEvent()
+            self.isInitialized = True
+
+    def changeEvent(self, event):
+        if event.type() == QtCore.QEvent.WindowStateChange:
+            if self.windowState() & QtCore.Qt.WindowMinimized:
+                print('changeEvent: Minimised')
+            elif event.oldState() & QtCore.Qt.WindowMinimized:
+                print('changeEvent: Maximised/FullScreen')
 
 
 def run_finSEMA():

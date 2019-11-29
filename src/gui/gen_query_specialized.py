@@ -182,14 +182,14 @@ class QueryGUI(Ui_Dialog):
                                     '\nWHERE { ?s ?p ?o .\n' \
                                     '?s rdf:type ont:StockExchange .\n ' \
                                     '?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n ' \
-                                    'NOT EXISTS {?o ont:isG20Country "true"^^xsd:boolean .}\n ' \
+                                    'FILTER NOT EXISTS {?o ont:isG20Country "true"^^xsd:boolean .} }\n ' \
                                     'ORDER BY ' + order + '(?o)\n' \
                                     'LIMIT ' + limit
                 else:
                     query = query + "\nSELECT ?s ?p ?o" \
                                     "\nWHERE { ?s ?p ?o .\n" \
                                     "?s rdf:type ont:StockExchange .\n " \
-                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n " \
+                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> . }\n " \
                                     "ORDER BY " + order + "(?o)\n" \
                                     "LIMIT " + limit
             else:

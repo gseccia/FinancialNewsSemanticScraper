@@ -14,6 +14,8 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(580, 451)
+        Dialog.setFixedSize(580, 451)
+        Dialog.setWindowIcon(QtGui.QIcon("../../resources/gui/icon.png"))
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(0, 0, 581, 451))
         self.label.setText("")
@@ -146,7 +148,6 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Query generation panel"))
-        self.queryTextArea.setToolTip(_translate("Dialog", "<html><head/><body><p>>Generated query</p></body></html>"))
         self.generateButton.setToolTip(_translate("Dialog", "<html><head/><body><p>Generate a query with the specified parameters</p></body></html>"))
         self.label_2.setText(_translate("Dialog", "Copy this query to Tarsier interface"))
         self.group_label.setText(_translate("Dialog", "Group"))

@@ -58,7 +58,7 @@ def doQuery(endpoint, q):
 
     # return
     try:
-        res = json.loads(r.text)
+        res = r.text # json.loads(r.text)
         #print(res)
         return True, res
     except:

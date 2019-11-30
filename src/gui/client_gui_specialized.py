@@ -3,6 +3,7 @@ from PyQt5 import QtGui, QtWidgets
 from main import Main
 from gui.gen_query_specialized import QueryGUI
 import traceback
+from selenium import webdriver
 import os
 
 
@@ -13,6 +14,8 @@ class ClientGUI(Ui_finNSEMA, QtWidgets.QMainWindow):
         self.__is_on = False
         try:
             self.__main = Main.load_configuration()
+            print(self.__main.get_browser_path() + "chromedriver.exe")
+            self._driver = None
         except Exception as e:
             print("Exception in loading:\n", e)
             exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -33,10 +36,8 @@ class ClientGUI(Ui_finNSEMA, QtWidgets.QMainWindow):
         dialog.show()
 
     def visualize_data(self):
-        from selenium import webdriver
-        print(self.__main.get_browser_path() + "chromedriver.exe")
-        driver = webdriver.Chrome(executable_path=self.__main.get_browser_path() + "chromedriver.exe")
-        driver.get("localhost:8080")
+        self._driver = webdriver.Chrome(executable_path=self.__main.get_browser_path() + "chromedriver.exe")
+        self._driver.get("localhost:8080")
 
     def start_stop_finNSEMA(self):
         try:

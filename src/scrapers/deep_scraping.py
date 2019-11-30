@@ -13,7 +13,7 @@ import re
 import datetime
 import time
 
-def make_request(url,exe_path,date = None,delay=10,verbose=False):
+def make_request(url,exe_path,date = None,delay=10,verbose=False,close_session=False):
     triples = None
     auth = None
     if "reuters" in url or "bloomberg" in url:
@@ -36,7 +36,10 @@ def make_request(url,exe_path,date = None,delay=10,verbose=False):
 
             # Wait for the page
             response = session.page_source
-            if "reuters" in url:
+            if "reuters" in url and "bloomberg" in url:
+                if verbose:
+                    print("Double Reference")
+            elif "reuters" in url:
                 myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
                 triples,auth = scrape_reuters_request(session,response,verbose=verbose)
             elif "bloomberg" in url:
@@ -228,7 +231,7 @@ def scrape_bloomberg_request(session,text,exe_path,verbose = False):
             print("Starting companies scraping")
     while True:
         try:
-            company,link = (company,link) if (error and force_next < 10) else next(it)
+            company,link = (company,link) if (error and force_next < 3) else next(it)
             if verbose and error:
                 print("Retry to get ", link)
             error = False
@@ -390,7 +393,7 @@ def save_file(new_file):
 
 
 if __name__ == "__main__":
-    print(make_request("https://www.reuters.com/article/us-cannabis-stocks-europe/wave-of-european-cannabis-firms-to-list-in-2020-analyst-says-idUSKBN1Y21WS?feedType=RSS&feedName=businessNews&utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+reuters%2FbusinessNews+%28Business+News%29","./",verbose=True))
+    print(make_request("https://www.bloomberg.com/news/articles/2019-11-30/peru-s-opposition-leader-fujimori-freed-from-jail-reuters-says","./",verbose=True))
     """
     new_file = []
     filename = "news_2019119.json"

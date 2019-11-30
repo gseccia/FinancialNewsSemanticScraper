@@ -157,7 +157,7 @@ class Main:
         #     self.__change_configuration()
         self.__is_active = False
 
-    def loop(self, logger_area, label, max_blocked_loops=10):
+    def loop(self, logger_area, label, max_blocked_loops=3):
         if self.__is_proxy:
             self.__change_configuration()
         """Retrieve news and insert into database"""
@@ -186,9 +186,10 @@ class Main:
                         blocked_loops += 1
                         if blocked_loops == max_blocked_loops:
                             logger_area.append("ERROR: Captcha not resolved!")
-                            more_info = {}
+                            more_info = None
                     # Update fresh news information
-                    news[link].update(more_info)
+                    if more_info is not None:
+                        news[link].update(more_info)
 
                 counter_news += len(news)
 

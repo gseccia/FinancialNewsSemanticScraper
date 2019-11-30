@@ -23,6 +23,7 @@ import traceback
 
 # local reqs
 from libr.sparqllib import *
+from turtle_to_json import turtle_to_json
 
 ########################################################################
 #
@@ -85,7 +86,10 @@ class HTTPHandler(tornado.web.RequestHandler):
                 logging.error("Connection to endpoint failed")
                 self.write({"error":"Connection Failed"})
                 return
-
+            if "CONSTRUCT" in msg["sparql"]:
+                results = turtle_to_json(results)
+            else:
+                results = json.loads(results)
             # 2 - put data into a local graph
             st = time.time()
             #print("number of results is: ",len(results["results"]["bindings"]))
@@ -266,8 +270,6 @@ class HTTPHandler(tornado.web.RequestHandler):
             self.write(f_results)
     
         elif msg["command"] == "sparql":
-            # Fixing
-            msg["sessionID"] = sessionID
 
             # do the query            
             results = graphs[msg["sessionID"]].query(msg["sparql"])

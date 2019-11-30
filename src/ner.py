@@ -33,18 +33,21 @@ def text_ner(text: str, confidence_threshold_pers: int = 0.35, confidence_thresh
     ]
     """
     text = text.lower()
-    result_dict = paralleldots.ner(text)
+    try:
+        result_dict = paralleldots.ner(text)
 
-    l = list()
-    for el in result_dict['entities']:
-        current_element = dict()
-        if el['category'] == 'place' and el['confidence_score'] >= confidence_threshold_plac \
-                or el['category'] == 'name' and el['confidence_score'] >= confidence_threshold_pers:
-            current_element['name'] = el['name']
-            current_element['category'] = el['category']
-            l.append(current_element)
-    return l
-
+        l = list()
+        for el in result_dict['entities']:
+            current_element = dict()
+            if el['category'] == 'place' and el['confidence_score'] >= confidence_threshold_plac \
+                    or el['category'] == 'name' and el['confidence_score'] >= confidence_threshold_pers:
+                current_element['name'] = el['name']
+                current_element['category'] = el['category']
+                l.append(current_element)
+        return l
+    except Exception as e:
+        print("Errore nel NER: ", e)
+        return []
 
 if __name__ == "__main__":
     # ATTENZIONE QUESTO VA INSERITO NELL'INIT DEL PROGRAMMA

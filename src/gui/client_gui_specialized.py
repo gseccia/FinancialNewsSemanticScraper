@@ -6,9 +6,10 @@ import traceback
 import os
 
 
-class ClientGUI(Ui_finNSEMA):
+class ClientGUI(Ui_finNSEMA, QtWidgets.QMainWindow):
 
     def __init__(self):
+        super().__init__()
         self.__is_on = False
         try:
             self.__main = Main.load_configuration()
@@ -58,6 +59,7 @@ class ClientGUI(Ui_finNSEMA):
         self.log_area.append(s)
 
     def configure(self):
+        self.anim.start()
         file_browser = QtWidgets.QFileDialog()
         file_browser.setVisible(True)
         if file_browser.exec_():

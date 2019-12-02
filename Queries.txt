@@ -1,7 +1,21 @@
-- Mostrare tutto il grafo, mostrerebbe anche tutte le triple con le istanze:
-  CONSTRUCT { ?s ?p ?o }
-  WHERE { ?s ?p ?o }
+- Costruzione grafo di base
+  CONSTRUCT {
+    ?s ?p ?news . 
+    ?news ?p1 ?o1 . 
+    ?s ?p2 ?o2 .
+    ?o2 ?p3 ?o3 .
+  }
+  WHERE {
+    ?s ?p ?news .
+    ?news rdf:type ont:News .
+    ?news ?p1 ?o1 .
+    ?s ?p2 ?o2 . 
+    ?o2 ?p3 ?o3 .
+  }
 
+La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tarsier. Può risultare utile solo nel caso di visualizzazione tabellare.
+
+  +++++++++++++++ SINTATTICAMENTE CORRETTA ++++++++++++++++++++++++++++++++++
 - Mostrare tutte le news positive dell'ultimo giorno (?) in ordine di positività/negatività
   SELECT  ?news ?news_title
   WHERE
@@ -11,17 +25,19 @@
     }
   ORDER BY DESC(?rank)
 
+  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Mostrare tutti i concetti associati a news positive (organizzazione, indice, paese, persona) in ordine di 
   numero di news positive
   SELECT  ?x (COUNT(DISTINCT ?x) AS ?positive_count)
   WHERE
     { ?x     ont:isCitedIn         ?news .
-      ?news  ont:hasPositivenessRank  ?val
-      FILTER ( ?val > "SOGLIA" )
+      ?news  ont:hasPositivenessRank  ?val .
+      FILTER ( ?val > 0 )
     }
   GROUP BY ?x
   ORDER BY DESC(?positive_count)
-
+  
+  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Mostrare tutti i concetti associati a news negative (organizzazione, indice, paese, persona) in ordine di 
   numero di news negative
   SELECT  ?x (COUNT(DISTINCT ?x) AS ?positive_count)
@@ -33,6 +49,7 @@
   GROUP BY ?x
   ORDER BY DESC(?positive_count)
   
+  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Mostrare i tipi di organizzazione ordinati per trend di positività delle notizie
   SELECT  ?company_type (AVG(?rank) AS ?avg_positiveness)
   WHERE
@@ -45,6 +62,7 @@
  GROUP BY ?company_type
  ORDER BY DESC(?avg_positiveness)
 
+  +++++++++++++++ SINTATTICAMENTE CORRETTA ++++++++++++++++++++++++++++++++++
 - Tutte le compagnie che hanno almeno una news positiva nell'ultimo x temporale
   SELECT  ?company (COUNT(?news) AS ?count)
   WHERE
@@ -58,6 +76,7 @@
   GROUP BY ?company
   HAVING ( ?count >= 1 )
 
+  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Ricava gli indici di mercato in base alle compagnie in ordine di positività delle news
   SELECT  ?stock (AVG(?rank) AS ?average_positiveness)
   WHERE
@@ -67,12 +86,16 @@
       ?news     ont:hasPositivenessRank  ?rank
     }
   GROUP BY ?stock
-  ORDER BY ?average_positiveness
+  ORDER BY DESC(?average_positiveness)
 
-- Ricava i paesi con associate news positive/negative
-
-- Ricavare le news in cui è citato un certo concetto
-
-- Ricavare le news di uno specifico topic
-
-- Ricavare le persone/nazioni/organizzazioni più citate in news positive/negative
+  
+  +++++++++++++++ SINTATTICAMENTE CORRETTA ++++++++++++++++++++++++++++++++++
+- Ricavare le news di uno specifico topic in ordine di positività
+   SELECT  ?news ?news_title
+   WHERE
+     { ?news  rdf:type              ont:News ;
+             ont:hasEconomicsTopic  "TOPICSPECIFICO" ;
+             ont:hasTitle          ?title ;
+             ont:hasPositivenessRank  ?rank
+    }
+  ORDER BY DESC(?rank)

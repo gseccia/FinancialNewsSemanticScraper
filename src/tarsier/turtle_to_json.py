@@ -1,7 +1,7 @@
 from rdflib import Graph,URIRef,BNode
 
 def turtle_to_json(turtle_text):
-    with open("tmp","w") as f:
+    with open("tmp", encoding="utf8",mode="w") as f:
         f.write(turtle_text)
         f.close()
 

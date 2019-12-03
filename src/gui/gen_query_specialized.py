@@ -136,7 +136,10 @@ class QueryGUI(Ui_Dialog):
             group = self.group_list.currentItem().text()
             subgroup = self.subgroup_list.currentItem().text()
             positiveness = self.positiveness_list.currentItem().text()
-            threshold = self.threshold_list.currentItem().text()
+            if positiveness != "ANY":
+                threshold = self.threshold_list.currentItem().text()
+            else:
+                threshold = 0
             topic = self.topic_list.currentItem().text()
             query = query_prefix
 

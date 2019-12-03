@@ -16,7 +16,7 @@ class Tripleizer():
         classes = {0: 'CompaniesEconomy', 1: 'Markets&Goods', 2: 'NationalEconomy', 3: 'OtherTopic'}
         self.__topic_classifier = TopicClassifier(classes_dict=classes,
                          tokenizer_path='../../resources/keras_model_classifier/tokenizer.pickle',
-                         path_to_h5_classifier="../../resources/keras_model_classifier/model.h5")
+                         path_to_h5_classifier="../../resources/keras_model_classifier/model2.h5")
         self.__query_prefix = """
         PREFIX ont: <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -33,6 +33,7 @@ class Tripleizer():
             self.__lookuper.set_person_table()
             self.__lookuper.set_market_table_filename('../../resources/Data/stock_exchange_original.json')
             self.__lookuper.set_market_table()
+            print("Persons and Stocks table are created!")
         else:
             self.__lookuper.set_person_table_filename("../../resources/Data/vips.json")
             self.__lookuper.set_person_table()
@@ -57,7 +58,6 @@ class Tripleizer():
         partial_query = self.__query_prefix
         partial_query = partial_query + self.__insert_prefix
 
-
         for news in news_pool:  # news is the link
             datetime = news_pool[news]["date"]
             news_title = news_pool[news]["text"]
@@ -69,12 +69,14 @@ class Tripleizer():
             # news topic is defined by the ML classifier
             try:
                 macro_topic, specific_topic = self.__topic_classifier.classify_news(news_title)
+                print("*** From ML topic classifier ***")
+                print("Macro topic: ", macro_topic, " - Topic: ", specific_topic)
                 if macro_topic == "EconomicsTopics":
-                    partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic ont:" + specific_topic + " ."
+                    partial_query = partial_query + "\n<" + news + "> ont:hasEconomicsTopic <ont:" + specific_topic + "> ."
                 else:
-                    partial_query = partial_query + "\n<" + news + "> ont:hasOtherTopic ont:" + specific_topic + " ."
+                    partial_query = partial_query + "\n<" + news + "> ont:hasOtherTopic <ont:" + specific_topic + "> ."
             except Exception as e:
-                print(e)
+                print("Exception in News Topic ML classifier: ", e)
 
             # add news sentiment positiveness
             partial_query = partial_query + '\n<' + news + '> ont:hasPositivenessRank "' + \
@@ -107,85 +109,90 @@ class Tripleizer():
 
             ##### DEEEP SCRAPING #####
             companies = news_pool[news]['companies']
-            for company in companies:
-                company_name = format_name(companies[company]['name'])
-
-                # add triple about company type
-                # NB company type could not be retrieved by scraper -> KeyError event
-                try:
-                    company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
-                    if company_type is not None:
-                        partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
-                                        + company_type + ', owl:NamedIndividual .'
-                    else:
-                        # If the company is not found in the lookup (None), set it as OtherEntity
-                        partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
-                                        + 'OtherEntity' + ', owl:NamedIndividual .'
-                except KeyError:
-                    print("No company type found for the company " + companies[company]['name'])
-                partial_query = partial_query + '\n<ont:' + company_name + '> rdfs:seeAlso <' \
-                                + get_dbpedia_uri(company_name) + '> .'
-
-                # add company stock name
-                partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasStockName "' \
-                                + company + '"^^xsd:string .'
-
-                # add triples about market index
-                # NB market index could not be retrieved by scraper -> KeyError event
-                try:
-                    market_name = format_name(companies[company]['market_index'][1:-1])
-                    # check if the market index of the company is already into the knowledge base, otherwise add it
-                    if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
-                        partial_query = partial_query + '\n<ont:' + market_name + '>' \
-                                        ' rdf:type ont:StockExchange, owl:NamedIndividual .'
-                        self.__lookuper.update_table(False, market_name)
-                        partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
-                                        + get_dbpedia_uri(market_name) + '> .'
-                    # In both cases, retrieve correct uri from lookup
-                    partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <' \
-                                    + self.__lookuper.market_index_lookup(companies[company]["market_index"]) + '> .'
-                except KeyError:
-                    print("No market index name found for the company " + companies[company]['name'])
-
-                # add triples about company's ceo
-                try:
-                    for ceo in companies[company]['ceo']:
-                        ceo = format_name(ceo)
-                        # verify if the system already knows this person, otherwise update it with a new individual
-                        if self.__lookuper.person_lookup(ceo) is None:
-                            partial_query = partial_query + '\n<ont:' + ceo + '> rdf:type ont:Person, ' \
-                                            'owl:NamedIndividual .'
-                            self.__lookuper.update_table(True, ceo, False)
-                            partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
-                        partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasCEO <ont:'\
-                                        + ceo + '> .'
-                        partial_query = partial_query + '\n<ont:' + ceo + '> ont:isImportantPersonOf <ont:' + \
-                                        company_name + '> .'
-                except Exception as e:
-                    print("Exception in parsing ceo: ", e)
-                    print(sys.exc_info())
-
-                # add triples about company location
-                try:
-                    # NB place can contain the FULL address of the company, must add a lookup
-                    place = companies[company]['site']
-                    place = self.__lookuper.country_lookup(place)
-                    partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
-                           '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + place + '> .'
-                except KeyError:
-                    print("No site found for the company " + companies[company]['name'])
-
-                # add triple about company citation in a news
-                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
-
-            # add triples about persons relevance for countries and organizations
-            for person in person_list:
+            if companies is not None:
                 for company in companies:
-                        partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
-                                        format_name(companies[company]['name']) + '> .'
+                    if company is not None:
+                        company_name = format_name(companies[company]['name'])
+                        # add triple about company type
+                        # NB company type could not be retrieved by scraper -> KeyError event
+                        try:
+                            company_type = self.__lookuper.company_type_lookup(companies[company]['type'])
+                            print("Company: ", companies[company]['name'],
+                                  " Company type from scraper: ", companies[company]['type'],
+                                  " Company type found: ", company_type)
+                            if company_type is not None:
+                                partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
+                                                + company_type + ', owl:NamedIndividual .'
+                            else:
+                                # If the company is not found in the lookup (None), set it as OtherEntity
+                                partial_query = partial_query + '\n<ont:' + company_name + '> rdf:type ont:' \
+                                                + 'OtherEntity' + ', owl:NamedIndividual .'
+                        except KeyError:
+                            print("No company type found for the company " + companies[company]['name'])
+                        partial_query = partial_query + '\n<ont:' + company_name + '> rdfs:seeAlso <' \
+                                        + get_dbpedia_uri(company_name) + '> .'
+
+                        # add company stock name
+                        partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasStockName "' \
+                                        + company + '"^^xsd:string .'
+
+                        # add triples about market index
+                        # NB market index could not be retrieved by scraper -> KeyError event
+                        try:
+                            market_name = format_name(companies[company]['market_index'][1:-1])
+                            # check if the market index of the company is already into the knowledge base, otherwise add it
+                            if self.__lookuper.market_index_lookup(companies[company]["market_index"]) is None:
+                                partial_query = partial_query + '\n<ont:' + market_name + '>' \
+                                                ' rdf:type ont:StockExchange, owl:NamedIndividual .'
+                                self.__lookuper.update_table(False, market_name)
+                                partial_query = partial_query + '\n<ont:' + market_name + '> rdfs:seeAlso <' \
+                                                + get_dbpedia_uri(market_name) + '> .'
+                            # In both cases, retrieve correct uri from lookup
+                            partial_query = partial_query + '\n<ont:' + company_name + '> ont:isQuotedOn <' \
+                                            + self.__lookuper.market_index_lookup(companies[company]["market_index"]) + '> .'
+                        except KeyError:
+                            print("No market index name found for the company " + companies[company]['name'])
+
+                        # add triples about company's ceo
+                        try:
+                            for ceo in companies[company]['ceo']:
+                                ceo = format_name(ceo)
+                                # verify if the system already knows this person, otherwise update it with a new individual
+                                if self.__lookuper.person_lookup(ceo) is None:
+                                    partial_query = partial_query + '\n<ont:' + ceo + '> rdf:type ont:Person, ' \
+                                                    'owl:NamedIndividual .'
+                                    self.__lookuper.update_table(True, ceo, False)
+                                    partial_query = partial_query + '\n<ont:' + ceo + '> rdfs:seeAlso <' + get_dbpedia_uri(ceo) + '> .'
+                                partial_query = partial_query + '\n<ont:' + company_name + '> ont:hasCEO <ont:'\
+                                                + ceo + '> .'
+                                partial_query = partial_query + '\n<ont:' + ceo + '> ont:isImportantPersonOf <ont:' + \
+                                                company_name + '> .'
+                        except Exception as e:
+                            print("Exception in parsing ceo: ", e)
+                            print(sys.exc_info())
+
+                        # add triples about company location
+                        try:
+                            # NB place can contain the FULL address of the company, must add a lookup
+                            place = companies[company]['site']
+                            place = self.__lookuper.country_lookup(place)
+                            partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
+                                   '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + place + '> .'
+                        except KeyError:
+                            print("No site found for the company " + companies[company]['name'])
+
+                        # add triple about company citation in a news
+                        partial_query = partial_query + '\n<ont:' + company_name + '> ont:isCitedIn <' + news + '> .'
+
+                # add triples about persons relevance for companies
+                for person in person_list:
+                    for company in companies:
+                            partial_query = partial_query + '\n<' + person + '> ont:isImportantPersonOf <ont:' + \
+                                            format_name(companies[company]['name']) + '> .'
+            # add triples about persons relevance for countries
             for person in person_list:
                 for country in nation_list:
-                    partial_query = partial_query + '\n<ont:' + person + '> ont:isImportantPersonOf <ont:' + \
+                    partial_query = partial_query + '\n<' + person + '> ont:isImportantPersonOf <' + \
                                     country + '> .'
         partial_query = partial_query + "\n}"
         print(partial_query)

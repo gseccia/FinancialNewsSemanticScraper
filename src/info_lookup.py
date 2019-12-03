@@ -79,9 +79,13 @@ class InfoLookup():
     """
     def company_type_lookup(self, cat: str):
         try:
-            return remove_whitespaces(br_classes[cat])
+            return remove_whitespaces(br_classes[cat])  # If found any in the keys (Reuters)
         except KeyError:
-            return None
+            for v in br_classes.values():
+                if v == cat:
+                    return remove_whitespaces(cat)  # If found any in the values (Bloomberg)
+            else:
+                return None  # If not found
 
     """
     Looks for a person cited in the title of a news into the lookup knowledge of the system 

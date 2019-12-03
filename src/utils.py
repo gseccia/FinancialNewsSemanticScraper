@@ -26,7 +26,7 @@ def find_news_source(link: str) -> str:
 
 
 def format_name(text: str) -> str:
-    return re.sub('[^a-z|A-Z|&| ]', '', text).replace(" ","_")
+    return re.sub('[^a-z|A-Z|&| ]', '', text.capitalize()).replace(" ","_")
 
 
 if __name__ == "__main__":

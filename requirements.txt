@@ -1,7 +1,7 @@
 scikit-learn
 beautifulsoup4
 nltk
-numpy
+numpy<1.17,>=1.14.5
 pandas
 PyYAML
 rdflib
@@ -13,8 +13,8 @@ SPARQLWrapper
 testpath
 tornado
 urllib3
-tensorflow
-keras
+tensorflow==1.14
+keras==2.2.5
 paralleldots
 requests-toolbelt
 lazy-import

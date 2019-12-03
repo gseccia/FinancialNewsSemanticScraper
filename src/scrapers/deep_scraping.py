@@ -36,15 +36,18 @@ def make_request(url,exe_path,date = None,delay=10,verbose=False,close_session=F
 
             # Wait for the page
             response = session.page_source
-            if "reuters" in url and "bloomberg" in url:
+            match = re.search('^(http[s]?:\/\/.*?\/)',url)
+            if match:
                 if verbose:
-                    print("Double Reference")
-            elif "reuters" in url:
-                myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
-                triples,auth = scrape_reuters_request(session,response,verbose=verbose)
-            elif "bloomberg" in url:
-                myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
-                triples,auth = scrape_bloomberg_request(session,response,exe_path,verbose=verbose)
+                    print("Checking url ", match.group(0))
+                if "reuters" in match.group(0):
+                    myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'Attribution_content')))
+                    triples,auth = scrape_reuters_request(session,response,verbose=verbose)
+                elif "bloomberg" in match.group(0):
+                    myElem = WebDriverWait(session, delay).until(EC.presence_of_element_located((By.CLASS_NAME , 'lede-text-v2__hed')))
+                    triples,auth = scrape_bloomberg_request(session,response,exe_path,verbose=verbose)
+            elif verbose:
+                print("No matching for ",url)
 
             # Save info
             if date is not None:

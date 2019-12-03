@@ -176,8 +176,9 @@ class Tripleizer():
                             # NB place can contain the FULL address of the company, must add a lookup
                             place = companies[company]['site']
                             place = self.__lookuper.country_lookup(place)
-                            partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
-                                   '<http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166.' + place + '> .'
+                            if place is not None:
+                                partial_query = partial_query + '\n<ont:' + company_name + '> ont:isLocatedIn ' \
+                                       '<' + place + '> .'
                         except KeyError:
                             print("No site found for the company " + companies[company]['name'])
 

@@ -173,7 +173,7 @@ class QueryGUI(Ui_Dialog):
                                       "?o        rdf:type              ?company_type .\n" \
                                       "?s        ont:isCitedIn         ?news .\n" \
                                       "?news     ont:hasPositivenessRank  ?rank .\n" \
-                                      "?company_type rdfs:subClassOf       ont:Organization\n" \
+                                      "?company_type rdfs:subClassOf       ont:Organization .\n" \
                                       + topic_filter \
                                       + positiveness_filter + " }"
                 else:
@@ -182,7 +182,7 @@ class QueryGUI(Ui_Dialog):
                                     "{ ?s     ?p                    ?o ;\n" \
                                               "rdf:type              ont:Person ;\n" \
                                               "ont:isCitedIn         ?news .\n" \
-                                      "?news  ont:hasPositivenessRank  ?rank\n " \
+                                      "?news  ont:hasPositivenessRank  ?rank .\n " \
                                       + topic_filter \
                                       + positiveness_filter +"\n" \
                                       "{ ?o  rdf:type  <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> }\n" \
@@ -198,7 +198,7 @@ class QueryGUI(Ui_Dialog):
                                         "?company_type    rdfs:subClassOf       ont:Organization .\n" \
                                         "?o        rdf:type              ont:StockExchange .\n" \
                                         "?s        ont:isCitedIn         ?news .\n" \
-                                        "?news     ont:hasPositivenessRank  ?rank\n" \
+                                        "?news     ont:hasPositivenessRank  ?rank .\n" \
                                         + topic_filter \
                                         + positiveness_filter + " }"
 
@@ -209,7 +209,7 @@ class QueryGUI(Ui_Dialog):
                                                "rdf:type              ont:" + subgroup + " .\n" \
                                         "?o     rdf:type              ont:StockExchange .\n" \
                                         "?s     ont:isCitedIn         ?news .\n" \
-                                        "?news  ont:hasPositivenessRank  ?rank\n" \
+                                        "?news  ont:hasPositivenessRank  ?rank .\n" \
                                       + topic_filter \
                                       + positiveness_filter + " }"
             elif group == "Country":
@@ -221,7 +221,7 @@ class QueryGUI(Ui_Dialog):
                                       '?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> ;\n' \
                                              'ont:isG20Country      true ;\n' \
                                              'ont:isCitedIn         ?news .\n' \
-                                      '?news  ont:hasPositivenessRank  ?rank\n' \
+                                      '?news  ont:hasPositivenessRank  ?rank .\n' \
                                       + topic_filter \
                                       + positiveness_filter + ' }'
                 elif subgroup == "NonG20Country":
@@ -232,7 +232,7 @@ class QueryGUI(Ui_Dialog):
                                     "?o  rdf:type  <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>\n" \
                                     "FILTER NOT EXISTS { ?o  ont:isG20Country  true }\n" \
                                     "?o     ont:isCitedIn         ?news .\n" \
-                                    "?news  ont:hasPositivenessRank  ?rank\n" \
+                                    "?news  ont:hasPositivenessRank  ?rank .\n" \
                                     + topic_filter \
                                     + positiveness_filter + " }"
                 else:
@@ -242,7 +242,7 @@ class QueryGUI(Ui_Dialog):
                                                "rdf:type              ont:StockExchange .\n" \
                                         "?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> ;\n" \
                                                "ont:isCitedIn         ?news .\n" \
-                                        "?news  ont:hasPositivenessRank  ?rank \n" \
+                                        "?news  ont:hasPositivenessRank  ?rank .\n" \
                                       + topic_filter \
                                       + positiveness_filter + " }"
             else:
@@ -254,7 +254,7 @@ class QueryGUI(Ui_Dialog):
                                         "?company_type     rdfs:subClassOf       ont:Organization .\n" \
                                         "?o        rdf:type              ont:StockExchange ;\n" \
                                                   "ont:isCitedIn         ?news .\n" \
-                                        "?news     ont:hasPositivenessRank  ?rank\n" \
+                                        "?news     ont:hasPositivenessRank  ?rank .\n" \
                                       + topic_filter \
                                       + positiveness_filter + " }"
                 else:
@@ -264,7 +264,7 @@ class QueryGUI(Ui_Dialog):
                                                "rdf:type              ont:CommunicationServices .\n" \
                                         "?o     rdf:type              ont:StockExchange ;\n" \
                                                "ont:isCitedIn         ?news .\n" \
-                                        "?news  ont:hasPositivenessRank  ?rank\n" \
+                                        "?news  ont:hasPositivenessRank  ?rank .\n" \
                                       + topic_filter \
                                       + positiveness_filter + " }"
             #print(query)
@@ -279,12 +279,13 @@ class QueryGUI(Ui_Dialog):
             return "FILTER(?rank < " + threshold + ")"
 
     def generate_topic_filter(self, topic):
-        if topic == "CompaniesEconomy" or "Markets&Goods" or "NationalEconomy":
-            return "?news ont:hasEconomicsTopic ont:" + topic + " .\n"
+        if topic == "CompaniesEconomy" or topic == "Markets&Goods" or topic == "NationalEconomy":
+            return "?news ont:hasEconomicsTopic <ont:" + topic + "> .\n"
         elif topic == "OtherTopic":
-            return "?news ont:hasOtherTopic ont:" + topic + " .\n"
+            return "?news ont:hasOtherTopic <ont:" + topic + "> .\n"
         else:
             ""
+
 
 if __name__ == "__main__":
     import sys

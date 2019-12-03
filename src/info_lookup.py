@@ -140,7 +140,7 @@ class InfoLookup():
         if key_to_find in self.__country_table.keys():
             return self.__country_table[key_to_find]
         else:
-            key_found = ""
+            key_found = None
             for key in self.__country_table:
                 if re.sub('[^a-z|0-9|&]', '', key.lower()) in key_to_find or key_to_find in re.sub('[^a-z]', '', key.lower()):
                     key_found = self.__country_table[key]

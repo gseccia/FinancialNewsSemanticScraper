@@ -11,15 +11,26 @@ class QueryGUI(Ui_Dialog):
         item.setText("No subgroup")
         self.generateButton.clicked.connect(self.generate_query)
         self.subgroup_list.currentItemChanged.connect(self.change_selected_item_color)
-        self.order_list.currentItemChanged.connect(self.change_selected_item_color)
-        self.limit_list.currentItemChanged.connect(self.change_selected_item_color)
+        self.positiveness_list.currentItemChanged.connect(self.change_selected_item_color)
+        self.topic_list.currentItemChanged.connect(self.change_selected_item_color)
+        self.threshold_list.currentItemChanged.connect(self.change_selected_item_color)
         self.group_list.currentItemChanged.connect(self.change_selected_item_color)
         self.group_list.currentItemChanged.connect(self.add_subgroup_options)
+        self.positiveness_list.currentItemChanged.connect(self.disable_ranking_options)
 
     def change_selected_item_color(self, curr, prev):
         curr.setBackground(QtCore.Qt.red)
         if prev is not None:
             prev.setBackground(QtCore.Qt.transparent)
+
+    def disable_ranking_options(self, curr, prev):
+        if curr.text() == "ANY":
+            self.threshold_list.setEnabled(False)
+            for item in self.threshold_list.selectedItems():
+                item.setBackground(QtCore.Qt.transparent)
+        else:
+            self.threshold_list.setEnabled(True)
+
 
     def add_subgroup_options(self, curr, prev):
         self.subgroup_list.blockSignals(True)
@@ -116,102 +127,161 @@ class QueryGUI(Ui_Dialog):
                        "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
         items_group = self.group_list.selectedItems()
         items_subgroup = self.subgroup_list.selectedItems()
-        items_order = self.order_list.selectedItems()
-        items_limit = self.limit_list.selectedItems()
-        if not (items_group and items_subgroup and items_order and items_limit):
+        items_positiveness = self.positiveness_list.selectedItems()
+        items_threshold = self.threshold_list.selectedItems()
+        items_topic = self.topic_list.selectedItems()
+        if not (items_group and items_subgroup and items_positiveness and items_topic):
             query = "Please select a field for each option"
         else:
             group = self.group_list.currentItem().text()
             subgroup = self.subgroup_list.currentItem().text()
-            order = self.order_list.currentItem().text()
-            limit = self.limit_list.currentItem().text()
+            positiveness = self.positiveness_list.currentItem().text()
+            threshold = self.threshold_list.currentItem().text()
+            topic = self.topic_list.currentItem().text()
             query = query_prefix
+
+            positiveness_filter = ""
+            if positiveness != "ANY":
+                positiveness_filter = self.generate_positiveness_filter(positiveness, threshold)
+                print(positiveness_filter)
+
+            topic_filter = ""
+            if topic != "No topic":
+                print(topic)
+                topic_filter = self.generate_topic_filter(topic)
+                print(topic_filter)
+
             if group == "Person":
                 if subgroup == "NationalPersonality":
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o .\n " \
-                                    "?s rdf:type ont:Person .\n" \
-                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> . }\n" \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                    "WHERE \n" \
+                                    "{ ?s     ?p                     ?o ;\n" \
+                                              "rdf:type              ont:Person ;\n" \
+                                              "ont:isCitedIn         ?news .\n" \
+                                      "?news  ont:hasPositivenessRank  ?rank .\n" \
+                                      "?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n" \
+                                      + topic_filter \
+                                      + positiveness_filter + " }"
                 elif subgroup == "CompanyPersonality":
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o .\n " \
-                                    "?s rdf:type ont:Person .\n" \
-                                    "?o rdf:type ?company_type .\n" \
-                                    "?company_type rdfs:subClassOf ont:Organization . }\n" \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                    "WHERE\n" \
+                                    "{ ?s        ?p                    ?o ;\n" \
+                                                "rdf:type              ont:Person .\n" \
+                                      "?o        rdf:type              ?company_type .\n" \
+                                      "?s        ont:isCitedIn         ?news .\n" \
+                                      "?news     ont:hasPositivenessRank  ?rank .\n" \
+                                      "?company_type rdfs:subClassOf       ont:Organization\n" \
+                                      + topic_filter \
+                                      + positiveness_filter + " }"
                 else:
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o  .\n " \
-                                    "?s rdf:type ont:Person .\n" \
-                                    "{?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>}\n" \
-                                    "UNION \n" \
-                                    "{?o rdf:type ?company_type .\n" \
-                                    " ?company_type rdfs:subClassOf ont:Organization}}\n" \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                    "WHERE\n" \
+                                    "{ ?s     ?p                    ?o ;\n" \
+                                              "rdf:type              ont:Person ;\n" \
+                                              "ont:isCitedIn         ?news .\n" \
+                                      "?news  ont:hasPositivenessRank  ?rank\n " \
+                                      + topic_filter \
+                                      + positiveness_filter +"\n" \
+                                      "{ ?o  rdf:type  <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> }\n" \
+                                      "UNION\n" \
+                                      "{ ?o        rdf:type         ?company_type .\n" \
+                                        "?company_type      rdfs:subClassOf  ont:Organization } }"
             elif group == "Company":
                 if subgroup == "No subgroup":
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o .\n" \
-                                    "?s rdf:type ?company_type . \n" \
-                                    "?company_type rdfs:subClassOf ont:Organization .\n" \
-                                    "?o rdf:type ont:StockExchange . }\n" \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                      "WHERE\n" \
+                                      "{ ?s        ?p                    ?o ;\n" \
+                                                  "rdf:type              ?company_type .\n" \
+                                        "?company_type    rdfs:subClassOf       ont:Organization .\n" \
+                                        "?o        rdf:type              ont:StockExchange .\n" \
+                                        "?s        ont:isCitedIn         ?news .\n" \
+                                        "?news     ont:hasPositivenessRank  ?rank\n" \
+                                        + topic_filter \
+                                        + positiveness_filter + " }"
+
                 else:
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o . \n" \
-                                    "?s rdf:type ont:" + subgroup + ".\n " \
-                                    "?o rdf:type ont:StockExchange . }\n" \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                      "WHERE\n" \
+                                      "{ ?s     ?p                    ?o ;\n" \
+                                               "rdf:type              ont:" + subgroup + " .\n" \
+                                        "?o     rdf:type              ont:StockExchange .\n" \
+                                        "?s     ont:isCitedIn         ?news .\n" \
+                                        "?news  ont:hasPositivenessRank  ?rank\n" \
+                                      + topic_filter \
+                                      + positiveness_filter + " }"
             elif group == "Country":
                 if subgroup == "G20Country":
-                    query = query + '\nSELECT ?s ?p ?o' \
-                                    '\nWHERE { ?s ?p ?o .\n" \
-                                    "?s rdf:type ont:StockExchange .\n ' \
-                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n" \
-                                    '?o ont:isG20Country "true"^^xsd:boolean .}\n ' \
-                                    'ORDER BY ' + order + '(?o)\n'\
-                                    'LIMIT ' + limit
+                    query = query + '\nSELECT  ?s ?p ?o\n' \
+                                    'WHERE\n' \
+                                    '{ ?s     ?p                    ?o ;\n' \
+                                             'rdf:type              ont:StockExchange .\n' \
+                                      '?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> ;\n' \
+                                             'ont:isG20Country      true ;\n' \
+                                             'ont:isCitedIn         ?news .\n' \
+                                      '?news  ont:hasPositivenessRank  ?rank\n' \
+                                      + topic_filter \
+                                      + positiveness_filter + ' }'
                 elif subgroup == "NonG20Country":
-                    query = query + '\nSELECT ?s ?p ?o' \
-                                    '\nWHERE { ?s ?p ?o .\n' \
-                                    '?s rdf:type ont:StockExchange .\n ' \
-                                    '?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> .\n ' \
-                                    'FILTER NOT EXISTS {?o ont:isG20Country "true"^^xsd:boolean .} }\n ' \
-                                    'ORDER BY ' + order + '(?o)\n' \
-                                    'LIMIT ' + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                    "WHERE\n" \
+                                    "{ ?s  ?p        ?o ;\n" \
+                                    "rdf:type  ont:StockExchange .\n" \
+                                    "?o  rdf:type  <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>\n" \
+                                    "FILTER NOT EXISTS { ?o  ont:isG20Country  true }\n" \
+                                    "?o     ont:isCitedIn         ?news .\n" \
+                                    "?news  ont:hasPositivenessRank  ?rank\n" \
+                                    + topic_filter \
+                                    + positiveness_filter + " }"
                 else:
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o .\n" \
-                                    "?s rdf:type ont:StockExchange .\n " \
-                                    "?o rdf:type <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> . }\n " \
-                                    "ORDER BY " + order + "(?o)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                      "WHERE\n" \
+                                      "{ ?s     ?p                    ?o ;\n" \
+                                               "rdf:type              ont:StockExchange .\n" \
+                                        "?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> ;\n" \
+                                               "ont:isCitedIn         ?news .\n" \
+                                        "?news  ont:hasPositivenessRank  ?rank \n" \
+                                      + topic_filter \
+                                      + positiveness_filter + " }"
             else:
                 if subgroup == "No subgroup":
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o .\n" \
-                                    "?s rdf:type ?company_type .\n" \
-                                    "?company_type rdfs:subClassOf ont:Organization .\n" \
-                                    "?o rdf:type ont:StockExchange .}\n " \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                      "WHERE\n" \
+                                      "{ ?s        ?p                    ?o ;\n" \
+                                                  "rdf:type              ?company_type .\n" \
+                                        "?company_type     rdfs:subClassOf       ont:Organization .\n" \
+                                        "?o        rdf:type              ont:StockExchange ;\n" \
+                                                  "ont:isCitedIn         ?news .\n" \
+                                        "?news     ont:hasPositivenessRank  ?rank\n" \
+                                      + topic_filter \
+                                      + positiveness_filter + " }"
                 else:
-                    query = query + "\nSELECT ?s ?p ?o" \
-                                    "\nWHERE { ?s ?p ?o .\n " \
-                                    "?s rdf:type ont:" + subgroup + ".\n " \
-                                    "?o rdf:type ont:StockExchange .}\n " \
-                                    "ORDER BY " + order + "(?s)\n" \
-                                    "LIMIT " + limit
-            print(query)
+                    query = query + "\nSELECT  ?s ?p ?o\n" \
+                                      "WHERE\n" \
+                                      "{ ?s     ?p                    ?o ;\n" \
+                                               "rdf:type              ont:CommunicationServices .\n" \
+                                        "?o     rdf:type              ont:StockExchange ;\n" \
+                                               "ont:isCitedIn         ?news .\n" \
+                                        "?news  ont:hasPositivenessRank  ?rank\n" \
+                                      + topic_filter \
+                                      + positiveness_filter + " }"
+            #print(query)
         self.queryTextArea.clear()
         self.queryTextArea.append(query)
         self.queryTextArea.verticalScrollBar().setValue(self.queryTextArea.verticalScrollBar().minimum())
+
+    def generate_positiveness_filter(self, order, threshold):
+        if order == "POS":
+            return "FILTER(?rank > " + threshold + ")"
+        else:
+            return "FILTER(?rank < " + threshold + ")"
+
+    def generate_topic_filter(self, topic):
+        if topic == "CompaniesEconomy" or "Markets&Goods" or "NationalEconomy":
+            return "?news ont:hasEconomicsTopic ont:" + topic + " .\n"
+        elif topic == "OtherTopic":
+            return "?news ont:hasOtherTopic ont:" + topic + " .\n"
+        else:
+            ""
 
 if __name__ == "__main__":
     import sys

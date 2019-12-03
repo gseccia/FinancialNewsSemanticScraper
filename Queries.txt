@@ -99,3 +99,151 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
              ont:hasPositivenessRank  ?rank
     }
   ORDER BY DESC(?rank)
+  
+  
+  
+  
+  
+
+- Prefixes
+  PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+  PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+  PREFIX  ont:  <http://www.github.com/gseccia/FinancialNewsSemanticScraper/ontologies/FinancialNewsOntology#>
+  PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX  owl:  <http://www.w3.org/2002/07/owl#>
+   
+PERSON QUERY:
+This query finds the relation between persons and countries and/or companies
+- No subgroup
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s     ?p                    ?o ;
+             rdf:type              ont:Person ;
+             ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+        { ?o  rdf:type  <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> }
+      UNION
+        { ?o        rdf:type         ?company_type .
+          ?company_type
+                    rdfs:subClassOf  ont:Organization
+        }
+    }
+	
+- National person
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s     ?p                    ?o ;
+             rdf:type              ont:Person ;
+             ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank .
+      ?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>
+      FILTER ( ?rank > 0 )
+    }
+         
+- Non national person
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s        ?p                    ?o ;
+                rdf:type              ont:Person .
+      ?o        rdf:type              ?company_type .
+      ?s        ont:isCitedIn         ?news .
+      ?news     ont:hasPositivenessRank  ?rank .
+      ?company_type
+                rdfs:subClassOf       ont:Organization
+      FILTER ( ?rank > 0 )
+    }
+	
+	
+COUNTRY QUERY:
+This query finds the relation between countries and stock indices
+- No subgroup:
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s     ?p                    ?o ;
+             rdf:type              ont:StockExchange .
+      ?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> ;
+             ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+
+- G20 country:
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s     ?p                    ?o ;
+             rdf:type              ont:StockExchange .
+      ?o     rdf:type              <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry> ;
+             ont:isG20Country      true ;
+             ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+
+- Non G20 country:
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s  ?p        ?o ;
+          rdf:type  ont:StockExchange .
+      ?o  rdf:type  <http://www.bpiresearch.com/BPMO/2004/03/03/cdl/Countries#ISO3166DefinedCountry>
+      FILTER NOT EXISTS { ?o  ont:isG20Country  true }
+      ?o     ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+	
+	
+COMPANY QUERY:
+This query finds the relation between companies and stock markets on which they are quoted
+- No subgroup:
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s        ?p                    ?o ;
+                rdf:type              ?company_type .
+      ?company_type
+                rdfs:subClassOf       ont:Organization .
+      ?o        rdf:type              ont:StockExchange .
+      ?s        ont:isCitedIn         ?news .
+      ?news     ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+
+- Any subgroup:
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s     ?p                    ?o ;
+             rdf:type              ont:ANYSUBGROUP .
+      ?o     rdf:type              ont:StockExchange .
+      ?s     ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+	
+STOCK QUERY:
+This query finds the relation between stock indices and companies quoted on them
+- No subgroup:
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s        ?p                    ?o ;
+                rdf:type              ?company_type .
+      ?company_type
+                rdfs:subClassOf       ont:Organization .
+      ?o        rdf:type              ont:StockExchange ;
+                ont:isCitedIn         ?news .
+      ?news     ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+
+- Any subgroup
+  SELECT  ?s ?p ?o
+  WHERE
+    { ?s     ?p                    ?o ;
+             rdf:type              ont:CommunicationServices .
+      ?o     rdf:type              ont:StockExchange ;
+             ont:isCitedIn         ?news .
+      ?news  ont:hasPositivenessRank  ?rank
+      FILTER ( ?rank > 0 )
+    }
+  
+  
+  

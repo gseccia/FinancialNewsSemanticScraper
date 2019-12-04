@@ -167,7 +167,10 @@ class HTTPHandler(tornado.web.RequestHandler):
                                 except Exception:
                                     traceback.print_exc()
                         else:
-                            o = Literal(l)
+                            if "datatype" in r["o"]:
+                                o = Literal(l,datatype=r["o"]["datatype"])
+                            else:
+                                o = Literal(l)
                             if not l in f_results["literals"]:
                                 f_results["literals"].append(l)
                     except:
@@ -264,14 +267,14 @@ class HTTPHandler(tornado.web.RequestHandler):
             for res in f_results["resources"]:
                 if f_results["resources"][res]["drawAsRes"]:
                     f_results["individuals_num"] += 1
-            
+
             # send the reply
             et = time.time()
             self.write(f_results)
     
         elif msg["command"] == "sparql":
 
-            # do the query            
+            # do the query
             results = graphs[msg["sessionID"]].query(msg["sparql"])
 
             # build the results dictionary
@@ -295,12 +298,11 @@ class HTTPHandler(tornado.web.RequestHandler):
                             d[v]["type"] = "literal"
                         d[v]["value"] = str(row[v])
                     except KeyError:
-                        pass
+                        traceback.print_exc()
                     res_dict["results"]["bindings"].append(d)
 
             et = time.time()
             self.write(res_dict)
-            print("Res_dict",res_dict)
 
         
 

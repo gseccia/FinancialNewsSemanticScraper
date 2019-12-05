@@ -13,7 +13,12 @@ def location_on_the_screen(t):
 
 
 if __name__ == "__main__":
-    import sys, time
+    import sys, time, os
+
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+    # suppress Tensorflow warnings version 1.14
+    import tensorflow as tf
+    tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
     app = QApplication(sys.argv)
 

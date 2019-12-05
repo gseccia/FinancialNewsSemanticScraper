@@ -273,7 +273,7 @@ class QueryGUI(Ui_Dialog):
         self.queryTextArea.verticalScrollBar().setValue(self.queryTextArea.verticalScrollBar().minimum())
 
     def generate_positiveness_filter(self, order, threshold):
-        if order == "POS":
+        if order == ">":
             return "FILTER(?rank > " + threshold + ")"
         else:
             return "FILTER(?rank < " + threshold + ")"

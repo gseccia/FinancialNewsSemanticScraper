@@ -15,7 +15,6 @@
 
 La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tarsier. Può risultare utile solo nel caso di visualizzazione tabellare.
 
-  +++++++++++++++ SINTATTICAMENTE CORRETTA ++++++++++++++++++++++++++++++++++
 - Mostrare tutte le news positive dell'ultimo giorno (?) in ordine di positività/negatività
   SELECT  ?news ?news_title
   WHERE
@@ -25,7 +24,6 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
     }
   ORDER BY DESC(?rank)
 
-  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Mostrare tutti i concetti associati a news positive (organizzazione, indice, paese, persona) in ordine di 
   numero di news positive
   SELECT  ?x (COUNT(DISTINCT ?x) AS ?positive_count)
@@ -37,7 +35,6 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
   GROUP BY ?x
   ORDER BY DESC(?positive_count)
   
-  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Mostrare tutti i concetti associati a news negative (organizzazione, indice, paese, persona) in ordine di 
   numero di news negative
   SELECT  ?x (COUNT(DISTINCT ?x) AS ?positive_count)
@@ -49,7 +46,6 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
   GROUP BY ?x
   ORDER BY DESC(?positive_count)
   
-  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Mostrare i tipi di organizzazione ordinati per trend di positività delle notizie
   SELECT  ?company_type (AVG(?rank) AS ?avg_positiveness)
   WHERE
@@ -62,7 +58,6 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
  GROUP BY ?company_type
  ORDER BY DESC(?avg_positiveness)
 
-  +++++++++++++++ SINTATTICAMENTE CORRETTA ++++++++++++++++++++++++++++++++++
 - Tutte le compagnie che hanno almeno una news positiva nell'ultimo x temporale
   SELECT  ?company (COUNT(?news) AS ?count)
   WHERE
@@ -76,7 +71,6 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
   GROUP BY ?company
   HAVING ( ?count >= 1 )
 
-  +++++++++++++++++++ FUNZIONANTE +++++++++++++++++++++++++++++++++++++++++++
 - Ricava gli indici di mercato in base alle compagnie in ordine di positività delle news
   SELECT  ?stock (AVG(?rank) AS ?average_positiveness)
   WHERE
@@ -88,8 +82,6 @@ La clausola di ORDER non ha nessun effetto ai fini della visualizzazione con Tar
   GROUP BY ?stock
   ORDER BY DESC(?average_positiveness)
 
-  
-  +++++++++++++++ SINTATTICAMENTE CORRETTA ++++++++++++++++++++++++++++++++++
 - Ricavare le news di uno specifico topic in ordine di positività
    SELECT  ?news ?news_title
    WHERE

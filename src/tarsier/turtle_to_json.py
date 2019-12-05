@@ -1,4 +1,4 @@
-from rdflib import Graph,URIRef,BNode
+from rdflib import Graph,URIRef,BNode,Literal
 
 def turtle_to_json(turtle_text):
     with open("tmp", encoding="utf8",mode="w") as f:
@@ -12,16 +12,22 @@ def turtle_to_json(turtle_text):
     result = {"head":{"vars":["s","p","o"]},"results":{"bindings":[]}}
 
     for stmt in g:
-        type_ele = ["","",""]
+        ref = ["s", "p", "o"]
+        tmp_dict = {"s": {},
+                    "p": {},
+                    "o": {}}
         for i in range(3):
             if isinstance(stmt[i], URIRef):
-                type_ele[i] = "uri"
+                tmp_dict[ref[i]]["type"] = "uri"
             elif isinstance(stmt[i], BNode):
-                type_ele[i] = "bnode"
+                tmp_dict[ref[i]]["type"]  = "bnode"
             else:
-                type_ele[i] = "literal"
-        result["results"]["bindings"].append({"s": {"type": type_ele[0], "value": str(stmt[0])}, "p": {"type": type_ele[1], "value": str(stmt[1])},
-         "o": {"type": type_ele[2], "value": str(stmt[2])}})
+                tmp_dict[ref[i]]["type"]  = "literal"
+                if stmt[i].datatype:
+                    tmp_dict[ref[i]]["datatype"] = stmt[i].datatype
+            tmp_dict[ref[i]]["value"] = stmt[i]
+
+        result["results"]["bindings"].append(tmp_dict)
 
     return result
 
